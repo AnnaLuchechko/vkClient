@@ -10,7 +10,7 @@
         <!--View Controller-->
         <scene sceneID="wsX-2Z-wKu">
             <objects>
-                <viewController id="Olb-TI-aXa" sceneMemberID="viewController">
+                <viewController id="Olb-TI-aXa" customClass="ViewController" customModule="vkClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GuJ-wK-PhB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -77,6 +77,9 @@
                                                 </fragment>
                                             </attributedString>
                                         </state>
+                                        <connections>
+                                            <action selector="loginButtonPressed:" destination="Olb-TI-aXa" eventType="touchUpInside" id="GCI-eb-UVv"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -109,6 +112,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rHX-Ex-VuD"/>
                     </view>
+                    <connections>
+                        <outlet property="loginField" destination="TNf-ox-2d3" id="8G8-kF-5oo"/>
+                        <outlet property="passwordField" destination="FUy-Gb-fH2" id="zjh-Yi-AtK"/>
+                        <outlet property="scrollView" destination="KaE-kq-tMX" id="rxf-LK-JwM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vb5-cf-7Bq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
