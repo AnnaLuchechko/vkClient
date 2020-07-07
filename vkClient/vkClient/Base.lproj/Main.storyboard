@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Olb-TI-aXa">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -12,14 +12,14 @@
             <objects>
                 <viewController id="Olb-TI-aXa" customClass="ViewController" customModule="vkClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GuJ-wK-PhB">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KaE-kq-tMX">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="734"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wcW-HK-wOh">
-                                        <rect key="frame" x="159" y="255" width="57" height="22.5"/>
+                                        <rect key="frame" x="159" y="254.99999999999997" width="57" height="22.666666666666657"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Логин">
                                                 <attributes>
@@ -32,7 +32,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1EB-fX-QEE">
-                                        <rect key="frame" x="153" y="354.5" width="69" height="23"/>
+                                        <rect key="frame" x="153" y="354.66666666666669" width="69" height="23"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Пароль">
                                                 <attributes>
@@ -45,23 +45,23 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TNf-ox-2d3">
-                                        <rect key="frame" x="67.5" y="285.5" width="240" height="34"/>
+                                        <rect key="frame" x="67.666666666666686" y="285.66666666666669" width="240" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="240" id="cCl-sr-H6f"/>
                                         </constraints>
                                         <attributedString key="attributedText"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" usesAttributedText="YES" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FUy-Gb-fH2">
-                                        <rect key="frame" x="67.5" y="385.5" width="240" height="34"/>
+                                        <rect key="frame" x="67.666666666666686" y="385.66666666666669" width="240" height="34"/>
                                         <attributedString key="attributedText"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                     </textField>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="xbb-iT-50L">
-                                        <rect key="frame" x="87.5" y="40" width="200" height="200"/>
+                                        <rect key="frame" x="87.666666666666686" y="40" width="200" height="200"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m9A-yC-Q7e">
-                                        <rect key="frame" x="157.5" y="469" width="60" height="32"/>
+                                        <rect key="frame" x="157.66666666666666" y="469.33333333333337" width="60" height="32"/>
                                         <color key="backgroundColor" red="0.049434423450000001" green="0.108797349" blue="0.16446605319999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="m9A-yC-Q7e" secondAttribute="height" multiplier="15:8" id="4oo-I1-u2S"/>
@@ -83,7 +83,7 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="m9A-yC-Q7e" secondAttribute="bottom" constant="202.00000000000023" id="028-dZ-Rla"/>
+                                    <constraint firstAttribute="bottom" secondItem="m9A-yC-Q7e" secondAttribute="bottom" id="028-dZ-Rla"/>
                                     <constraint firstItem="wcW-HK-wOh" firstAttribute="centerX" secondItem="xbb-iT-50L" secondAttribute="centerX" id="20N-AZ-l7X"/>
                                     <constraint firstItem="TNf-ox-2d3" firstAttribute="centerX" secondItem="wcW-HK-wOh" secondAttribute="centerX" id="4wK-Ng-jF2"/>
                                     <constraint firstItem="TNf-ox-2d3" firstAttribute="top" secondItem="wcW-HK-wOh" secondAttribute="bottom" constant="8" id="HH2-rk-k4H"/>
