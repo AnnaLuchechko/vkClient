@@ -49,15 +49,35 @@ class LoginViewController: UIViewController {
         self.scrollView?.endEditing(true)
     }
     
-    @IBAction func loginButtonPressed(_ sender: UIButton) {
-        guard let login = loginField.text else { return }
-        guard let password = passwordField.text else { return }
+    private func checkLoginInfo() -> Bool {
+        guard let login = loginField.text else { return false }
+        guard let password = passwordField.text else { return false}
         
         if login == "admin" && password == "1234" {
-            print("Успешная авторизация")
+            return true
         } else {
-            print("Неуспешная авторизация")
+            return false
         }
+    }
+       
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "loginSegue" {
+            if checkLoginInfo() {
+                return true
+            } else {
+                showLoginError()
+                return false
+            }
+        }
+        return true
+    }
+       
+    private func showLoginError() {
+        let alert = UIAlertController(title: "Ошибка!", message: "Логин и/или пароль не верны", preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(action)
+           
+        present(alert, animated: true, completion: nil)
     }
 
 }

@@ -11,7 +11,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="9hB-MF-sMf">
             <objects>
-                <tabBarController id="E5N-Or-zke" sceneMemberID="viewController">
+                <tabBarController modalPresentationStyle="fullScreen" id="E5N-Or-zke" customClass="TabBarController" customModule="vkClient" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="UF5-EK-jaj"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1fW-Di-FB4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -27,14 +27,15 @@
             </objects>
             <point key="canvasLocation" x="-2252" y="66"/>
         </scene>
-        <!--Item-->
+        <!--Friends-->
         <scene sceneID="z3u-I4-Udz">
             <objects>
                 <navigationController id="oAV-yz-d9w" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="0PE-2L-L2U"/>
+                    <tabBarItem key="tabBarItem" title="Friends" image="friends" id="0PE-2L-L2U"/>
                     <navigationItem key="navigationItem" id="v1V-Vf-fg7"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="L3R-Tf-zbu">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -45,12 +46,12 @@
             </objects>
             <point key="canvasLocation" x="-1455" y="-292"/>
         </scene>
-        <!--Collection View Controller-->
+        <!--Friends Photos Collection View Controller-->
         <scene sceneID="iIt-xv-N7G">
             <objects>
-                <collectionViewController id="pqB-g0-FSE" sceneMemberID="viewController">
+                <collectionViewController id="pqB-g0-FSE" customClass="FriendsPhotosCollectionViewController" customModule="vkClient" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="rrd-UF-OBE">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="tZr-xo-y76">
@@ -134,7 +135,7 @@
                                         <rect key="frame" x="87.666666666666686" y="40" width="200" height="200"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m9A-yC-Q7e">
-                                        <rect key="frame" x="157.66666666666666" y="469" width="60" height="32"/>
+                                        <rect key="frame" x="157.66666666666666" y="469.33333333333337" width="60" height="32"/>
                                         <color key="backgroundColor" red="0.049434423450000001" green="0.108797349" blue="0.16446605319999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="m9A-yC-Q7e" secondAttribute="height" multiplier="15:8" id="4oo-I1-u2S"/>
@@ -151,7 +152,7 @@
                                             </attributedString>
                                         </state>
                                         <connections>
-                                            <action selector="loginButtonPressed:" destination="Olb-TI-aXa" eventType="touchUpInside" id="GCI-eb-UVv"/>
+                                            <segue destination="E5N-Or-zke" kind="show" identifier="loginSegue" id="DAU-ZW-Okb"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -189,19 +190,18 @@
                         <outlet property="loginField" destination="TNf-ox-2d3" id="8G8-kF-5oo"/>
                         <outlet property="passwordField" destination="FUy-Gb-fH2" id="zjh-Yi-AtK"/>
                         <outlet property="scrollView" destination="KaE-kq-tMX" id="rxf-LK-JwM"/>
-                        <segue destination="E5N-Or-zke" kind="show" id="xNS-8s-kxH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vb5-cf-7Bq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3074" y="66"/>
+            <point key="canvasLocation" x="-3020" y="66"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Friends Table View Controller-->
         <scene sceneID="TLX-Is-lBB">
             <objects>
-                <tableViewController id="RsC-OU-Fhq" sceneMemberID="viewController">
+                <tableViewController id="RsC-OU-Fhq" customClass="FriendsTableViewController" customModule="vkClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="vt0-Dd-nqt">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
@@ -228,12 +228,12 @@
             </objects>
             <point key="canvasLocation" x="-714" y="-293"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Communities Table View Controller-->
         <scene sceneID="EoR-5G-yJG">
             <objects>
-                <tableViewController id="Rwg-XK-C5L" sceneMemberID="viewController">
+                <tableViewController id="Rwg-XK-C5L" customClass="CommunitiesTableViewController" customModule="vkClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="W6R-eu-Qtw">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
@@ -251,16 +251,22 @@
                             <outlet property="delegate" destination="Rwg-XK-C5L" id="dTj-uv-FO3"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="zfo-QP-wZz"/>
+                    <navigationItem key="navigationItem" id="zfo-QP-wZz">
+                        <barButtonItem key="rightBarButtonItem" image="globalcommunity" id="Rqs-k9-kwv">
+                            <connections>
+                                <segue destination="2lT-am-UV1" kind="show" id="N3X-Yi-qga"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z6z-QN-pnG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-714" y="372"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Communities Global Search Table View Controller-->
         <scene sceneID="NOV-9h-EUE">
             <objects>
-                <tableViewController id="2lT-am-UV1" sceneMemberID="viewController">
+                <tableViewController id="2lT-am-UV1" customClass="CommunitiesGlobalSearchTableViewController" customModule="vkClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ZnX-51-4Ne">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -280,19 +286,21 @@
                             <outlet property="delegate" destination="2lT-am-UV1" id="WQi-fD-n7c"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="dPo-Lw-kyI"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HVe-bz-8Wh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-12" y="372"/>
         </scene>
-        <!--Item-->
+        <!--Communities-->
         <scene sceneID="Jrg-f7-bfO">
             <objects>
-                <navigationController id="uJG-vZ-m5D" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Fxy-TI-YrL"/>
+                <navigationController modalPresentationStyle="fullScreen" id="uJG-vZ-m5D" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Communities" image="communities" id="Fxy-TI-YrL"/>
                     <navigationItem key="navigationItem" id="FNe-GE-uwb"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="yXl-VX-c0X">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -306,5 +314,8 @@
     </scenes>
     <resources>
         <image name="Image" width="200" height="200"/>
+        <image name="communities" width="48" height="48"/>
+        <image name="friends" width="48" height="48"/>
+        <image name="globalcommunity" width="48" height="48"/>
     </resources>
 </document>
