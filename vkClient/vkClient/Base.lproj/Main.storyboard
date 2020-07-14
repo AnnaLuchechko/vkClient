@@ -104,24 +104,49 @@
         <scene sceneID="xd6-4V-9Mj">
             <objects>
                 <collectionViewController id="7pG-i3-S4r" customClass="FriendsPhotosCollectionViewController" customModule="vkClient" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="OQy-AY-vKq">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" dataMode="prototypes" id="OQy-AY-vKq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="IKc-ks-iT7">
-                            <size key="itemSize" width="128" height="128"/>
+                            <size key="itemSize" width="375" height="320"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="friendsPhotoCell" id="6if-xu-dQn">
-                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" layoutMarginsFollowReadableWidth="YES" reuseIdentifier="friendsPhotoCell" id="6if-xu-dQn" customClass="FriendsPhotoCell" customModule="vkClient" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="320"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="a3v-ay-KHF">
-                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="320"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tdf-ts-mgO">
+                                            <rect key="frame" x="70" y="49.999999999999986" width="235" height="214.66666666666663"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JXs-AP-ygi">
+                                            <rect key="frame" x="165.66666666666666" y="272.66666666666669" width="43.666666666666657" height="20.333333333333314"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="tdf-ts-mgO" firstAttribute="leading" secondItem="a3v-ay-KHF" secondAttribute="leading" constant="70" id="6ul-ST-otq"/>
+                                        <constraint firstAttribute="bottom" secondItem="JXs-AP-ygi" secondAttribute="bottom" constant="26.999999999999943" id="Kuk-XX-LYJ"/>
+                                        <constraint firstItem="JXs-AP-ygi" firstAttribute="top" secondItem="tdf-ts-mgO" secondAttribute="bottom" constant="8.0000000000000568" id="UMN-qi-gmD"/>
+                                        <constraint firstItem="tdf-ts-mgO" firstAttribute="top" secondItem="a3v-ay-KHF" secondAttribute="top" constant="49.999999999999986" id="WfW-ED-jtU"/>
+                                        <constraint firstItem="JXs-AP-ygi" firstAttribute="centerX" secondItem="a3v-ay-KHF" secondAttribute="centerX" id="exu-Sw-aXD"/>
+                                        <constraint firstItem="tdf-ts-mgO" firstAttribute="centerX" secondItem="a3v-ay-KHF" secondAttribute="centerX" id="kWg-yV-cWP"/>
+                                        <constraint firstAttribute="trailing" secondItem="tdf-ts-mgO" secondAttribute="trailing" constant="70" id="qn5-bl-PRQ"/>
+                                    </constraints>
                                 </collectionViewCellContentView>
+                                <size key="customSize" width="375" height="320"/>
+                                <connections>
+                                    <outlet property="friendsImage" destination="tdf-ts-mgO" id="gOw-WY-adC"/>
+                                    <outlet property="friendsName" destination="JXs-AP-ygi" id="lU4-cG-EFP"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -134,7 +159,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OKV-nz-NrB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="129" y="-293"/>
+            <point key="canvasLocation" x="128.80000000000001" y="-293.3497536945813"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="wsX-2Z-wKu">
