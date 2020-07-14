@@ -11,4 +11,8 @@ import UIKit
 class FriendsCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+    }
 }

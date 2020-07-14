@@ -1,5 +1,5 @@
 //
-//  FriendsViewController.swift
+//  FriendsTableViewController.swift
 //  vkClient
 //
 //  Created by Anna Luchechko on 14.07.2020.
@@ -8,10 +8,8 @@
 
 import UIKit
 
-class FriendsViewController: UIViewController {
-
-    @IBOutlet weak var tableView: UITableView!
-    
+class FriendsTableViewController: UITableViewController {
+        
     var friends = [
         "Джефф Безос",
         "Билл Гейтс",
@@ -42,13 +40,13 @@ class FriendsViewController: UIViewController {
     
 }
     
-    extension FriendsViewController: UITableViewDataSource {
+    extension FriendsTableViewController {
         
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return friends.count
         }
         
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell") as? FriendsCell else { fatalError() }
             
             cell.titleLabel.text = friends[indexPath.row]
@@ -58,7 +56,7 @@ class FriendsViewController: UIViewController {
             return cell
         }
         
-        func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
             
             if editingStyle == .delete {
                 friends.remove(at: indexPath.row)
@@ -69,6 +67,6 @@ class FriendsViewController: UIViewController {
     }
 
 
-    extension FriendsViewController: UITableViewDelegate {
+    extension FriendsTableViewController {
         
     }
