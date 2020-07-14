@@ -10,4 +10,13 @@ import UIKit
 
 class FriendsPhotosCollectionViewController: UICollectionViewController {
 
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        collectionView.dataSource = self
+    }
+}
+
+extension FriendsPhotosCollectionViewController {
+    
 }

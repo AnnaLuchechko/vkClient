@@ -20,7 +20,6 @@ class FriendsTableViewController: UITableViewController {
         "Марк Цукерберг",
         "Джим Уолтон",
         "Элис Уолтон",
-        "Роб Уолтон",
         "Стив Балмер",
         "Карлос Слим Элу",
         "Ларри Пейдж",
@@ -31,13 +30,33 @@ class FriendsTableViewController: UITableViewController {
         "Чарльз Кох",
         "Ма Хуатэн"
     ]
+    
+    var friendsPhotos = [
+        UIImage(named: "bezos"),
+        UIImage(named: "gates"),
+        UIImage(named: "arno"),
+        UIImage(named: "buffett"),
+        UIImage(named: "elison"),
+        UIImage(named: "ortega"),
+        UIImage(named: "cukerberg"),
+        UIImage(named: "uolton"),
+        UIImage(named: "uoltonw"),
+        UIImage(named: "balmer"),
+        UIImage(named: "slim"),
+        UIImage(named: "peydj"),
+        UIImage(named: "brin"),
+        UIImage(named: "mayers"),
+        UIImage(named: "bloomberg"),
+        UIImage(named: "jackma"),
+        UIImage(named: "koh"),
+        UIImage(named: "huaten")
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
     }
-    
 }
     
     extension FriendsTableViewController {
@@ -50,8 +69,9 @@ class FriendsTableViewController: UITableViewController {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell") as? FriendsCell else { fatalError() }
             
             cell.titleLabel.text = friends[indexPath.row]
+            cell.friendimage.image = friendsPhotos[indexPath .row]
             
-            print("Cell created for row: \(indexPath.row), \(friends[indexPath.row])")
+            print("Cell created for row: \(indexPath.row), \(friends[indexPath.row]), \(String(describing: friendsPhotos[indexPath .row]))")
             
             return cell
         }
@@ -64,6 +84,7 @@ class FriendsTableViewController: UITableViewController {
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
         }
+        
     }
 
 
