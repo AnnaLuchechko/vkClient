@@ -12,7 +12,7 @@ class FriendsPhotosCollectionViewController: UICollectionViewController {
     
     var friendsPhotos = [
         FriendsPhoto("Джефф Безос", UIImage(named: "bezos")),
-        FriendsPhoto("Билл Гейтс", UIImage(named: "bezos")),
+        FriendsPhoto("Билл Гейтс", UIImage(named: "gates")),
         FriendsPhoto("Бернар Арно", UIImage(named: "bezos")),
         FriendsPhoto("Уоррен Баффет", UIImage(named: "bezos")),
         FriendsPhoto("Ларри Эллисон", UIImage(named: "bezos")),
@@ -33,7 +33,6 @@ class FriendsPhotosCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.dataSource = self
     }
 }
 

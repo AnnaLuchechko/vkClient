@@ -11,51 +11,28 @@ import UIKit
 class FriendsTableViewController: UITableViewController {
         
     var friends = [
-        "Джефф Безос",
-        "Билл Гейтс",
-        "Бернар Арно",
-        "Уоррен Баффет",
-        "Ларри Эллисон",
-        "Амансио Ортега",
-        "Марк Цукерберг",
-        "Джим Уолтон",
-        "Элис Уолтон",
-        "Стив Балмер",
-        "Карлос Слим Элу",
-        "Ларри Пейдж",
-        "Сергей Брин",
-        "Франсуаза Беттанкур-Майерс",
-        "Майкл Блумберг",
-        "Джек Ма",
-        "Чарльз Кох",
-        "Ма Хуатэн"
-    ]
-    
-    var friendsPhotos = [
-        UIImage(named: "bezos"),
-        UIImage(named: "gates"),
-        UIImage(named: "arno"),
-        UIImage(named: "buffett"),
-        UIImage(named: "elison"),
-        UIImage(named: "ortega"),
-        UIImage(named: "cukerberg"),
-        UIImage(named: "uolton"),
-        UIImage(named: "uoltonw"),
-        UIImage(named: "balmer"),
-        UIImage(named: "slim"),
-        UIImage(named: "peydj"),
-        UIImage(named: "brin"),
-        UIImage(named: "mayers"),
-        UIImage(named: "bloomberg"),
-        UIImage(named: "jackma"),
-        UIImage(named: "koh"),
-        UIImage(named: "huaten")
-    ]
+            FriendsPhoto("Джефф Безос", UIImage(named: "bezos")),
+            FriendsPhoto("Билл Гейтс", UIImage(named: "gates")),
+            FriendsPhoto("Бернар Арно", UIImage(named: "arno")),
+            FriendsPhoto("Уоррен Баффет", UIImage(named: "buffett")),
+            FriendsPhoto("Ларри Эллисон", UIImage(named: "elison")),
+            FriendsPhoto("Амансио Ортега", UIImage(named: "ortega")),
+            FriendsPhoto("Марк Цукерберг", UIImage(named: "cukerberg")),
+            FriendsPhoto("Джим Уолтон", UIImage(named: "uolton")),
+            FriendsPhoto("Элис Уолтон", UIImage(named: "uoltonw")),
+            FriendsPhoto("Стив Балмер", UIImage(named: "balmer")),
+            FriendsPhoto("Карлос Слим Элу", UIImage(named: "slim")),
+            FriendsPhoto("Ларри Пейдж", UIImage(named: "peydj")),
+            FriendsPhoto("Сергей Брин", UIImage(named: "brin")),
+            FriendsPhoto("Франсуаза Беттанкур-Майерс", UIImage(named: "mayers")),
+            FriendsPhoto("Майкл Блумберг", UIImage(named: "bloomberg")),
+            FriendsPhoto("Джек Ма", UIImage(named: "jackma")),
+            FriendsPhoto("Чарльз Кох", UIImage(named: "koh")),
+            FriendsPhoto("Ма Хуатэн", UIImage(named: "huaten"))
+        ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = self
-        tableView.delegate = self
     }
 }
     
@@ -68,10 +45,10 @@ class FriendsTableViewController: UITableViewController {
         override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell") as? FriendsCell else { fatalError() }
             
-            cell.titleLabel.text = friends[indexPath.row]
-            cell.friendimage.image = friendsPhotos[indexPath .row]
+            cell.titleLabel.text = friends[indexPath.row].friendsName
+            cell.friendimage.image = friends[indexPath.row].friendsImage
             
-            print("Cell created for row: \(indexPath.row), \(friends[indexPath.row]), \(String(describing: friendsPhotos[indexPath .row]))")
+            print("Cell created for row: \(indexPath.row), \(friends[indexPath.row]), \(String(describing: friends[indexPath .row]))")
             
             return cell
         }
