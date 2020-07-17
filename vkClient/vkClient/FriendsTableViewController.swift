@@ -10,6 +10,8 @@ import UIKit
 
 class FriendsTableViewController: UITableViewController {
         
+    var selectedFriend: FriendsPhoto? //Create variable to send FriendsPhoto element of selected cell
+    
     var friends = [
             FriendsPhoto("Джефф Безос", UIImage(named: "bezos")),
             FriendsPhoto("Билл Гейтс", UIImage(named: "gates")),
@@ -34,36 +36,45 @@ class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-}
     
-    extension FriendsTableViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return friends.count
+        //Send selectedFriend by seque to FriendsPhotosCollectionViewController
+        if segue.destination is FriendsPhotosCollectionViewController {
+            let friendsPhotosCollectionViewController = segue.destination as? FriendsPhotosCollectionViewController
+            friendsPhotosCollectionViewController?.friend = selectedFriend
         }
-        
-        override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell") as? FriendsCell else { fatalError() }
-            
-            cell.titleLabel.text = friends[indexPath.row].friendsName
-            cell.friendimage.image = friends[indexPath.row].friendsImage
-            
-            print("Cell created for row: \(indexPath.row), \(friends[indexPath.row]), \(String(describing: friends[indexPath .row]))")
-            
-            return cell
-        }
-        
-        override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-            
-            if editingStyle == .delete {
-                friends.remove(at: indexPath.row)
-                
-                tableView.deleteRows(at: [indexPath], with: .fade)
-            }
-        }
-        
     }
-
-    extension FriendsTableViewController {
         
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return friends.count
     }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell") as? FriendsCell else { fatalError() }
+        
+        cell.titleLabel.text = friends[indexPath.row].friendsName
+        cell.friendimage.image = friends[indexPath.row].friendsImage
+        
+        print("Cell created for row: \(indexPath.row), \(friends[indexPath.row]), \(String(describing: friends[indexPath .row]))")
+        
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            friends.remove(at: indexPath.row)
+            
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        
+        //Store selectedFriend by indexPath  into variable
+        selectedFriend = friends[indexPath.row]
+        
+        return indexPath
+    }
+    
+}
