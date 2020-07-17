@@ -87,7 +87,6 @@ class FriendsTableViewController: UITableViewController {
         
     }
 
-
     extension FriendsTableViewController {
         
     }
