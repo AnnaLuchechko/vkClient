@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "1xcommunities.png",
+      "filename" : "elison.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "2xcommunities.png",
+      "filename" : "elison-2.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "3xcommunities.png",
+      "filename" : "elison-1.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "1xcommunities.png",
+      "filename" : "mayers.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "2xcommunities.png",
+      "filename" : "mayers-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "3xcommunities.png",
+      "filename" : "mayers-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
