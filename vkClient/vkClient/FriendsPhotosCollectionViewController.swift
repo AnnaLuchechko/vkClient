@@ -10,7 +10,7 @@ import UIKit
 
 class FriendsPhotosCollectionViewController: UICollectionViewController {
     
-    var friend: FriendsPhoto?
+    var friend: Friend?
     
     override func viewDidLoad() {
         super.viewDidLoad()

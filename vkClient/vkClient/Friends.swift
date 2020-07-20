@@ -1,5 +1,5 @@
 //
-//  FriendsPhoto.swift
+//  Friends.swift
 //  vkClient
 //
 //  Created by Anna Luchechko on 14.07.2020.
@@ -7,7 +7,7 @@
 //
 import UIKit
 
-struct FriendsPhoto {
+struct Friend {
     var friendsName: String
     var friendsImage: UIImage?
     
