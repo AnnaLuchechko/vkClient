@@ -297,7 +297,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="zfo-QP-wZz">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Rqs-k9-kwv">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="Rqs-k9-kwv">
                             <color key="tintColor" red="0.60526019330000003" green="0.68699091670000001" blue="0.72149676080000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
                                 <segue destination="otN-Q6-ERP" kind="show" id="ttH-ph-iqS"/>
