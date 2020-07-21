@@ -374,6 +374,9 @@
                     <navigationItem key="navigationItem" id="Ptf-UL-9qR">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="zMt-MB-loe">
                             <color key="tintColor" red="0.60526019330000003" green="0.68699091670000001" blue="0.72149676080000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <connections>
+                                <action selector="addCommunity:" destination="otN-Q6-ERP" id="bzD-Tb-m6Z"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>

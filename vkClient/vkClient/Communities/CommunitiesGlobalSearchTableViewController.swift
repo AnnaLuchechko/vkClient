@@ -41,6 +41,27 @@ class CommunitiesGlobalSearchTableViewController: UITableViewController {
         Community("Инновации", UIImage(named: "innow"), "FORBES CLUB — это закрытые встречи с членами списка Forbes, представителями власти и деятелями культуры. Пресса на эти встречи не приглашается, что позволяет вести разговор откровенно, без обычных для официальных выступлений банальностей и общих слов.")
     ]
     
+    @IBAction func addCommunity(_ sender: Any) {
+      let alert = UIAlertController(title: "Add Community", message: nil, preferredStyle: .alert)
+      alert.addTextField { (textField) in
+        textField.placeholder = "Name"
+      }
+       
+      let typeCommunitNameAction = UIAlertAction(title: "OK", style: .default) { [weak self, weak alert] (action) in
+        guard let communityName = alert?.textFields?.first?.text else { return }
+        self?.addCommunity(name: communityName)
+      }
+      alert.addAction(typeCommunitNameAction)
+       
+      present(alert, animated: true, completion: nil)
+    }
+     
+    private func addCommunity(name: String) {
+      guard !name.isEmpty else { return }
+        globalCommunities.append(Community(name, nil, ""))
+      self.tableView.reloadData()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         

@@ -117,9 +117,9 @@
 		088FD7A824C6629300451FEB /* Communities */ = {
 			isa = PBXGroup;
 			children = (
-				081D64CE24B76CCD00F6B61D /* CommunitiesGlobalSearchTableViewController.swift */,
-				08D1518D24C1BE7400D70BCC /* CommunitiesCell.swift */,
 				081D64CC24B76C2600F6B61D /* CommunitiesTableViewController.swift */,
+				08D1518D24C1BE7400D70BCC /* CommunitiesCell.swift */,
+				081D64CE24B76CCD00F6B61D /* CommunitiesGlobalSearchTableViewController.swift */,
 			);
 			path = Communities;
 			sourceTree = "<group>";
