@@ -10,9 +10,11 @@ import UIKit
 struct Community {
     var communityName: String
     var communityImage: UIImage?
+    var communityDescription: String
     
-    init(_ communityName: String, _ communityImage: UIImage?) {
+    init(_ communityName: String, _ communityImage: UIImage?, _ communityDescription: String) {
         self.communityName = communityName
         self.communityImage = communityImage
+        self.communityDescription = communityDescription
     }
 }
