@@ -80,12 +80,12 @@
 		084A7C0724AF63990049FAF7 /* vkClient */ = {
 			isa = PBXGroup;
 			children = (
-				086238AE24CD8F25000240A1 /* UserPhotoView.swift */,
 				084A7C0824AF63990049FAF7 /* AppDelegate.swift */,
 				084A7C0A24AF63990049FAF7 /* SceneDelegate.swift */,
 				084A7C0E24AF63990049FAF7 /* Main.storyboard */,
 				084A7C0C24AF63990049FAF7 /* LoginViewController.swift */,
 				081D64D024B8FD1100F6B61D /* TabBarController.swift */,
+				086238AE24CD8F25000240A1 /* UserPhotoView.swift */,
 				088FD7A624C6621500451FEB /* Model */,
 				088FD7A824C6629300451FEB /* Communities */,
 				088FD7A724C6623F00451FEB /* Friends */,
