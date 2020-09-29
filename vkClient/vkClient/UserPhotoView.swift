@@ -9,6 +9,25 @@
 import UIKit
 
 @IBDesignable class UserPhotoView: UIView {
+        
+    @IBInspectable var shadowRadius: CGFloat = 5.0 {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    
+    @IBInspectable var shadowColor: UIColor = .black {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    
+    @IBInspectable var shadowOpacity: Float = 0.9 {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
@@ -16,10 +35,10 @@ import UIKit
         let shadowSubview = UIView()
         shadowSubview.frame.size = CGSize(width: 200, height: 200)
         shadowSubview.clipsToBounds = false
-        shadowSubview.layer.shadowColor = UIColor.black.cgColor
-        shadowSubview.layer.shadowOpacity = 0.9
+        shadowSubview.layer.shadowColor = shadowColor.cgColor
+        shadowSubview.layer.shadowOpacity = shadowOpacity
         shadowSubview.layer.shadowOffset = CGSize.zero
-        shadowSubview.layer.shadowRadius = 5.0
+        shadowSubview.layer.shadowRadius = shadowRadius
         
         let userPhoto = UIImageView(frame: shadowSubview.bounds)
         userPhoto.image = UIImage(named: "cars")
