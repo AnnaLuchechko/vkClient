@@ -21,7 +21,9 @@
 		084A7C1024AF63990049FAF7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 084A7C0E24AF63990049FAF7 /* Main.storyboard */; };
 		084A7C1224AF639A0049FAF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 084A7C1124AF639A0049FAF7 /* Assets.xcassets */; };
 		084A7C1524AF639A0049FAF7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 084A7C1324AF639A0049FAF7 /* LaunchScreen.storyboard */; };
+		086238AF24CD8F25000240A1 /* UserPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086238AE24CD8F25000240A1 /* UserPhotoView.swift */; };
 		088FD7AA24C6635000451FEB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD7A924C6635000451FEB /* User.swift */; };
+		0892F6EC25248EB300D8C807 /* Like.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0892F6EB25248EB300D8C807 /* Like.swift */; };
 		08D1518E24C1BE7400D70BCC /* CommunitiesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1518D24C1BE7400D70BCC /* CommunitiesCell.swift */; };
 		08D1519024C6401A00D70BCC /* Communities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1518F24C6401A00D70BCC /* Communities.swift */; };
 /* End PBXBuildFile section */
@@ -43,7 +45,9 @@
 		084A7C1124AF639A0049FAF7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		084A7C1424AF639A0049FAF7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		084A7C1624AF639B0049FAF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		086238AE24CD8F25000240A1 /* UserPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotoView.swift; sourceTree = "<group>"; };
 		088FD7A924C6635000451FEB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		0892F6EB25248EB300D8C807 /* Like.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Like.swift; sourceTree = "<group>"; };
 		08D1518D24C1BE7400D70BCC /* CommunitiesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunitiesCell.swift; sourceTree = "<group>"; };
 		08D1518F24C6401A00D70BCC /* Communities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Communities.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,6 +87,8 @@
 				084A7C0E24AF63990049FAF7 /* Main.storyboard */,
 				084A7C0C24AF63990049FAF7 /* LoginViewController.swift */,
 				081D64D024B8FD1100F6B61D /* TabBarController.swift */,
+				086238AE24CD8F25000240A1 /* UserPhotoView.swift */,
+				0892F6EB25248EB300D8C807 /* Like.swift */,
 				088FD7A624C6621500451FEB /* Model */,
 				088FD7A824C6629300451FEB /* Communities */,
 				088FD7A724C6623F00451FEB /* Friends */,
@@ -117,8 +123,8 @@
 		088FD7A824C6629300451FEB /* Communities */ = {
 			isa = PBXGroup;
 			children = (
-				081D64CC24B76C2600F6B61D /* CommunitiesTableViewController.swift */,
 				08D1518D24C1BE7400D70BCC /* CommunitiesCell.swift */,
+				081D64CC24B76C2600F6B61D /* CommunitiesTableViewController.swift */,
 				081D64CE24B76CCD00F6B61D /* CommunitiesGlobalSearchTableViewController.swift */,
 			);
 			path = Communities;
@@ -195,6 +201,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				086238AF24CD8F25000240A1 /* UserPhotoView.swift in Sources */,
 				083F953D24BD1CDC00DFEAAA /* FriendsTableViewController.swift in Sources */,
 				08D1518E24C1BE7400D70BCC /* CommunitiesCell.swift in Sources */,
 				083F953F24BD267600DFEAAA /* FriendsCell.swift in Sources */,
@@ -204,6 +211,7 @@
 				088FD7AA24C6635000451FEB /* User.swift in Sources */,
 				084A7C0D24AF63990049FAF7 /* LoginViewController.swift in Sources */,
 				084A7C0924AF63990049FAF7 /* AppDelegate.swift in Sources */,
+				0892F6EC25248EB300D8C807 /* Like.swift in Sources */,
 				081D64CB24B76B8700F6B61D /* FriendsPhotosCollectionViewController.swift in Sources */,
 				081D64CD24B76C2600F6B61D /* CommunitiesTableViewController.swift in Sources */,
 				08D1519024C6401A00D70BCC /* Communities.swift in Sources */,
