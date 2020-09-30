@@ -87,9 +87,6 @@
                                                 <constraint firstItem="pYu-be-8O4" firstAttribute="centerY" secondItem="jXN-0l-RDp" secondAttribute="centerY" id="cqB-ce-kcd"/>
                                                 <constraint firstItem="pYu-be-8O4" firstAttribute="centerX" secondItem="jXN-0l-RDp" secondAttribute="centerX" id="mDQ-4f-d9H"/>
                                             </constraints>
-                                            <userDefinedRuntimeAttributes>
-                               
-                                            </userDefinedRuntimeAttributes>
                                         </view>
                                     </subviews>
                                     <constraints>
@@ -163,7 +160,7 @@
                                                 <constraint firstAttribute="height" constant="335" id="8pL-0I-VPP"/>
                                             </constraints>
                                         </imageView>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="42e-iu-2SX" customClass="Like" customModule="vkClient" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="42e-iu-2SX" customClass="LikeControl" customModule="vkClient" customModuleProvider="target">
                                             <rect key="frame" x="10" y="395" width="150" height="45"/>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JXs-AP-ygi">
