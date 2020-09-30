@@ -8,22 +8,46 @@
 
 import UIKit
 
-@IBDesignable class Like: UIView {
+class Like: UIView {
+    
+    private var like = UIImageView()
+    private var likeCount = UILabel()
+
+    private var likeImage = UIImage(named: "likeUnfilled")
+    private var likes = 0
     
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
         self.frame.size = CGSize(width: 150, height: 45)
         
-        let like = UIImageView()
-        like.image = UIImage(named: "likeUnfilled")
+        like.frame.size = CGSize(width: 30, height: 30)
+        like.image = likeImage
         
-        let likeCount = UILabel()
-        
-
+        likeCount.frame.size = CGSize(width: 50, height: 30)
+        likeCount.frame.origin.x = like.frame.size.width + 10
+        likeCount.text = String(likes)
+        likeCount.font = UIFont(name: "Roboto", size: 20)
         
         addSubview(like)
         addSubview(likeCount)
-
+        configure()
+    }
+    
+    func configure() {
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(onTap(_:)))
+        recognizer.numberOfTapsRequired = 1
+        addGestureRecognizer(recognizer)
+    }
+    
+    @objc func onTap(_ sender:UITapGestureRecognizer) {
+        if likes == 0 {
+            likes = 1
+            likeImage = UIImage(named: "likeFilled")
+        } else {
+            likes = 0
+            likeImage = UIImage(named: "likeUnfilled")
+        }
+        setNeedsDisplay()
     }
 }
