@@ -9,6 +9,9 @@
 import UIKit
 
 @IBDesignable class UserPhotoView: UIView {
+    
+    var userPhoto = UIImageView()
+    var image = UIImage(named: "cars")
         
     @IBInspectable var shadowRadius: CGFloat = 5.0 {
         didSet {
@@ -33,24 +36,22 @@ import UIKit
         super.draw(rect)
         
         let shadowSubview = UIView()
-        shadowSubview.frame.size = CGSize(width: 200, height: 200)
+        shadowSubview.frame.size = CGSize(width: 40, height: 40)
         shadowSubview.clipsToBounds = false
         shadowSubview.layer.shadowColor = shadowColor.cgColor
         shadowSubview.layer.shadowOpacity = shadowOpacity
         shadowSubview.layer.shadowOffset = CGSize.zero
         shadowSubview.layer.shadowRadius = shadowRadius
         
-        let userPhoto = UIImageView(frame: shadowSubview.bounds)
-        userPhoto.image = UIImage(named: "cars")
-        userPhoto.layer.borderWidth = 1
+        userPhoto.frame = shadowSubview.bounds
+        userPhoto.image = image
+        userPhoto.layer.borderWidth = 0.5
         userPhoto.clipsToBounds = true
-        userPhoto.layer.cornerRadius = 100
+        userPhoto.layer.cornerRadius = 20
         
         shadowSubview.addSubview(userPhoto)
         
         addSubview(shadowSubview)
-        
-
     }
     
 }

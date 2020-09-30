@@ -10,7 +10,7 @@ import UIKit
 
 class FriendsCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var friendimage: UIImageView!
+    @IBOutlet weak var friendimage: UserPhotoView!
     
     override func prepareForReuse() {
         super.prepareForReuse()
