@@ -1,5 +1,5 @@
 //
-//  Like.swift
+//  LikeControl.swift
 //  vkClient
 //
 //  Created by Anna Luchechko on 30.09.2020.
