@@ -32,9 +32,27 @@ class FriendsTableViewController: UITableViewController {
             Friend("Чарльз", "Кох", UIImage(named: "koh")),
             Friend("Ма", "Хуатэн", UIImage(named: "huaten"))
         ]
+    
+    var sections: [Character: [Friend]] = [:]
+    var sectionTitles = [Character]()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        for friend in friends {
+            let firstLetter = friend.friendsSurname.first!
+            
+            if sections[firstLetter] != nil {
+                sections[firstLetter]?.append(friend)
+            }
+            else {
+                sections[firstLetter] = [friend]
+            }
+        }
+        sectionTitles = Array(sections.keys)
+        sectionTitles.sort()
+    
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -45,23 +63,36 @@ class FriendsTableViewController: UITableViewController {
             friendsPhotosCollectionViewController?.friend = selectedFriend
         }
     }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
+    }
         
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return friends.count
+        return sections[sectionTitles[section]]?.count ?? 0
+    }
+    
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return sectionTitles.map{ String($0) }
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return String(sectionTitles[section])
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell") as? FriendsCell else { fatalError() }
+        guard let friend = sections[sectionTitles[indexPath.section]]?[indexPath.row] else { fatalError() }
         
-        cell.titleLabel.text = friends[indexPath.row].friendsName
-        cell.friendimage.image = friends[indexPath.row].friendsImage
+        cell.titleLabel.text = friend.friendsSurname + " " + friend.friendsName
+        cell.friendimage.image = friend.friendsImage
             
         return cell
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            friends.remove(at: indexPath.row)
+            sections[sectionTitles[indexPath.section]]?.remove(at: indexPath.row)
             
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
@@ -70,7 +101,8 @@ class FriendsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         
         //Store selectedFriend by indexPath  into variable
-        selectedFriend = friends[indexPath.row]
+        guard let friend = sections[sectionTitles[indexPath.section]]?[indexPath.row] else { fatalError() }
+        selectedFriend = friend
         
         return indexPath
     }
