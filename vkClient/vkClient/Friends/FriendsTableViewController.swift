@@ -13,24 +13,24 @@ class FriendsTableViewController: UITableViewController {
     var selectedFriend: Friend? //Create variable to send FriendsPhoto element of selected cell
     
     var friends = [
-            Friend("Джефф Безос", UIImage(named: "bezos")),
-            Friend("Билл Гейтс", UIImage(named: "gates")),
-            Friend("Бернар Арно", UIImage(named: "arno")),
-            Friend("Уоррен Баффет", UIImage(named: "buffett")),
-            Friend("Ларри Эллисон", UIImage(named: "elison")),
-            Friend("Амансио Ортега", UIImage(named: "ortega")),
-            Friend("Марк Цукерберг", UIImage(named: "cukerberg")),
-            Friend("Джим Уолтон", UIImage(named: "uolton")),
-            Friend("Элис Уолтон", UIImage(named: "uoltonw")),
-            Friend("Стив Балмер", UIImage(named: "balmer")),
-            Friend("Карлос Слим Элу", UIImage(named: "slim")),
-            Friend("Ларри Пейдж", UIImage(named: "peydj")),
-            Friend("Сергей Брин", UIImage(named: "brin")),
-            Friend("Франсуаза Беттанкур-Майерс", UIImage(named: "mayers")),
-            Friend("Майкл Блумберг", UIImage(named: "bloomberg")),
-            Friend("Джек Ма", UIImage(named: "jackma")),
-            Friend("Чарльз Кох", UIImage(named: "koh")),
-            Friend("Ма Хуатэн", UIImage(named: "huaten"))
+            Friend("Джефф", "Безос", UIImage(named: "bezos")),
+            Friend("Билл", "Гейтс", UIImage(named: "gates")),
+            Friend("Бернар", "Арно", UIImage(named: "arno")),
+            Friend("Уоррен", "Баффет", UIImage(named: "buffett")),
+            Friend("Ларри", "Эллисон", UIImage(named: "elison")),
+            Friend("Амансио", "Ортега", UIImage(named: "ortega")),
+            Friend("Марк", "Цукерберг", UIImage(named: "cukerberg")),
+            Friend("Джим", "Уолтон", UIImage(named: "uolton")),
+            Friend("Элис", "Уолтон", UIImage(named: "uoltonw")),
+            Friend("Стив", "Балмер", UIImage(named: "balmer")),
+            Friend("Карлос", "Слим Элу", UIImage(named: "slim")),
+            Friend("Ларри", "Пейдж", UIImage(named: "peydj")),
+            Friend("Сергей", "Брин", UIImage(named: "brin")),
+            Friend("Франсуаза", "Беттанкур-Майерс", UIImage(named: "mayers")),
+            Friend("Майкл", "Блумберг", UIImage(named: "bloomberg")),
+            Friend("Джек", "Ма", UIImage(named: "jackma")),
+            Friend("Чарльз", "Кох", UIImage(named: "koh")),
+            Friend("Ма", "Хуатэн", UIImage(named: "huaten"))
         ]
 
     override func viewDidLoad() {
