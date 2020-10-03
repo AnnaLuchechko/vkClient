@@ -27,6 +27,29 @@ class CommunitiesTableViewController: UITableViewController {
         Community("Инновации", UIImage(named: "innow"), "FORBES CLUB — это закрытые встречи с членами списка Forbes, представителями власти и деятелями культуры. Пресса на эти встречи не приглашается, что позволяет вести разговор откровенно, без обычных для официальных выступлений банальностей и общих слов.")
     ]
     
+    private var filteredCommunities = [Community]()
+    private let searchController = UISearchController(searchResultsController: nil)
+    private var searchBarIsEmpty: Bool {
+        guard let text = searchController.searchBar.text else { return false }
+        return text.isEmpty
+    }
+    private var isFiltering: Bool {
+        return searchController.isActive && !searchBarIsEmpty
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        //Setup the Search Controller
+        searchController.searchBar.delegate = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        
+        tableView.tableHeaderView = searchController.searchBar
+        tableView.setContentOffset(CGPoint.init(x: 0, y: searchController.searchBar.frame.size.height), animated: false)
+    
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.destination is CommunitiesGlobalSearchTableViewController {
@@ -36,14 +59,24 @@ class CommunitiesTableViewController: UITableViewController {
     }
             
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isFiltering {
+            return filteredCommunities.count
+        }
         return communities.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CommunitiesCell") as? CommunitiesCell else { fatalError() }
         
-        cell.titleLabel.text = communities[indexPath.row].communityName
-        cell.communityimage.image = communities[indexPath.row].communityImage
+        var community: Community
+        if isFiltering {
+            community = filteredCommunities[indexPath.row]
+        } else {
+            community = communities[indexPath.row]
+        }
+        
+        cell.titleLabel.text = community.communityName
+        cell.communityimage.image = community.communityImage
         
         return cell
     }
@@ -56,5 +89,18 @@ class CommunitiesTableViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
+    
+}
 
+extension CommunitiesTableViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        filteredCommunities = communities.filter({ (community: Community) -> Bool in
+            return community.communityName.lowercased().contains(searchText.lowercased())
+        })
+
+        tableView.reloadData()
+    }
+    
 }
