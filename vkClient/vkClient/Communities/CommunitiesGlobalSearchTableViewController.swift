@@ -55,6 +55,29 @@ class CommunitiesGlobalSearchTableViewController: UITableViewController {
        
       present(alert, animated: true, completion: nil)
     }
+    
+    private var filteredCommunities = [Community]()
+    private let searchController = UISearchController(searchResultsController: nil)
+    private var searchBarIsEmpty: Bool {
+        guard let text = searchController.searchBar.text else { return false }
+        return text.isEmpty
+    }
+    private var isFiltering: Bool {
+        return searchController.isActive && !searchBarIsEmpty
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        //Setup the Search Controller
+        searchController.searchBar.delegate = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        
+        tableView.tableHeaderView = searchController.searchBar
+        tableView.setContentOffset(CGPoint.init(x: 0, y: searchController.searchBar.frame.size.height), animated: false)
+    
+    }
      
     private func addCommunity(name: String) {
       guard !name.isEmpty else { return }
@@ -70,14 +93,24 @@ class CommunitiesGlobalSearchTableViewController: UITableViewController {
     }
             
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isFiltering {
+            return filteredCommunities.count
+        }
         return globalCommunities.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CommunitiesCell") as? CommunitiesCell else { fatalError() }
         
-        cell.titleLabel.text = globalCommunities[indexPath.row].communityName
-        cell.communityimage.image = globalCommunities[indexPath.row].communityImage
+        var globalCommunity: Community
+        if isFiltering {
+            globalCommunity = filteredCommunities[indexPath.row]
+        } else {
+            globalCommunity = globalCommunities[indexPath.row]
+        }
+        
+        cell.titleLabel.text = globalCommunity.communityName
+        cell.communityimage.image = globalCommunity.communityImage
         
         return cell
     }
@@ -90,6 +123,19 @@ class CommunitiesGlobalSearchTableViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
+    
+}
 
+extension CommunitiesGlobalSearchTableViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        filteredCommunities = globalCommunities.filter({ (community: Community) -> Bool in
+            return community.communityName.lowercased().contains(searchText.lowercased())
+        })
+
+        tableView.reloadData()
+    }
+    
 }
 
