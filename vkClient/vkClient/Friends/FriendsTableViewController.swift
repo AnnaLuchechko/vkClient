@@ -12,7 +12,7 @@ class FriendsTableViewController: UITableViewController {
         
     var selectedFriend: Friend? //Create variable to send FriendsPhoto element of selected cell
     
-    var friends = [
+    private var friends = [
             Friend("Джефф", "Безос", UIImage(named: "bezos")),
             Friend("Билл", "Гейтс", UIImage(named: "gates")),
             Friend("Бернар", "Арно", UIImage(named: "arno")),
@@ -33,12 +33,32 @@ class FriendsTableViewController: UITableViewController {
             Friend("Ма", "Хуатэн", UIImage(named: "huaten"))
         ]
     
+    private let searchController = UISearchController(searchResultsController: nil)
+    private var searchBarIsEmpty: Bool {
+        guard let text = searchController.searchBar.text else { return false }
+        return text.isEmpty
+    }
+    private var isFiltering: Bool {
+        return searchController.isActive && !searchBarIsEmpty
+    }
+    
     var sections: [Character: [Friend]] = [:]
     var sectionTitles = [Character]()
+    
+    var filteredSections: [Character: [Friend]] = [:]
+    var filteredSectionTitles = [Character]()
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Setup the Search Controller
+        searchController.searchBar.delegate = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        
+        tableView.tableHeaderView = searchController.searchBar
+        tableView.setContentOffset(CGPoint.init(x: 0, y: searchController.searchBar.frame.size.height), animated: false)
         
         //Register .xib for section header
         tableView.register(UINib(nibName: "FriendsSectionHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "friendSectionHeader")
@@ -72,15 +92,25 @@ class FriendsTableViewController: UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
+        if isFiltering {
+            return filteredSections.count
+        }
         return sections.count
     }
         
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isFiltering {
+            return filteredSections[filteredSectionTitles[section]]?.count ?? 0
+        }
         return sections[sectionTitles[section]]?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let sectionName = String(sectionTitles[section])
+        var sectionName = String(sectionTitles[section])
+        
+        if isFiltering {
+            sectionName = String(filteredSectionTitles[section])
+        }
         
         guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "friendSectionHeader") as? FriendsSectionHeaderView else { fatalError() }
         header.header.text = sectionName
@@ -92,19 +122,30 @@ class FriendsTableViewController: UITableViewController {
     
     
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        if isFiltering {
+            return filteredSectionTitles.map{ String($0) }
+        }
         return sectionTitles.map{ String($0) }
     }
-   
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        return String(sectionTitles[section])
-//    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell") as? FriendsCell else { fatalError() }
-        guard let friend = sections[sectionTitles[indexPath.section]]?[indexPath.row] else { fatalError() }
         
-        cell.titleLabel.text = friend.friendsSurname + " " + friend.friendsName
-        cell.friendimage.image = friend.friendsImage
+        var filteredFriend: Friend
+        
+        if isFiltering {
+            guard let friend = filteredSections[filteredSectionTitles[indexPath.section]]?[indexPath.row] else { fatalError() }
+            filteredFriend = friend
+        } else {
+            guard let friend = sections[sectionTitles[indexPath.section]]?[indexPath.row] else { fatalError() }
+            filteredFriend = friend
+        }
+        
+        
+        //guard let friend = sections[sectionTitles[indexPath.section]]?[indexPath.row] else { fatalError() }
+        
+        cell.titleLabel.text = filteredFriend.friendsSurname + " " + filteredFriend.friendsName
+        cell.friendimage.image = filteredFriend.friendsImage
             
         return cell
     }
@@ -124,6 +165,32 @@ class FriendsTableViewController: UITableViewController {
         selectedFriend = friend
         
         return indexPath
+    }
+    
+}
+
+extension FriendsTableViewController: UISearchBarDelegate {
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredSections = [:]
+        filteredSectionTitles = [Character]()
+        
+        for friend in friends {
+            let frindFullName = friend.friendsName + " " + friend.friendsSurname
+            if(frindFullName.lowercased().contains(searchText.lowercased())) {
+                let firstLetter = friend.friendsSurname.first!
+                if filteredSections[firstLetter] != nil {
+                    filteredSections[firstLetter]?.append(friend)
+                }
+                else {
+                    filteredSections[firstLetter] = [friend]
+                }
+            }
+        }
+        filteredSectionTitles = Array(filteredSections.keys)
+        filteredSectionTitles.sort()
+
+        tableView.reloadData()
     }
     
 }
