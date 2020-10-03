@@ -112,18 +112,7 @@
                             <outlet property="delegate" destination="1k4-W9-C5i" id="b9C-IX-PvP"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="09f-gW-RIB">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="be6-no-wFR">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="htz-u1-RUM">
-                                <rect key="frame" x="276" y="7" width="83" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                            </button>
-                            <connections>
-                                <action selector="showTempWindow:" destination="1k4-W9-C5i" id="To7-Qk-dCE"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="09f-gW-RIB"/>
                     <connections>
                         <outlet property="tableView" destination="xaM-xu-6sf" id="EMi-Lv-3QM"/>
                     </connections>

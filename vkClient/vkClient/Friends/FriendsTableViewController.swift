@@ -40,6 +40,13 @@ class FriendsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Register .xib for section header
+        tableView.register(UINib(nibName: "FriendsSectionHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "friendSectionHeader")
+        tableView.estimatedSectionHeaderHeight = 40
+        
+        tableView.backgroundColor = UIColor(red: 0.29, green: 0.53, blue: 0.80, alpha: 1.00)
+        
+        
         for friend in friends {
             let firstLetter = friend.friendsSurname.first!
             
@@ -51,7 +58,7 @@ class FriendsTableViewController: UITableViewController {
             }
         }
         sectionTitles = Array(sections.keys)
-        sectionTitles.sort()
+        sectionTitles.sort()    //Sort section titles A-Z
     
     }
     
@@ -72,13 +79,25 @@ class FriendsTableViewController: UITableViewController {
         return sections[sectionTitles[section]]?.count ?? 0
     }
     
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let sectionName = String(sectionTitles[section])
+        
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "friendSectionHeader") as? FriendsSectionHeaderView else { fatalError() }
+        header.header.text = sectionName
+        header.contentView.backgroundColor = tableView.backgroundColor
+        header.contentView.layer.opacity = 0.5
+
+        return header
+    }
+    
+    
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         return sectionTitles.map{ String($0) }
     }
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return String(sectionTitles[section])
-    }
+   
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return String(sectionTitles[section])
+//    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell") as? FriendsCell else { fatalError() }

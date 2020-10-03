@@ -23,7 +23,7 @@ class FriendsPhotosCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "friendsPhotoCell", for: indexPath) as? FriendsPhotoCell else { fatalError() }
                     
-        cell.friendsName.text = friend?.friendsName
+        cell.friendsName.text = (friend?.friendsName ?? "") + " " + (friend?.friendsSurname ?? "")
         cell.friendsImage.image = friend?.friendsImage
 
         return cell
