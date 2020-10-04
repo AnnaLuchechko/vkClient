@@ -45,6 +45,9 @@ class NewsCell: UITableViewCell {
         controlView.addSubview(shareControl)
         
         let viewControl = ViewControl(frame: CGRect(x: frame.size.width - 35, y: 5, width: 44, height: 44))
+        viewControl.viewImageView.frame.origin.y = viewControl.frame.origin.y
+        viewControl.viewImageView.frame.size.width = 20
+        viewControl.viewImageView.frame.size.height = 20
         controlView.addSubview(viewControl)
     }
 }

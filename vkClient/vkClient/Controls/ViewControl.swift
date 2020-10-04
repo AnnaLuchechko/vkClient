@@ -12,8 +12,8 @@ class ViewControl: UIControl {
     
     private var viewCount: Int = 0
 
-    private  let viewCountLabel = UILabel()
-    private  let viewImageView = UIImageView()
+    let viewCountLabel = UILabel()
+    let viewImageView = UIImageView()
     
     //called when initialized programmatically
     override init(frame: CGRect) {
