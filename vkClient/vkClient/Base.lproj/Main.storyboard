@@ -245,6 +245,11 @@
                                         <color key="textColor" red="0.98439520599999997" green="0.99478048090000004" blue="0.99044924970000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Szk-2S-oxQ" customClass="DotsLoadingIndicator" customModule="vkClient" customModuleProvider="target">
+                                        <rect key="frame" x="73" y="433" width="240" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="m9A-yC-Q7e" secondAttribute="bottom" id="028-dZ-Rla"/>
@@ -402,7 +407,7 @@
                                                     <rect key="frame" x="15" y="14.999999999999996" width="50" height="50.666666666666657"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZsR-Ts-0Wr">
-                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="51"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50.666666666666664"/>
                                                         </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -564,6 +569,21 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NIq-M3-yxW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="38" y="143"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="u2p-4h-cqZ">
+            <objects>
+                <viewController id="Tfy-wo-NhB" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xF8-Vc-73x">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="MvM-h0-84r"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nkO-zu-ZsI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-612" y="-1189"/>
         </scene>
     </scenes>
     <color key="tintColor" red="0.50588235290000005" green="0.54901960780000003" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
