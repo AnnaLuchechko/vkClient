@@ -12,7 +12,7 @@ class NewsViewController: UIViewController {
     @IBOutlet weak var newsTable: UITableView!
     
     private var newsArray = [
-        News("Apple", "10 Oct 2020", UIImage(named: "apple"), "Кидайте в коментарии последнюю фотографию из вашей галереи", UIImage(named: "newsImage"), "823", "67", "12", "1023")
+        News("Apple", "10 Oct 2020", UIImage(named: "apple"), "Кидайте в коментарии последнюю фотографию из вашей галереи Кидайте в коментарии последнюю фотографию из вашей галереи Кидайте в коментарии", UIImage(named: "newsImage"), "823", "67", "12", "1023")
     ]
     
     override func viewDidLoad() {
