@@ -34,5 +34,17 @@ class NewsCell: UITableViewCell {
         accountImage.layer.cornerRadius = containerAccountImage.bounds.width / 2
         accountImage.clipsToBounds = true
         
+        
+        let likeControl = LikeControl(frame: CGRect(x: 10, y: 5, width: 44, height: 44))
+        controlView.addSubview(likeControl)
+        
+        let commentControl = CommentControl(frame: CGRect(x: 94, y: 5, width: 44, height: 44))
+        controlView.addSubview(commentControl)
+        
+        let shareControl = ShareControl(frame: CGRect(x: 178, y: 5, width: 44, height: 44))
+        controlView.addSubview(shareControl)
+        
+        let viewControl = ViewControl(frame: CGRect(x: frame.size.width - 35, y: 5, width: 44, height: 44))
+        controlView.addSubview(viewControl)
     }
 }
