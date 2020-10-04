@@ -1,5 +1,5 @@
 //
-//  Like.swift
+//  LikeControl.swift
 //  vkClient
 //
 //  Created by Anna Luchechko on 30.09.2020.
@@ -15,8 +15,18 @@ class LikeControl: UIControl {
     private  let likeCountLabel = UILabel()
     private  let likeImageView = UIImageView()
     
+    //called when initialized programmatically
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        config()
+    }
+    
+    //called when initialized from storyboard
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+
+        config()
     }
 
     private func updatelike() {
@@ -36,10 +46,8 @@ class LikeControl: UIControl {
         updatelike()
         sendActions(for: .valueChanged)
     }
-        
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-
+    
+    private func config() {
         likeImageView.frame.size = CGSize(width: 30, height: 30)
         addSubview(likeImageView)
         

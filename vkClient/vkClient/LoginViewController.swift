@@ -22,6 +22,7 @@ class LoginViewController: UIViewController {
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         scrollView.addGestureRecognizer(tapGesture)
+        
     }
     
     @objc func keyboardWasShown(notification: Notification) {
