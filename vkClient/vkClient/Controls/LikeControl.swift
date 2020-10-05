@@ -31,11 +31,11 @@ class LikeControl: UIControl {
 
     private func updatelike() {
         if isSelected {
-            likeImageView.image = UIImage(named: "likeFilled")
+            animateLikeTap()
             likeCount = 1
         }
         else {
-            likeImageView.image = UIImage(named: "likeUnfilled")
+            animateLikeTap()
             likeCount = 0
         }
         likeCountLabel.text = "\(likeCount)"
@@ -46,6 +46,17 @@ class LikeControl: UIControl {
         updatelike()
         sendActions(for: .valueChanged)
     }
+    
+    func animateLikeTap() {
+        UIView.transition(with: likeImageView, duration: 1, options: self.isSelected ? .transitionFlipFromLeft : .transitionFlipFromRight,
+        animations: {
+          if self.isSelected {
+            self.likeImageView.image = UIImage(named: "likeFilled")
+          } else {
+            self.likeImageView.image = UIImage(named: "likeUnfilled")
+          }
+        }, completion: nil)
+      }
     
     private func config() {
         likeImageView.frame.size = CGSize(width: 30, height: 30)

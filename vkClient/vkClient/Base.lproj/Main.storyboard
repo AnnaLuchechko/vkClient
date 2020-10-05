@@ -245,11 +245,6 @@
                                         <color key="textColor" red="0.98439520599999997" green="0.99478048090000004" blue="0.99044924970000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Szk-2S-oxQ" customClass="DotsLoadingIndicator" customModule="vkClient" customModuleProvider="target">
-                                        <rect key="frame" x="73" y="433" width="240" height="128"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="m9A-yC-Q7e" secondAttribute="bottom" id="028-dZ-Rla"/>
