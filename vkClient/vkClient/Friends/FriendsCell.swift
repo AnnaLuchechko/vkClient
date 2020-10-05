@@ -30,5 +30,19 @@ class FriendsCell: UITableViewCell {
         
         friendimage.layer.cornerRadius = containerFriendImage.bounds.width / 2
         friendimage.clipsToBounds = true
+        
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(onFriendImageTap(_:)))
+        containerFriendImage.addGestureRecognizer(gesture)
     }
+    
+    @objc func onFriendImageTap(_ gesture: UITapGestureRecognizer) {
+        UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.0, options: [], animations: {
+            self.containerFriendImage.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+        }, completion: { result in
+            UIView.animate(withDuration: 0.2, animations: {
+                self.containerFriendImage.transform = CGAffineTransform.identity
+           })
+        })
+    }
+    
 }
