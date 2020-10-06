@@ -10,9 +10,10 @@ import UIKit
 struct Friend {
     var friendsName: String
     var friendsSurname: String
-    var friendsImage: UIImage?
+    var friendsImage: [String]
     
-    init(_ friendsName: String, _ friendsSurname: String, _ friendsImage: UIImage?) {
+    
+    init(_ friendsName: String, _ friendsSurname: String, _ friendsImage: [String]) {
         self.friendsName = friendsName
         self.friendsSurname = friendsSurname
         self.friendsImage = friendsImage

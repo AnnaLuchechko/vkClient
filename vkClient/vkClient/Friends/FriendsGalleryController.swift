@@ -10,47 +10,41 @@ import UIKit
 
 class FriendsGalleryController: UIViewController {
     
-    let galleryScrollView: UIScrollView = {
-        let scroll = UIScrollView()
-        scroll.isPagingEnabled = true
-        scroll.showsVerticalScrollIndicator = false
-        scroll.showsHorizontalScrollIndicator = false
-        scroll.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        return scroll
-    }()
+    var photosArray = [String]()
+    let galleryScrollView = UIScrollView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        galleryScrollView.isPagingEnabled = true
+        galleryScrollView.showsVerticalScrollIndicator = false
+        galleryScrollView.contentInsetAdjustmentBehavior = .never
+        galleryScrollView.showsHorizontalScrollIndicator = false
+        galleryScrollView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        
         view.addSubview(galleryScrollView)
+        setupImages(photosArray)
         
-        
-        setupImages()
     }
-
     
-    func setupImages(){
-        
-        let images = [
-            UIImage(named: "cars"),
-            UIImage(named: "cats")
-        ]
-
+    func setupImages(_ images: [String]){
         for i in 0..<images.count {
 
-            let imageView = UIImageView()
-            imageView.image = images[i]
-            let xPosition = UIScreen.main.bounds.width * CGFloat(i)
-            imageView.frame = CGRect(x: xPosition, y: 0, width: galleryScrollView.frame.width, height: galleryScrollView.frame.height)
-            imageView.contentMode = .scaleAspectFit
+            let imageView = UIView(frame:  CGRect(x: 0, y: 0, width: galleryScrollView.frame.width, height: galleryScrollView.frame.height))
+            let image = UIImageView()
+
+            image.frame = imageView.bounds
+            image.frame.origin.x = view.frame.width * CGFloat(i)
+            image.image = UIImage(named: images[i])
+            image.contentMode = .scaleAspectFit
+            
+            imageView.addSubview(image)
 
             galleryScrollView.contentSize.width = galleryScrollView.frame.width * CGFloat(i + 1)
+            galleryScrollView.contentSize.height = view.frame.height
             galleryScrollView.addSubview(imageView)
-            //galleryScrollView.delegate = self
-
-
+            
         }
-
     }
 
 }
