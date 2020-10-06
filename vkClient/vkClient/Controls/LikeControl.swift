@@ -48,14 +48,17 @@ class LikeControl: UIControl {
     }
     
     func animateLikeTap() {
-        UIView.transition(with: likeImageView, duration: 1, options: self.isSelected ? .transitionFlipFromLeft : .transitionFlipFromRight,
-        animations: {
-          if self.isSelected {
-            self.likeImageView.image = UIImage(named: "likeFilled")
-          } else {
-            self.likeImageView.image = UIImage(named: "likeUnfilled")
-          }
-        }, completion: nil)
+        UIView.transition(with: likeImageView,
+                        duration: 1,
+                        options: self.isSelected ? .transitionFlipFromLeft : .transitionFlipFromRight,
+                        animations: {
+                          if self.isSelected {
+                            self.likeImageView.image = UIImage(named: "likeFilled")
+                          } else {
+                            self.likeImageView.image = UIImage(named: "likeUnfilled")
+                          }
+                        },
+                        completion: nil)
       }
     
     private func config() {

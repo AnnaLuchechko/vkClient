@@ -193,6 +193,29 @@
             </objects>
             <point key="canvasLocation" x="39" y="-508"/>
         </scene>
+        <!--Friends Gallery Controller-->
+        <scene sceneID="XnJ-NG-glF">
+            <objects>
+                <viewController id="HZc-et-kYc" customClass="FriendsGalleryController" customModule="vkClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aCa-iM-WCs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0fJ-zA-1oQ">
+                                <rect key="frame" x="0.0" y="137" width="375" height="336"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <viewLayoutGuide key="contentLayoutGuide" id="8ZX-mV-dqn"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="TVG-AO-q7H"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="xVH-pv-SIh"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tge-R5-gkW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="760.79999999999995" y="-508.37438423645324"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="wsX-2Z-wKu">
             <objects>
