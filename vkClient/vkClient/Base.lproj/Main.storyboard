@@ -178,6 +178,7 @@
                                 <connections>
                                     <outlet property="friendsImage" destination="tdf-ts-mgO" id="gOw-WY-adC"/>
                                     <outlet property="friendsName" destination="JXs-AP-ygi" id="lU4-cG-EFP"/>
+                                    <segue destination="HZc-et-kYc" kind="show" identifier="friendGallery" id="bC0-Ec-svk"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -200,17 +201,10 @@
                     <view key="view" contentMode="scaleToFill" id="aCa-iM-WCs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0fJ-zA-1oQ">
-                                <rect key="frame" x="0.0" y="137" width="375" height="336"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <viewLayoutGuide key="contentLayoutGuide" id="8ZX-mV-dqn"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="TVG-AO-q7H"/>
-                            </scrollView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="xVH-pv-SIh"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="BYV-Q2-g5r"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tge-R5-gkW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -374,7 +368,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="Rqs-k9-kwv">
                             <color key="tintColor" red="0.60526019330000003" green="0.68699091670000001" blue="0.72149676080000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <connections>
-                                <segue destination="otN-Q6-ERP" kind="show" id="ttH-ph-iqS"/>
+                                <segue destination="otN-Q6-ERP" kind="show" identifier="friendsGallery" id="ttH-ph-iqS"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -576,7 +570,7 @@
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" layoutMarginsFollowReadableWidth="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yr7-SZ-ys6">
-                                            <rect key="frame" x="71" y="15.333333333333332" width="288" height="20.333333333333332"/>
+                                            <rect key="frame" x="71" y="15.333333333333334" width="288" height="20.333333333333329"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
