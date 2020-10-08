@@ -10,41 +10,40 @@ import UIKit
 
 class FriendsGalleryController: UIViewController {
     
-    var photosArray = [String]()
+    var photosArray: [String] = []
     var currentIndex: Int = 0
+    
     private var currentSign = 0
     private var percent: CGFloat = 0
-    
     private var interactiveAnimator: UIViewPropertyAnimator?
-        
+    
     private let imageView: UIImageView = {
         let view = UIImageView()
-        view.contentMode = .scaleToFill
+        view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
         view.isUserInteractionEnabled = true
         return view
     }()
     
-    private let backgroundImageView: UIImageView = {
+    private let backgrounImageView: UIImageView = {
         let view = UIImageView()
-        view.contentMode = .scaleToFill
+        view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .white
-        layout(imgView: backgroundImageView)
+        layout(imgView: backgrounImageView)
         layout(imgView: imageView)
         setImages()
         
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(onPan(_:)))
         imageView.addGestureRecognizer(gesture)
-    
     }
     
     private func layout(imgView: UIImageView) {
@@ -53,10 +52,10 @@ class FriendsGalleryController: UIViewController {
             imgView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             imgView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             imgView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            imgView.heightAnchor.constraint(equalTo: view.widthAnchor)
+            imgView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.7)
         ])
     }
-
+    
     private func setImages() {
         let firstImage = UIImage(named: photosArray[currentIndex])
         var nextIndex = currentIndex + 1
@@ -65,37 +64,38 @@ class FriendsGalleryController: UIViewController {
         if currentSign > 0 {
             nextIndex = currentIndex - 1
         }
-        
-        if nextIndex < photosArray.count - 1, nextIndex >= 0 {
+
+        if nextIndex < photosArray.count, nextIndex >= 0 {
             backgroundImage = UIImage(named: photosArray[nextIndex])
         }
         
         imageView.image = firstImage
-        backgroundImageView.image = backgroundImage
-
+        backgrounImageView.image = backgroundImage
     }
     
     private func initAnimator() {
-        backgroundImageView.alpha = 0.0
-        backgroundImageView.transform = .init(translationX: view.frame.width, y: 0)
+        backgrounImageView.transform = CGAffineTransform.identity.scaledBy(x: 0.8, y: 0.8).translatedBy(x: -CGFloat(self.currentSign) * view.frame.width, y: 0)
+        
         interactiveAnimator?.stopAnimation(true)
-        interactiveAnimator = UIViewPropertyAnimator(duration: 0.5,
-            curve: .easeInOut, animations: {
-                let width = CGFloat(self.currentSign) * self.view.frame.width
-                let translationTransform = CGAffineTransform(translationX: width, y: 0)
-                self.imageView.transform = translationTransform
-                
-                self.backgroundImageView.alpha = 1.0
-                //self.backgroundImageView.transform = translationTransform
-                self.backgroundImageView.transform = .identity
-            })
+        interactiveAnimator = UIViewPropertyAnimator(duration: 0.5, curve: .easeInOut, animations: {
+            let width = CGFloat(self.currentSign) * self.view.frame.width
+            let translationTranform = CGAffineTransform(translationX: width, y: 0)
+            
+            self.imageView.transform = translationTranform
+            
+            let bgTransform = CGAffineTransform(translationX: 0, y: 0).concatenating(CGAffineTransform(scaleX: 0.8, y: 0.8))
+            
+            self.backgrounImageView.transform = bgTransform
+        })
+
+        
         interactiveAnimator?.startAnimation()
         interactiveAnimator?.pauseAnimation()
     }
     
     private func resetImageView() {
-        backgroundImageView.alpha = 0.0
-        backgroundImageView.transform = .init(translationX: view.frame.width, y: 0)
+        backgrounImageView.transform = CGAffineTransform.identity.scaledBy(x: 0.8, y: 0.8).translatedBy(x: -CGFloat(self.currentSign) * view.frame.width, y: 0)
+        
         imageView.transform = .identity
         
         setImages()
@@ -117,7 +117,7 @@ class FriendsGalleryController: UIViewController {
                 resetImageView()
                 interactiveAnimator = nil
                 
-                if (sign > 0 && currentIndex > 0 || (sign < 0 && currentIndex < photosArray.count - 1)) {
+                if ( sign > 0 && currentIndex > 0 || ( sign < 0 && currentIndex < photosArray.count - 1 ) ) {
                     currentSign = sign
                     setImages()
                     initAnimator()
@@ -127,8 +127,11 @@ class FriendsGalleryController: UIViewController {
             interactiveAnimator?.fractionComplete = abs(translation.x) / (self.view.frame.width / 2)
             
         case .ended:
-            interactiveAnimator?.addCompletion( { position in
-                self.resetImageView()
+            interactiveAnimator?.addCompletion({ (position) in
+                UIView.animate(withDuration: 0.3, delay: 0.0, options: [], animations: {
+                    self.backgrounImageView.transform = .identity
+                }, completion: { (finished: Bool) in self.resetImageView() })
+                
             })
             
             if percent < 0.33 {
@@ -136,14 +139,13 @@ class FriendsGalleryController: UIViewController {
                 UIView.animate(withDuration: 0.3) {
                     self.resetImageView()
                 }
-            } else {
+            }
+            else {
                 currentIndex += currentSign * -1
                 interactiveAnimator?.continueAnimation(withTimingParameters: nil, durationFactor: 0)
             }
-            
         default:
             break
         }
     }
-    
 }
