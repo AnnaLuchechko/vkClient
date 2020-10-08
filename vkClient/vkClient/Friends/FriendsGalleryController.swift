@@ -52,7 +52,7 @@ class FriendsGalleryController: UIViewController {
         NSLayoutConstraint.activate([
             imgView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             imgView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            imgView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
+            imgView.widthAnchor.constraint(equalTo: view.widthAnchor),
             imgView.heightAnchor.constraint(equalTo: view.widthAnchor)
         ])
     }
@@ -77,18 +77,16 @@ class FriendsGalleryController: UIViewController {
     
     private func initAnimator() {
         backgroundImageView.alpha = 0.0
-        backgroundImageView.transform = .init(scaleX: 0.8, y: 0.8)
+        backgroundImageView.transform = .init(translationX: view.frame.width, y: 0)
         interactiveAnimator?.stopAnimation(true)
         interactiveAnimator = UIViewPropertyAnimator(duration: 0.5,
             curve: .easeInOut, animations: {
                 let width = CGFloat(self.currentSign) * self.view.frame.width
                 let translationTransform = CGAffineTransform(translationX: width, y: 0)
-                let anggle = CGFloat(self.currentSign) * 0.8
-                
-                let angleTransform = CGAffineTransform(rotationAngle: anggle)
-                self.imageView.transform = angleTransform.concatenating(translationTransform)
+                self.imageView.transform = translationTransform
                 
                 self.backgroundImageView.alpha = 1.0
+                //self.backgroundImageView.transform = translationTransform
                 self.backgroundImageView.transform = .identity
             })
         interactiveAnimator?.startAnimation()
@@ -97,7 +95,7 @@ class FriendsGalleryController: UIViewController {
     
     private func resetImageView() {
         backgroundImageView.alpha = 0.0
-        backgroundImageView.transform = .init(scaleX: 0.8, y: 0.8)
+        backgroundImageView.transform = .init(translationX: view.frame.width, y: 0)
         imageView.transform = .identity
         
         setImages()
