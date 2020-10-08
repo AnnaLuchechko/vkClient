@@ -13,24 +13,24 @@ class FriendsTableViewController: UITableViewController {
     var selectedFriend: Friend? //Create variable to send FriendsPhoto element of selected cell
     
     private var friends = [
-            Friend("Джефф", "Безос", UIImage(named: "bezos")),
-            Friend("Билл", "Гейтс", UIImage(named: "gates")),
-            Friend("Бернар", "Арно", UIImage(named: "arno")),
-            Friend("Уоррен", "Баффет", UIImage(named: "buffett")),
-            Friend("Ларри", "Эллисон", UIImage(named: "elison")),
-            Friend("Амансио", "Ортега", UIImage(named: "ortega")),
-            Friend("Марк", "Цукерберг", UIImage(named: "cukerberg")),
-            Friend("Джим", "Уолтон", UIImage(named: "uolton")),
-            Friend("Элис", "Уолтон", UIImage(named: "uoltonw")),
-            Friend("Стив", "Балмер", UIImage(named: "balmer")),
-            Friend("Карлос", "Слим Элу", UIImage(named: "slim")),
-            Friend("Ларри", "Пейдж", UIImage(named: "peydj")),
-            Friend("Сергей", "Брин", UIImage(named: "brin")),
-            Friend("Франсуаза", "Беттанкур-Майерс", UIImage(named: "mayers")),
-            Friend("Майкл", "Блумберг", UIImage(named: "bloomberg")),
-            Friend("Джек", "Ма", UIImage(named: "jackma")),
-            Friend("Чарльз", "Кох", UIImage(named: "koh")),
-            Friend("Ма", "Хуатэн", UIImage(named: "huaten"))
+            Friend("Джефф", "Безос", ["bezos", "bezos2", "bezos3"]),
+            Friend("Билл", "Гейтс", ["gates", "gates2", "gates3"]),
+            Friend("Бернар", "Арно", ["arno", "arno2", "arno3"]),
+            Friend("Уоррен", "Баффет", ["buffett", "buffet2", "buffet3"]),
+            Friend("Ларри", "Эллисон", ["elison", "elison2", "elison3"]),
+            Friend("Амансио", "Ортега", ["ortega", "ortega2", "ortega3"]),
+            Friend("Марк", "Цукерберг", ["cukerberg", "cukerberg2", "cukerberg3"]),
+            Friend("Джим", "Уолтон", ["uolton", "uolton2", "uolton3"]),
+            Friend("Элис", "Уолтон", ["uoltonw", "uoltonw2", "uoltonw3"]),
+            Friend("Стив", "Балмер", ["balmer", "balmer2", "balmer3"]),
+            Friend("Карлос", "Слим Элу", ["slim", "slim2", "slim3"]),
+            Friend("Ларри", "Пейдж", ["peydj", "peydj2", "peydj3"]),
+            Friend("Сергей", "Брин", ["brin", "brin2", "brin3"]),
+            Friend("Франсуаза", "Беттанкур-Майерс", ["mayers", "mayers2", "mayers3"]),
+            Friend("Майкл", "Блумберг", ["bloomberg", "bloomberg2", "bloomberg3"]),
+            Friend("Джек", "Ма", ["jackma", "jackma2", "jackma3"]),
+            Friend("Чарльз", "Кох", ["koh", "koh2", "koh3"]),
+            Friend("Ма", "Хуатэн", ["huaten", "huaten2", "huaten3"])
         ]
     
     private let searchController = UISearchController(searchResultsController: nil)
@@ -141,11 +141,10 @@ class FriendsTableViewController: UITableViewController {
             filteredFriend = friend
         }
         
-        
         //guard let friend = sections[sectionTitles[indexPath.section]]?[indexPath.row] else { fatalError() }
         
         cell.titleLabel.text = filteredFriend.friendsSurname + " " + filteredFriend.friendsName
-        cell.friendimage.image = filteredFriend.friendsImage
+        cell.friendimage.image = UIImage(named: filteredFriend.friendsImage[0])
             
         return cell
     }

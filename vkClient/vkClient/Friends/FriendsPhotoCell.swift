@@ -16,4 +16,5 @@ class FriendsPhotoCell: UICollectionViewCell {
         super.prepareForReuse()
         
     }
+    
 }
