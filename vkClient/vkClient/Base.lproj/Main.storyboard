@@ -34,7 +34,7 @@
         <!--Friends-->
         <scene sceneID="z3u-I4-Udz">
             <objects>
-                <navigationController id="oAV-yz-d9w" sceneMemberID="viewController">
+                <navigationController id="oAV-yz-d9w" customClass="CustomNavigationController" customModule="vkClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Friends" image="friends" selectedImage="friends" id="0PE-2L-L2U"/>
                     <navigationItem key="navigationItem" id="v1V-Vf-fg7"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
