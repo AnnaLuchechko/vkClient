@@ -32,6 +32,7 @@
 		08E0FDE625288F6600738150 /* FriendsSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E0FDE525288F6600738150 /* FriendsSectionHeaderView.swift */; };
 		08E0FDE925288F7700738150 /* FriendsSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08E0FDE825288F7700738150 /* FriendsSectionHeaderView.xib */; };
 		08E1010725337BCC00D5BF94 /* CustomPushAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E1010625337BCC00D5BF94 /* CustomPushAnimator.swift */; };
+		08E1010B25337DCA00D5BF94 /* CustomPopAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E1010A25337DCA00D5BF94 /* CustomPopAnimator.swift */; };
 		08EB0E0E252A1EE400132AB3 /* CommentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB0E0D252A1EE400132AB3 /* CommentControl.swift */; };
 		08EB0E11252A1EFA00132AB3 /* ShareControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB0E10252A1EFA00132AB3 /* ShareControl.swift */; };
 		08EB0E14252A1F1500132AB3 /* ViewControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EB0E13252A1F1500132AB3 /* ViewControl.swift */; };
@@ -66,6 +67,7 @@
 		08E0FDE525288F6600738150 /* FriendsSectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsSectionHeaderView.swift; sourceTree = "<group>"; };
 		08E0FDE825288F7700738150 /* FriendsSectionHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendsSectionHeaderView.xib; sourceTree = "<group>"; };
 		08E1010625337BCC00D5BF94 /* CustomPushAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPushAnimator.swift; sourceTree = "<group>"; };
+		08E1010A25337DCA00D5BF94 /* CustomPopAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopAnimator.swift; sourceTree = "<group>"; };
 		08EB0E0D252A1EE400132AB3 /* CommentControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentControl.swift; sourceTree = "<group>"; };
 		08EB0E10252A1EFA00132AB3 /* ShareControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareControl.swift; sourceTree = "<group>"; };
 		08EB0E13252A1F1500132AB3 /* ViewControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControl.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				081D64D024B8FD1100F6B61D /* TabBarController.swift */,
 				08EB0E47252A807200132AB3 /* DotsLoadingIndicator.swift */,
 				08E1010625337BCC00D5BF94 /* CustomPushAnimator.swift */,
+				08E1010A25337DCA00D5BF94 /* CustomPopAnimator.swift */,
 				084A7C1124AF639A0049FAF7 /* Assets.xcassets */,
 				084A7C1324AF639A0049FAF7 /* LaunchScreen.storyboard */,
 				084A7C1624AF639B0049FAF7 /* Info.plist */,
@@ -273,6 +276,7 @@
 				084AB3BE2528F450004CBF56 /* NewsCell.swift in Sources */,
 				081D64CB24B76B8700F6B61D /* FriendsPhotosCollectionViewController.swift in Sources */,
 				08EB0E11252A1EFA00132AB3 /* ShareControl.swift in Sources */,
+				08E1010B25337DCA00D5BF94 /* CustomPopAnimator.swift in Sources */,
 				081D64CD24B76C2600F6B61D /* CommunitiesTableViewController.swift in Sources */,
 				08E1010725337BCC00D5BF94 /* CustomPushAnimator.swift in Sources */,
 				08D1519024C6401A00D70BCC /* Communities.swift in Sources */,
