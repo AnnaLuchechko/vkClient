@@ -1,5 +1,5 @@
 //
-//  CurrentSession.swift
+//  Session.swift
 //  vkClient
 //
 //  Created by Anna Luchechko on 12.10.2020.
@@ -8,12 +8,12 @@
 
 import UIKit
 
-class CurrentSession {
+class Session {
         
     var token: String = " "
     var userID: Int = 0
     
-    static let shared = CurrentSession()
+    static let shared = Session()
     private init() {}
     
 }

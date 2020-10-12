@@ -25,7 +25,7 @@
 		084AB3C42529E97A004CBF56 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084AB3C32529E97A004CBF56 /* News.swift */; };
 		088FD7AA24C6635000451FEB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD7A924C6635000451FEB /* User.swift */; };
 		0892F6EC25248EB300D8C807 /* LikeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0892F6EB25248EB300D8C807 /* LikeControl.swift */; };
-		08B9CCEC2534ECA700A93C1A /* CurrentSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9CCEB2534ECA700A93C1A /* CurrentSession.swift */; };
+		08B9CCF22534EF7000A93C1A /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9CCF12534EF7000A93C1A /* Session.swift */; };
 		08D1518E24C1BE7400D70BCC /* CommunitiesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1518D24C1BE7400D70BCC /* CommunitiesCell.swift */; };
 		08D1519024C6401A00D70BCC /* Communities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1518F24C6401A00D70BCC /* Communities.swift */; };
 		08DD76E2252CDEF4001EBE76 /* FriendsGalleryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DD76E1252CDEF4001EBE76 /* FriendsGalleryController.swift */; };
@@ -62,7 +62,7 @@
 		084AB3C32529E97A004CBF56 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		088FD7A924C6635000451FEB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0892F6EB25248EB300D8C807 /* LikeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeControl.swift; sourceTree = "<group>"; };
-		08B9CCEB2534ECA700A93C1A /* CurrentSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentSession.swift; sourceTree = "<group>"; };
+		08B9CCF12534EF7000A93C1A /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		08D1518D24C1BE7400D70BCC /* CommunitiesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunitiesCell.swift; sourceTree = "<group>"; };
 		08D1518F24C6401A00D70BCC /* Communities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Communities.swift; sourceTree = "<group>"; };
 		08DD76E1252CDEF4001EBE76 /* FriendsGalleryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsGalleryController.swift; sourceTree = "<group>"; };
@@ -123,7 +123,7 @@
 				08E1010625337BCC00D5BF94 /* CustomPushAnimator.swift */,
 				08E1010A25337DCA00D5BF94 /* CustomPopAnimator.swift */,
 				08E1010D25337FBD00D5BF94 /* CustomNavigationController.swift */,
-				08B9CCEB2534ECA700A93C1A /* CurrentSession.swift */,
+				08B9CCEF2534EF2F00A93C1A /* Manager */,
 				084A7C1124AF639A0049FAF7 /* Assets.xcassets */,
 				084A7C1324AF639A0049FAF7 /* LaunchScreen.storyboard */,
 				084A7C1624AF639B0049FAF7 /* Info.plist */,
@@ -172,6 +172,14 @@
 				081D64CE24B76CCD00F6B61D /* CommunitiesGlobalSearchTableViewController.swift */,
 			);
 			path = Communities;
+			sourceTree = "<group>";
+		};
+		08B9CCEF2534EF2F00A93C1A /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				08B9CCF12534EF7000A93C1A /* Session.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		08E0FDE12527C96900738150 /* News */ = {
@@ -266,6 +274,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				083F953D24BD1CDC00DFEAAA /* FriendsTableViewController.swift in Sources */,
+				08B9CCF22534EF7000A93C1A /* Session.swift in Sources */,
 				08D1518E24C1BE7400D70BCC /* CommunitiesCell.swift in Sources */,
 				083F953F24BD267600DFEAAA /* FriendsCell.swift in Sources */,
 				08EB0E0E252A1EE400132AB3 /* CommentControl.swift in Sources */,
@@ -275,7 +284,6 @@
 				084AB3C42529E97A004CBF56 /* News.swift in Sources */,
 				088FD7AA24C6635000451FEB /* User.swift in Sources */,
 				084A7C0D24AF63990049FAF7 /* LoginViewController.swift in Sources */,
-				08B9CCEC2534ECA700A93C1A /* CurrentSession.swift in Sources */,
 				08EB0E48252A807200132AB3 /* DotsLoadingIndicator.swift in Sources */,
 				08EB0E14252A1F1500132AB3 /* ViewControl.swift in Sources */,
 				08E1010E25337FBD00D5BF94 /* CustomNavigationController.swift in Sources */,
