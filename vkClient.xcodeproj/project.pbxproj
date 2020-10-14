@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,7 @@
 		081D64CD24B76C2600F6B61D /* CommunitiesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081D64CC24B76C2600F6B61D /* CommunitiesTableViewController.swift */; };
 		081D64CF24B76CCD00F6B61D /* CommunitiesGlobalSearchTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081D64CE24B76CCD00F6B61D /* CommunitiesGlobalSearchTableViewController.swift */; };
 		081D64D124B8FD1100F6B61D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081D64D024B8FD1100F6B61D /* TabBarController.swift */; };
+		083197922537C41B00588893 /* VKLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083197912537C41B00588893 /* VKLoginController.swift */; };
 		083F953D24BD1CDC00DFEAAA /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F953C24BD1CDC00DFEAAA /* FriendsTableViewController.swift */; };
 		083F953F24BD267600DFEAAA /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F953E24BD267600DFEAAA /* FriendsCell.swift */; };
 		083F954124BD7A0A00DFEAAA /* Friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083F954024BD7A0A00DFEAAA /* Friends.swift */; };
@@ -24,6 +25,7 @@
 		084A7C1524AF639A0049FAF7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 084A7C1324AF639A0049FAF7 /* LaunchScreen.storyboard */; };
 		084AB3BE2528F450004CBF56 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084AB3BD2528F450004CBF56 /* NewsCell.swift */; };
 		084AB3C42529E97A004CBF56 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084AB3C32529E97A004CBF56 /* News.swift */; };
+		08544A362537C7460032C2D1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08544A352537C7460032C2D1 /* WebKit.framework */; };
 		088FD7AA24C6635000451FEB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD7A924C6635000451FEB /* User.swift */; };
 		0892F6EC25248EB300D8C807 /* LikeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0892F6EB25248EB300D8C807 /* LikeControl.swift */; };
 		08B9CCF22534EF7000A93C1A /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9CCF12534EF7000A93C1A /* Session.swift */; };
@@ -47,6 +49,7 @@
 		081D64CC24B76C2600F6B61D /* CommunitiesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunitiesTableViewController.swift; sourceTree = "<group>"; };
 		081D64CE24B76CCD00F6B61D /* CommunitiesGlobalSearchTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunitiesGlobalSearchTableViewController.swift; sourceTree = "<group>"; };
 		081D64D024B8FD1100F6B61D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		083197912537C41B00588893 /* VKLoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VKLoginController.swift; sourceTree = "<group>"; };
 		083F953C24BD1CDC00DFEAAA /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		083F953E24BD267600DFEAAA /* FriendsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
 		083F954024BD7A0A00DFEAAA /* Friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friends.swift; sourceTree = "<group>"; };
@@ -61,6 +64,7 @@
 		084A7C1624AF639B0049FAF7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		084AB3BD2528F450004CBF56 /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		084AB3C32529E97A004CBF56 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
+		08544A352537C7460032C2D1 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		088FD7A924C6635000451FEB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0892F6EB25248EB300D8C807 /* LikeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeControl.swift; sourceTree = "<group>"; };
 		08B9CCF12534EF7000A93C1A /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
@@ -87,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08544A362537C7460032C2D1 /* WebKit.framework in Frameworks */,
 				022F4BF7915914163DB79BC9 /* Pods_vkClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -124,6 +129,7 @@
 				084A7C0824AF63990049FAF7 /* AppDelegate.swift */,
 				084A7C0A24AF63990049FAF7 /* SceneDelegate.swift */,
 				084A7C0E24AF63990049FAF7 /* Main.storyboard */,
+				083197912537C41B00588893 /* VKLoginController.swift */,
 				084A7C0C24AF63990049FAF7 /* LoginViewController.swift */,
 				081D64D024B8FD1100F6B61D /* TabBarController.swift */,
 				08EB0E47252A807200132AB3 /* DotsLoadingIndicator.swift */,
@@ -214,13 +220,13 @@
 				FA38FE3C8E0E02B005AC6A0F /* Pods-vkClient.debug.xcconfig */,
 				B7F9CA86DA1A0956F237146E /* Pods-vkClient.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
 		6E8559FC26E11E79E632DCDE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				08544A352537C7460032C2D1 /* WebKit.framework */,
 				E8B0C94F9936CE2D6BD6EB20 /* Pods_vkClient.framework */,
 			);
 			name = Frameworks;
@@ -367,6 +373,7 @@
 				08D1519024C6401A00D70BCC /* Communities.swift in Sources */,
 				084A7C0B24AF63990049FAF7 /* SceneDelegate.swift in Sources */,
 				083F954324BD7C6500DFEAAA /* FriendsPhotoCell.swift in Sources */,
+				083197922537C41B00588893 /* VKLoginController.swift in Sources */,
 				08DD76E2252CDEF4001EBE76 /* FriendsGalleryController.swift in Sources */,
 				08E0FDE625288F6600738150 /* FriendsSectionHeaderView.swift in Sources */,
 				08E0FDDF2527C8ED00738150 /* NewsViewController.swift in Sources */,
