@@ -1,9 +1,9 @@
 //
-//  VKLoginController.swift
-//  NetworkService
+//  LoginViewController.swift
+//  vkClient
 //
-//  Created by Evgenii Semenov on 09.08.2020.
-//  Copyright © 2020 Evgenii Semenov. All rights reserved.
+//  Created by Anna Luchechko on 14.10.2020.
+//  Copyright © 2020 Anna Luchechko. All rights reserved.
 //
 
 import UIKit
@@ -30,7 +30,7 @@ class VKLoginController: UIViewController {
             URLQueryItem(name: "display", value: "mobile"),
             URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
             URLQueryItem(name: "response_type", value: "token"),
-            URLQueryItem(name: "v", value: "5.92")
+            URLQueryItem(name: "v", value: "5.124")
         ]
         
         let request = URLRequest(url: components.url!)
@@ -41,6 +41,9 @@ class VKLoginController: UIViewController {
 
 extension VKLoginController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
+        
+        print("logged")
+        
         guard let url = navigationResponse.response.url,
             url.path == "/blank.html",
             let fragment = url.fragment else { decisionHandler(.allow); return }
@@ -60,14 +63,19 @@ extension VKLoginController: WKNavigationDelegate {
         
         guard let token = params["access_token"],
             let userIdString = params["user_id"],
-            let _ = Int(userIdString) else {
+            let userID = Int(userIdString) else {
                 decisionHandler(.allow)
                 return
         }
         
         Session.shared.token = token
+        Session.shared.userID = userID
+        
+        let vkNetworkService = VKNetworkService()
+        vkNetworkService.getData(token: Session.shared.token, userID: Session.shared.userID)
                 
         decisionHandler(.cancel)
+        
     }
 }
 
