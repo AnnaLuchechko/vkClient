@@ -72,7 +72,7 @@ extension VKLoginController: WKNavigationDelegate {
         Session.shared.userID = userID
         
         let vkNetworkService = VKNetworkService()
-        vkNetworkService.getData(token: Session.shared.token, userID: Session.shared.userID)
+        vkNetworkService.getData(token: Session.shared.token, userID: Session.shared.userID, vkParameters: .friendsList)
                 
         decisionHandler(.cancel)
         
