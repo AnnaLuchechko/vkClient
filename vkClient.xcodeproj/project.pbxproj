@@ -31,6 +31,7 @@
 		0892F6EC25248EB300D8C807 /* LikeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0892F6EB25248EB300D8C807 /* LikeControl.swift */; };
 		089C9F86253A3A3D00F4FA89 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C9F85253A3A3D00F4FA89 /* User.swift */; };
 		089C9F8A253A3C3F00F4FA89 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C9F89253A3C3F00F4FA89 /* Photo.swift */; };
+		089C9F8E253A3CD500F4FA89 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C9F8D253A3CD500F4FA89 /* Group.swift */; };
 		08B9CCF22534EF7000A93C1A /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9CCF12534EF7000A93C1A /* Session.swift */; };
 		08D1518E24C1BE7400D70BCC /* CommunitiesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1518D24C1BE7400D70BCC /* CommunitiesCell.swift */; };
 		08D1519024C6401A00D70BCC /* Communities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1518F24C6401A00D70BCC /* Communities.swift */; };
@@ -73,6 +74,7 @@
 		0892F6EB25248EB300D8C807 /* LikeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeControl.swift; sourceTree = "<group>"; };
 		089C9F85253A3A3D00F4FA89 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		089C9F89253A3C3F00F4FA89 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		089C9F8D253A3CD500F4FA89 /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		08B9CCF12534EF7000A93C1A /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		08D1518D24C1BE7400D70BCC /* CommunitiesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunitiesCell.swift; sourceTree = "<group>"; };
 		08D1518F24C6401A00D70BCC /* Communities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Communities.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			children = (
 				089C9F85253A3A3D00F4FA89 /* User.swift */,
 				089C9F89253A3C3F00F4FA89 /* Photo.swift */,
+				089C9F8D253A3CD500F4FA89 /* Group.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -365,6 +368,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				089C9F8E253A3CD500F4FA89 /* Group.swift in Sources */,
 				083F953D24BD1CDC00DFEAAA /* FriendsTableViewController.swift in Sources */,
 				08B9CCF22534EF7000A93C1A /* Session.swift in Sources */,
 				08D1518E24C1BE7400D70BCC /* CommunitiesCell.swift in Sources */,
