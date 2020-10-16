@@ -29,6 +29,7 @@
 		08544A362537C7460032C2D1 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08544A352537C7460032C2D1 /* WebKit.framework */; };
 		088FD7AA24C6635000451FEB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088FD7A924C6635000451FEB /* User.swift */; };
 		0892F6EC25248EB300D8C807 /* LikeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0892F6EB25248EB300D8C807 /* LikeControl.swift */; };
+		089C9F86253A3A3D00F4FA89 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C9F85253A3A3D00F4FA89 /* User.swift */; };
 		08B9CCF22534EF7000A93C1A /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9CCF12534EF7000A93C1A /* Session.swift */; };
 		08D1518E24C1BE7400D70BCC /* CommunitiesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1518D24C1BE7400D70BCC /* CommunitiesCell.swift */; };
 		08D1519024C6401A00D70BCC /* Communities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1518F24C6401A00D70BCC /* Communities.swift */; };
@@ -69,6 +70,7 @@
 		08544A352537C7460032C2D1 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		088FD7A924C6635000451FEB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0892F6EB25248EB300D8C807 /* LikeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeControl.swift; sourceTree = "<group>"; };
+		089C9F85253A3A3D00F4FA89 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		08B9CCF12534EF7000A93C1A /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		08D1518D24C1BE7400D70BCC /* CommunitiesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunitiesCell.swift; sourceTree = "<group>"; };
 		08D1518F24C6401A00D70BCC /* Communities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Communities.swift; sourceTree = "<group>"; };
@@ -189,11 +191,20 @@
 			path = Communities;
 			sourceTree = "<group>";
 		};
+		089C9F88253A3A4C00F4FA89 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		08B9CCEF2534EF2F00A93C1A /* Manager */ = {
 			isa = PBXGroup;
 			children = (
 				08B9CCF12534EF7000A93C1A /* Session.swift */,
 				083AB1A025385A3F00181D0C /* VKNetworkService.swift */,
+				089C9F88253A3A4C00F4FA89 /* Model */,
+				089C9F85253A3A3D00F4FA89 /* User.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -355,6 +366,7 @@
 				08B9CCF22534EF7000A93C1A /* Session.swift in Sources */,
 				08D1518E24C1BE7400D70BCC /* CommunitiesCell.swift in Sources */,
 				083F953F24BD267600DFEAAA /* FriendsCell.swift in Sources */,
+				089C9F86253A3A3D00F4FA89 /* User.swift in Sources */,
 				08EB0E0E252A1EE400132AB3 /* CommentControl.swift in Sources */,
 				081D64CF24B76CCD00F6B61D /* CommunitiesGlobalSearchTableViewController.swift in Sources */,
 				083F954124BD7A0A00DFEAAA /* Friends.swift in Sources */,

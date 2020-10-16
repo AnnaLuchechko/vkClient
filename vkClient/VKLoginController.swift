@@ -70,6 +70,7 @@ extension VKLoginController: WKNavigationDelegate {
         
         Session.shared.token = token
         Session.shared.userID = userID
+        print(token, userID)
         
         let vkNetworkService = VKNetworkService()
         vkNetworkService.getData(token: Session.shared.token, userID: Session.shared.userID, vkParameters: .friendsList)
