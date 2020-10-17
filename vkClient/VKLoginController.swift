@@ -73,8 +73,14 @@ extension VKLoginController: WKNavigationDelegate {
         print(token, userID)
         
         let vkNetworkService = VKNetworkService()
-        vkNetworkService.getData(token: Session.shared.token, userID: Session.shared.userID, vkParameters: .friendsList)
-                
+        vkNetworkService.getFriends(url: vkNetworkService.getUrlForVKMethod(vkParameters: .friendsList), completion: {
+            userModel, error in guard let userModel = userModel else {
+                print(error)
+                return
+            }
+            print(userModel.response.items[0].lastName)
+        })
+        
         decisionHandler(.cancel)
         
     }
