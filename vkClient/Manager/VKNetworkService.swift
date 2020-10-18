@@ -18,17 +18,13 @@ class VKNetworkService {
         case searchGroups
     }
     
-    // Custom session
-    func getData(token:String, userID: Int, vkParameters: VKParameters) {
-        let configuration = URLSessionConfiguration.default
-        let session =  URLSession(configuration: configuration)
-        
+    func getUrlForVKMethod(vkParameters: VKParameters) -> URL {
         var urlConstructor = URLComponents()
         urlConstructor.scheme = "https"
         urlConstructor.host = "api.vk.com"
         urlConstructor.path = "/method/users.get"
         urlConstructor.queryItems = [
-            URLQueryItem(name: "access_token", value: token),
+            URLQueryItem(name: "access_token", value: Session.shared.token),
             URLQueryItem(name: "v", value: "5.124"),
         ]
         
@@ -36,35 +32,88 @@ class VKNetworkService {
         switch vkParameters {
         case .friendsList:
             urlConstructor.path = "/method/friends.get"
-            urlConstructor.queryItems?.append(URLQueryItem(name: "user_id", value: String(userID)))
+            urlConstructor.queryItems?.append(URLQueryItem(name: "user_id", value: String(Session.shared.userID)))
             urlConstructor.queryItems?.append(URLQueryItem(name: "fields", value: "photo_50"))
         case .userPhotos:
             urlConstructor.path = "/method/photos.getAll"
-            urlConstructor.queryItems?.append(URLQueryItem(name: "owner_id", value: String(userID)))
+            urlConstructor.queryItems?.append(URLQueryItem(name: "owner_id", value: String(Session.shared.userID)))
         case .userGroups:
             urlConstructor.path = "/method/groups.get"
-            urlConstructor.queryItems?.append(URLQueryItem(name: "user_id", value: String(userID)))
+            urlConstructor.queryItems?.append(URLQueryItem(name: "user_id", value: String(Session.shared.userID)))
             urlConstructor.queryItems?.append(URLQueryItem(name: "extended", value: "1"))
         case .searchGroups:
             urlConstructor.path = "/method/groups.search"
             urlConstructor.queryItems?.append(URLQueryItem(name: "q", value: "video"))
             urlConstructor.queryItems?.append(URLQueryItem(name: "type", value: "group"))
         }
+        guard let url = urlConstructor.url else { return URL(fileURLWithPath: "https://api.vk.com/blank.html") }
+        return url
+    }
+    
+    func getFriends(url:URL, completion: @escaping (User?, String) -> Void) {
+        let configuration = URLSessionConfiguration.default
+        let session = URLSession(configuration: configuration)
         
-        // Check if URL is valid
-        guard let url = urlConstructor.url else { return }
-        
-        //Run dataTask to get response from API
-        let dataTask = session.dataTask(with: url) { (data, response, error) in
-            if let data = data {
-                if let json = try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.allowFragments) {
-                    print(json)
-                }
-            } else if let error = error {
-                print(error.localizedDescription)
+        //Using shared(default) URLSession with no configuration
+        //let task = URLSession.shared.dataTask(with: url) { data, response, error in
+
+        let task = session.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                completion(nil, "data is nil")
+                return
+            }
+            do {
+                let userModel = try JSONDecoder().decode(User.self, from: data)
+                completion(userModel, "")
+            } catch {
+                completion(nil, "data decode error")
             }
         }
-        dataTask.resume()
+        task.resume()
+    }
+    
+    func getPhotos(url:URL, completion: @escaping (Photo?, String) -> Void) {
+        let configuration = URLSessionConfiguration.default
+        let session = URLSession(configuration: configuration)
+        
+        //Using shared(default) URLSession with no configuration
+        //let task = URLSession.shared.dataTask(with: url) { data, response, error in
+
+        let task = session.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                completion(nil, "data is nil")
+                return
+            }
+            do {
+                let photoModel = try JSONDecoder().decode(Photo.self, from: data)
+                completion(photoModel, "")
+            } catch {
+                completion(nil, "data decode error")
+            }
+        }
+        task.resume()
+    }
+    
+    func getGroups(url:URL, completion: @escaping (Group?, String) -> Void) {
+        let configuration = URLSessionConfiguration.default
+        let session = URLSession(configuration: configuration)
+        
+        //Using shared(default) URLSession with no configuration
+        //let task = URLSession.shared.dataTask(with: url) { data, response, error in
+
+        let task = session.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                completion(nil, "data is nil")
+                return
+            }
+            do {
+                let groupModel = try JSONDecoder().decode(Group.self, from: data)
+                completion(groupModel, "")
+            } catch {
+                completion(nil, "data decode error")
+            }
+        }
+        task.resume()
     }
 
 }

@@ -70,10 +70,33 @@ extension VKLoginController: WKNavigationDelegate {
         
         Session.shared.token = token
         Session.shared.userID = userID
+        print(token, userID)
         
         let vkNetworkService = VKNetworkService()
-        vkNetworkService.getData(token: Session.shared.token, userID: Session.shared.userID, vkParameters: .friendsList)
-                
+        vkNetworkService.getFriends(url: vkNetworkService.getUrlForVKMethod(vkParameters: .friendsList), completion: {
+            userModel, error in guard let userModel = userModel else {
+                print(error)
+                return
+            }
+            print(userModel.response.items[0].lastName)
+        })
+        
+        vkNetworkService.getPhotos(url: vkNetworkService.getUrlForVKMethod(vkParameters: .userPhotos), completion: {
+            photoModel, error in guard let photoModel = photoModel else {
+                print(error)
+                return
+            }
+            print(photoModel.response.items[0].ownerID)
+        })
+        
+        vkNetworkService.getGroups(url: vkNetworkService.getUrlForVKMethod(vkParameters: .userGroups), completion: {
+            groupModel, error in guard let groupModel = groupModel else {
+                print(error)
+                return
+            }
+            print(groupModel.response.items[0].name)
+        })
+        
         decisionHandler(.cancel)
         
     }
