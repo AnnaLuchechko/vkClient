@@ -71,6 +71,50 @@ class VKNetworkService {
         }
         task.resume()
     }
+    
+    func getPhotos(url:URL, completion: @escaping (Photo?, String) -> Void) {
+        let configuration = URLSessionConfiguration.default
+        let session = URLSession(configuration: configuration)
+        
+        //Using shared(default) URLSession with no configuration
+        //let task = URLSession.shared.dataTask(with: url) { data, response, error in
+
+        let task = session.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                completion(nil, "data is nil")
+                return
+            }
+            do {
+                let photoModel = try JSONDecoder().decode(Photo.self, from: data)
+                completion(photoModel, "")
+            } catch {
+                completion(nil, "data decode error")
+            }
+        }
+        task.resume()
+    }
+    
+    func getGroups(url:URL, completion: @escaping (Group?, String) -> Void) {
+        let configuration = URLSessionConfiguration.default
+        let session = URLSession(configuration: configuration)
+        
+        //Using shared(default) URLSession with no configuration
+        //let task = URLSession.shared.dataTask(with: url) { data, response, error in
+
+        let task = session.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                completion(nil, "data is nil")
+                return
+            }
+            do {
+                let groupModel = try JSONDecoder().decode(Group.self, from: data)
+                completion(groupModel, "")
+            } catch {
+                completion(nil, "data decode error")
+            }
+        }
+        task.resume()
+    }
 
 }
 

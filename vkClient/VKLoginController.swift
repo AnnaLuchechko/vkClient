@@ -81,6 +81,22 @@ extension VKLoginController: WKNavigationDelegate {
             print(userModel.response.items[0].lastName)
         })
         
+        vkNetworkService.getPhotos(url: vkNetworkService.getUrlForVKMethod(vkParameters: .userPhotos), completion: {
+            photoModel, error in guard let photoModel = photoModel else {
+                print(error)
+                return
+            }
+            print(photoModel.response.items[0].ownerID)
+        })
+        
+        vkNetworkService.getGroups(url: vkNetworkService.getUrlForVKMethod(vkParameters: .userGroups), completion: {
+            groupModel, error in guard let groupModel = groupModel else {
+                print(error)
+                return
+            }
+            print(groupModel.response.items[0].name)
+        })
+        
         decisionHandler(.cancel)
         
     }

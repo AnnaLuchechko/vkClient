@@ -7,7 +7,6 @@
 //
 
 import Foundation
-//   let photo = try? newJSONDecoder().decode(Photo.self, from: jsonData)
 
 struct Photo: Codable {
     let response: Response
@@ -20,7 +19,7 @@ struct Photo: Codable {
     struct Item: Codable {
         let albumID, date, id, ownerID: Int
         let hasTags: Bool
-        let postID: Int
+        let postID: Int?
         let sizes: [Size]
         let text: String
 
@@ -53,6 +52,5 @@ struct Photo: Codable {
         case y = "y"
         case z = "z"
     }
-
 }
 
