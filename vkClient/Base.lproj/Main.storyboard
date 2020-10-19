@@ -121,10 +121,10 @@
             </objects>
             <point key="canvasLocation" x="-710" y="-508"/>
         </scene>
-        <!--Friends Photos Collection View Controller-->
+        <!--User Photos Controller-->
         <scene sceneID="xd6-4V-9Mj">
             <objects>
-                <collectionViewController id="7pG-i3-S4r" customClass="FriendsPhotosCollectionViewController" customModule="vkClient" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="7pG-i3-S4r" customClass="UserPhotosController" customModule="vkClient" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="OQy-AY-vKq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -194,10 +194,10 @@
             </objects>
             <point key="canvasLocation" x="39" y="-508"/>
         </scene>
-        <!--Friends Gallery Controller-->
+        <!--User Gallery Controller-->
         <scene sceneID="XnJ-NG-glF">
             <objects>
-                <viewController id="HZc-et-kYc" customClass="FriendsGalleryController" customModule="vkClient" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="HZc-et-kYc" customClass="UserGalleryController" customModule="vkClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aCa-iM-WCs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -18,7 +18,7 @@ class VKNetworkService {
         case searchGroups
     }
     
-    func getUrlForVKMethod(vkParameters: VKParameters) -> URL {
+    func getUrlForVKMethod(vkParameters: VKParameters, userId: Int) -> URL {
         var urlConstructor = URLComponents()
         urlConstructor.scheme = "https"
         urlConstructor.host = "api.vk.com"
@@ -32,14 +32,14 @@ class VKNetworkService {
         switch vkParameters {
         case .friendsList:
             urlConstructor.path = "/method/friends.get"
-            urlConstructor.queryItems?.append(URLQueryItem(name: "user_id", value: String(Session.shared.userID)))
+            urlConstructor.queryItems?.append(URLQueryItem(name: "user_id", value: String(userId)))
             urlConstructor.queryItems?.append(URLQueryItem(name: "fields", value: "photo_50"))
         case .userPhotos:
             urlConstructor.path = "/method/photos.getAll"
-            urlConstructor.queryItems?.append(URLQueryItem(name: "owner_id", value: String(Session.shared.userID)))
+            urlConstructor.queryItems?.append(URLQueryItem(name: "owner_id", value: String(userId)))
         case .userGroups:
             urlConstructor.path = "/method/groups.get"
-            urlConstructor.queryItems?.append(URLQueryItem(name: "user_id", value: String(Session.shared.userID)))
+            urlConstructor.queryItems?.append(URLQueryItem(name: "user_id", value: String(userId)))
             urlConstructor.queryItems?.append(URLQueryItem(name: "extended", value: "1"))
         case .searchGroups:
             urlConstructor.path = "/method/groups.search"
