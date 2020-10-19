@@ -37,12 +37,12 @@ class VKLoginController: UIViewController {
         webView.load(request)
         
     }
+    
 }
 
 extension VKLoginController: WKNavigationDelegate {
+    
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
-        
-        print("logged")
         
         guard let url = navigationResponse.response.url,
             url.path == "/blank.html",
@@ -58,9 +58,7 @@ extension VKLoginController: WKNavigationDelegate {
                 dict[key] = value
                 return dict
         }
-        
-        print(params)
-        
+                
         guard let token = params["access_token"],
             let userIdString = params["user_id"],
             let userID = Int(userIdString) else {
@@ -70,7 +68,6 @@ extension VKLoginController: WKNavigationDelegate {
         
         Session.shared.token = token
         Session.shared.userID = userID
-        print(token, userID)
         
         let vkNetworkService = VKNetworkService()
         vkNetworkService.getFriends(url: vkNetworkService.getUrlForVKMethod(vkParameters: .friendsList), completion: {
@@ -98,6 +95,8 @@ extension VKLoginController: WKNavigationDelegate {
         })
         
         decisionHandler(.cancel)
+        
+        performSegue(withIdentifier: "loginSeque", sender: nil)
         
     }
 }
