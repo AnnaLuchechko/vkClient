@@ -54,7 +54,7 @@ class UsersController: UITableViewController {
 
     func processUsersResponse() {
         let vkNetworkService = VKNetworkService()
-        vkNetworkService.getFriends(url: vkNetworkService.getUrlForVKMethod(vkParameters: .friendsList), completion: {
+        vkNetworkService.getFriends(url: vkNetworkService.getUrlForVKMethod(vkParameters: .friendsList, userId: Session.shared.userID), completion: {
             userModel, error in guard let userModel = userModel else {
                 print(error)
                 return
@@ -83,9 +83,9 @@ class UsersController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         //Send selectedFriend by seque to FriendsPhotosCollectionViewController
-        if segue.destination is FriendsPhotosCollectionViewController {
-            let friendsPhotosCollectionViewController = segue.destination as? FriendsPhotosCollectionViewController
-            //friendsPhotosCollectionViewController?.friend = selectedUser
+        if segue.destination is UserPhotosController {
+            let userPhotosController = segue.destination as? UserPhotosController
+            userPhotosController?.user = selectedUser
         }
     }
 
@@ -154,10 +154,13 @@ class UsersController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-
-        //Store selectedFriend by indexPath  into variable
-        guard let user = sections[sectionTitles[indexPath.section]]?[indexPath.row] else { fatalError() }
-        selectedUser = user
+        if isFiltering {
+            guard let user = filteredSections[filteredSectionTitles[indexPath.section]]?[indexPath.row] else { fatalError() }
+            selectedUser = user
+        } else {
+            guard let user = sections[sectionTitles[indexPath.section]]?[indexPath.row] else { fatalError() }
+            selectedUser = user
+        }
 
         return indexPath
     }
