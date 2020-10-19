@@ -12,7 +12,7 @@ import Kingfisher
 
 class UsersController: UITableViewController {
 
-    var selectedUser: User.Item? //Create variable to send FriendsPhoto element of selected cell
+    var selectedUser: User.Item? 
     
     private var userModel = [User.Item]()
 

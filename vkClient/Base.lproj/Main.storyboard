@@ -245,10 +245,10 @@
             </objects>
             <point key="canvasLocation" x="-2994" y="66"/>
         </scene>
-        <!--Communities Table View Controller-->
+        <!--Groups Controller-->
         <scene sceneID="EoR-5G-yJG">
             <objects>
-                <tableViewController id="Rwg-XK-C5L" customClass="CommunitiesTableViewController" customModule="vkClient" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Rwg-XK-C5L" customClass="GroupsController" customModule="vkClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="28" id="W6R-eu-Qtw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
