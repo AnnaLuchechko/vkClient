@@ -1,5 +1,5 @@
 //
-//  FriendsGalleryController.swift
+//  UserGalleryController.swift
 //  vkClient
 //
 //  Created by Anna Luchechko on 06.10.2020.
@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import Kingfisher
 
-class FriendsGalleryController: UIViewController {
+class UserGalleryController: UIViewController {
     
-    var photosArray: [String] = []
+    var photosArray: [Photo.Item] = []
+    var userId: Int = 0
     var currentIndex: Int = 0
     
     private var currentSign = 0
@@ -38,12 +40,26 @@ class FriendsGalleryController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        layout(imgView: backgrounImageView)
-        layout(imgView: imageView)
-        setImages()
-        
-        let gesture = UIPanGestureRecognizer(target: self, action: #selector(onPan(_:)))
-        imageView.addGestureRecognizer(gesture)
+        getUserImages()
+    }
+    
+    func getUserImages() {
+        let vkNetworkService = VKNetworkService()
+        vkNetworkService.getPhotos(url: vkNetworkService.getUrlForVKMethod(vkParameters: .userPhotos, userId: userId), completion: {
+            photoModel, error in guard let photoModel = photoModel else {
+                print(error)
+                return
+            }
+            DispatchQueue.main.async {
+                self.photosArray = photoModel.response.items
+                self.layout(imgView: self.backgrounImageView)
+                self.layout(imgView: self.imageView)
+                self.setImages()
+                
+                let gesture = UIPanGestureRecognizer(target: self, action: #selector(self.onPan(_:)))
+                self.imageView.addGestureRecognizer(gesture)
+            }
+        })
     }
     
     private func layout(imgView: UIImageView) {
@@ -57,20 +73,20 @@ class FriendsGalleryController: UIViewController {
     }
     
     private func setImages() {
-        let firstImage = UIImage(named: photosArray[currentIndex])
+        let firstImage = URL(string: photosArray[currentIndex].sizes.last!.url)
         var nextIndex = currentIndex + 1
-        var backgroundImage: UIImage?
+        var backgroundImage: URL?
         
         if currentSign > 0 {
             nextIndex = currentIndex - 1
         }
 
         if nextIndex < photosArray.count, nextIndex >= 0 {
-            backgroundImage = UIImage(named: photosArray[nextIndex])
+            backgroundImage = URL(string: photosArray[nextIndex].sizes.last!.url)
         }
         
-        imageView.image = firstImage
-        backgrounImageView.image = backgroundImage
+        imageView.kf.setImage(with: firstImage)
+        backgrounImageView.kf.setImage(with: backgroundImage)
     }
     
     private func initAnimator() {

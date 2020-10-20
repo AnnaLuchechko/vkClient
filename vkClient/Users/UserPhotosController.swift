@@ -1,16 +1,18 @@
 //
-//  FriendsPhotosCollectionViewController.swift
+//  UserPhotosController.swift
 //  vkClient
 //
-//  Created by Anna Luchechko on 09.07.2020.
+//  Created by Anna Luchechko on 20.10.2020.
 //  Copyright © 2020 Anna Luchechko. All rights reserved.
 //
 
+import Foundation
 import UIKit
+import Kingfisher
 
-class FriendsPhotosCollectionViewController: UICollectionViewController {
+class UserPhotosController: UICollectionViewController {
     
-    var friend: Friend?
+    var user: User.Item?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,8 +25,8 @@ class FriendsPhotosCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "friendsPhotoCell", for: indexPath) as? FriendsPhotoCell else { fatalError() }
                     
-        cell.friendsName.text = (friend?.friendsName ?? "") + " " + (friend?.friendsSurname ?? "")
-        cell.friendsImage.image = UIImage(named: (friend?.friendsImage[0])!)
+        cell.friendsName.text = (user?.firstName ?? "") + " " + (user?.lastName ?? "")
+        cell.friendsImage.kf.setImage(with: URL(string: user?.photo50 ?? "https://miro.medium.com/max/720/1*W35QUSvGpcLuxPo3SRTH4w.png"))
 
         return cell
     }
@@ -32,12 +34,13 @@ class FriendsPhotosCollectionViewController: UICollectionViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         //Send selectedFriend's photos by seque to FriendsGalleryController
-        if segue.destination is FriendsGalleryController {
-            let friendsGalleryController = segue.destination as? FriendsGalleryController
+        if segue.destination is UserGalleryController {
+            let friendsGalleryController = segue.destination as? UserGalleryController
             
-            guard let friendsImages = friend?.friendsImage else { fatalError() }
-            friendsGalleryController?.photosArray = friendsImages
+            guard let userId = user?.id else { fatalError() }
+            friendsGalleryController?.userId = userId
         }
     }
     
 }
+
