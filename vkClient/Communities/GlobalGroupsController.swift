@@ -1,17 +1,22 @@
 //
-//  GroupsController.swift
+//  GlobalGroupsController.swift
 //  vkClient
 //
 //  Created by Anna Luchechko on 20.10.2020.
 //  Copyright © 2020 Anna Luchechko. All rights reserved.
+//
 
 import UIKit
 import Kingfisher
 
-class GroupsController: UITableViewController {
-    
-    private var communities = [Group.Item]()
-    var group: Group.Item?
+class GlobalGroupsController: UITableViewController {
+
+    var userCommunities = [Group.Item]()
+    var globalCommunities = [Group.Item]()
+
+
+    @IBAction func addCommunity(_ sender: Any) {
+    }
 
     private var filteredCommunities = [Group.Item]()
     private let searchController = UISearchController(searchResultsController: nil)
@@ -33,53 +38,51 @@ class GroupsController: UITableViewController {
 
         tableView.tableHeaderView = searchController.searchBar
         tableView.setContentOffset(CGPoint.init(x: 0, y: searchController.searchBar.frame.size.height), animated: false)
-        
+
         processGroupsResponse()
     }
     
     func processGroupsResponse() {
         let vkNetworkService = VKNetworkService()
-        vkNetworkService.getGroups(url: vkNetworkService.getUrlForVKMethod(vkParameters: .userGroups, userId: Session.shared.userID), completion: {
+        vkNetworkService.getGroups(url: vkNetworkService.getUrlForVKMethod(vkParameters: .searchGroups, userId: Session.shared.userID), completion: {
             groupModel, error in guard let groupModel = groupModel else {
                 print(error)
                 return
             }
-            print(groupModel.response.items[0].name)
-            self.communities = groupModel.response.items
+            self.globalCommunities = groupModel.response.items
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
 
         })
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-        if segue.destination is GlobalGroupsController {
-            let globalGroupsController = segue.destination as? GlobalGroupsController
-            globalGroupsController?.userCommunities = communities
-        }
+        //  Filter globalCommunities by communities array to remove userCommunities
+        globalCommunities = globalCommunities.filter({ item in userCommunities.contains(where: { $0.name == item.name }) })
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering {
             return filteredCommunities.count
         }
-        return communities.count
+        return globalCommunities.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CommunitiesCell") as? CommunitiesCell else { fatalError() }
 
-        var community: Group.Item
+        var globalCommunity: Group.Item
         if isFiltering {
-            community = filteredCommunities[indexPath.row]
+            globalCommunity = filteredCommunities[indexPath.row]
         } else {
-            community = communities[indexPath.row]
+            globalCommunity = globalCommunities[indexPath.row]
         }
 
-        cell.titleLabel.text = community.name
-        cell.communityimage.kf.setImage(with: URL(string: community.photo50 ))
+        cell.titleLabel.text = globalCommunity.name
+        cell.communityimage.kf.setImage(with: URL(string: globalCommunity.photo50 ))
 
         return cell
     }
@@ -87,7 +90,7 @@ class GroupsController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 
         if editingStyle == .delete {
-            communities.remove(at: indexPath.row)
+            globalCommunities.remove(at: indexPath.row)
 
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
@@ -95,11 +98,11 @@ class GroupsController: UITableViewController {
 
 }
 
-extension GroupsController: UISearchBarDelegate {
+extension GlobalGroupsController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 
-        filteredCommunities = communities.filter({ (community: Group.Item) -> Bool in
+        filteredCommunities = globalCommunities.filter({ (community: Group.Item) -> Bool in
             return community.name.lowercased().contains(searchText.lowercased())
         })
 
@@ -107,3 +110,4 @@ extension GroupsController: UISearchBarDelegate {
     }
 
 }
+

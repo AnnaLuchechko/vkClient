@@ -44,7 +44,7 @@ class VKNetworkService {
         case .searchGroups:
             urlConstructor.path = "/method/groups.search"
             urlConstructor.queryItems?.append(URLQueryItem(name: "q", value: "video"))
-            urlConstructor.queryItems?.append(URLQueryItem(name: "type", value: "group"))
+            urlConstructor.queryItems?.append(URLQueryItem(name: "type", value: "h"))
         }
         guard let url = urlConstructor.url else { return URL(fileURLWithPath: "https://api.vk.com/blank.html") }
         return url

@@ -484,10 +484,10 @@
             </objects>
             <point key="canvasLocation" x="-711.20000000000005" y="827.58620689655174"/>
         </scene>
-        <!--Communities Global Search Table View Controller-->
+        <!--Global Groups Controller-->
         <scene sceneID="xLF-QK-yVK">
             <objects>
-                <tableViewController id="otN-Q6-ERP" customClass="CommunitiesGlobalSearchTableViewController" customModule="vkClient" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="otN-Q6-ERP" customClass="GlobalGroupsController" customModule="vkClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="28" id="Hs2-Wq-BCp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
