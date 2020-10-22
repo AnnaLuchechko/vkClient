@@ -94,6 +94,14 @@ class VKNetworkService {
             }
             do {
                 let photoModel = try JSONDecoder().decode(Photo.self, from: data)
+                
+                var photoList: [PhotoRealm] = []
+                for photo in photoModel.response.items {
+                    photoList.append(PhotoRealm(id: photo.id, url: photo.sizes.last!.url))
+                }
+                let vkRealmService = VKRealmService()
+                vkRealmService.savePhotoToRealm(photoList: photoList)
+                
                 completion(photoModel, "")
             } catch {
                 completion(nil, "data decode error")
