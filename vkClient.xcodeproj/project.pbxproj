@@ -32,6 +32,7 @@
 		08B0D7F5253E409000974B9A /* UserPhotosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B0D7F4253E409000974B9A /* UserPhotosController.swift */; };
 		08B0D7F9253E494200974B9A /* UserGalleryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B0D7F8253E494200974B9A /* UserGalleryController.swift */; };
 		08B9CCF22534EF7000A93C1A /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B9CCF12534EF7000A93C1A /* Session.swift */; };
+		08C2B9842541052700EA01A8 /* VKRealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C2B9832541052700EA01A8 /* VKRealmService.swift */; };
 		08D1518E24C1BE7400D70BCC /* CommunitiesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D1518D24C1BE7400D70BCC /* CommunitiesCell.swift */; };
 		08D2419D2540F771005AD6EF /* UserRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D2419C2540F771005AD6EF /* UserRealm.swift */; };
 		08E0FDDF2527C8ED00738150 /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08E0FDDE2527C8ED00738150 /* NewsViewController.swift */; };
@@ -73,6 +74,7 @@
 		08B0D7F4253E409000974B9A /* UserPhotosController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotosController.swift; sourceTree = "<group>"; };
 		08B0D7F8253E494200974B9A /* UserGalleryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserGalleryController.swift; sourceTree = "<group>"; };
 		08B9CCF12534EF7000A93C1A /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		08C2B9832541052700EA01A8 /* VKRealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKRealmService.swift; sourceTree = "<group>"; };
 		08D1518D24C1BE7400D70BCC /* CommunitiesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommunitiesCell.swift; sourceTree = "<group>"; };
 		08D2419C2540F771005AD6EF /* UserRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRealm.swift; sourceTree = "<group>"; };
 		08E0FDDE2527C8ED00738150 /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 			children = (
 				08B9CCF12534EF7000A93C1A /* Session.swift */,
 				083AB1A025385A3F00181D0C /* VKNetworkService.swift */,
+				08C2B9832541052700EA01A8 /* VKRealmService.swift */,
 				089C9F88253A3A4C00F4FA89 /* Model */,
 			);
 			path = Manager;
@@ -372,6 +375,7 @@
 				08B0D7F5253E409000974B9A /* UserPhotosController.swift in Sources */,
 				08EB0E14252A1F1500132AB3 /* ViewControl.swift in Sources */,
 				083AB1A125385A3F00181D0C /* VKNetworkService.swift in Sources */,
+				08C2B9842541052700EA01A8 /* VKRealmService.swift in Sources */,
 				08E1010E25337FBD00D5BF94 /* CustomNavigationController.swift in Sources */,
 				089C9F8A253A3C3F00F4FA89 /* Photo.swift in Sources */,
 				084A7C0924AF63990049FAF7 /* AppDelegate.swift in Sources */,
