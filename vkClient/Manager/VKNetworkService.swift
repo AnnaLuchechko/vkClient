@@ -64,6 +64,14 @@ class VKNetworkService {
             }
             do {
                 let userModel = try JSONDecoder().decode(User.self, from: data)
+                
+                var userList: [UserRealm] = []
+                for user in userModel.response.items {
+                    userList.append(UserRealm(id: user.id, firstName: user.firstName, lastName: user.lastName, photo50: user.photo50))
+                }
+                let vkRealmService = VKRealmService()
+                vkRealmService.saveUsersToRealm(userList: userList)
+                
                 completion(userModel, "")
             } catch {
                 completion(nil, "data decode error")
