@@ -11,18 +11,22 @@ import RealmSwift
 
 class GroupRealm: Object {
 
-    @objc dynamic var id = 0
+    @objc dynamic var groupId = ""
     @objc dynamic var name = ""
     @objc dynamic var photo50 = ""
 
-    init(id:Int, name: String, photo50: String) {
-        self.id = id
+    init(groupId: String, name: String, photo50: String) {
+        self.groupId = groupId
         self.name = name
         self.photo50 = photo50
     }
     
-    required init() {
+    override required init() {
         super.init()
+    }
+    
+    override static func primaryKey() -> String? {
+        return "groupId"
     }
     
 }

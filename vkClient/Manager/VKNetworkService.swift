@@ -67,12 +67,15 @@ class VKNetworkService {
                 
                 var userList: [UserRealm] = []
                 for user in userModel.response.items {
-                    userList.append(UserRealm(id: user.id, firstName: user.firstName, lastName: user.lastName, photo50: user.photo50))
+                    userList.append(UserRealm(userId: String(user.id), firstName: user.firstName, lastName: user.lastName, photo50: user.photo50))
                 }
-                let vkRealmService = VKRealmService()
-                vkRealmService.saveUsersToRealm(userList: userList)
                 
-                completion(userModel, "")
+                DispatchQueue.main.async {
+                    let vkRealmService = VKRealmService()
+                    vkRealmService.saveUsersToRealm(userList: userList)
+                    completion(userModel, "")
+                }
+                
             } catch {
                 completion(nil, "data decode error")
             }
@@ -97,12 +100,14 @@ class VKNetworkService {
                 
                 var photosList: [PhotoRealm] = []
                 for photo in photoModel.response.items {
-                    photosList.append(PhotoRealm(id: photo.id, url: photo.sizes.last!.url))
+                    photosList.append(PhotoRealm(photoId: String(photo.id), url: photo.sizes.last!.url, photoOwnerId: String(photo.ownerID)))
                 }
                 let vkRealmService = VKRealmService()
-                vkRealmService.savePhotosToRealm(photosList: photosList)
+                DispatchQueue.main.async {
+                    vkRealmService.savePhotosToRealm(photosList: photosList)
+                    completion(photoModel, "")
+                }
                 
-                completion(photoModel, "")
             } catch {
                 completion(nil, "data decode error")
             }
@@ -127,12 +132,15 @@ class VKNetworkService {
                 
                 var groupsList: [GroupRealm] = []
                 for group in groupModel.response.items {
-                    groupsList.append(GroupRealm(id: group.id, name: group.name, photo50: group.photo50))
+                    groupsList.append(GroupRealm(groupId: String(group.id), name: group.name, photo50: group.photo50))
                 }
                 let vkRealmService = VKRealmService()
-                vkRealmService.saveGroupsToRealm(groupsList: groupsList)
                 
-                completion(groupModel, "")
+                DispatchQueue.main.async {
+                    vkRealmService.saveGroupsToRealm(groupsList: groupsList)
+                    completion(groupModel, "")
+                }
+                
             } catch {
                 completion(nil, "data decode error")
             }

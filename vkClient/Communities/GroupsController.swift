@@ -7,13 +7,14 @@
 
 import UIKit
 import Kingfisher
+import RealmSwift
 
 class GroupsController: UITableViewController {
     
-    private var communities = [Group.Item]()
-    var group: Group.Item?
+    private var communities = [GroupRealm]()
+    var group: GroupRealm?
 
-    private var filteredCommunities = [Group.Item]()
+    private var filteredCommunities = [GroupRealm]()
     private let searchController = UISearchController(searchResultsController: nil)
     private var searchBarIsEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
@@ -34,20 +35,28 @@ class GroupsController: UITableViewController {
         tableView.tableHeaderView = searchController.searchBar
         tableView.setContentOffset(CGPoint.init(x: 0, y: searchController.searchBar.frame.size.height), animated: false)
         
+        reloadGroupsDataFromRealm()
         processGroupsResponse()
+    }
+    
+    func reloadGroupsDataFromRealm() {
+        DispatchQueue.main.async {
+            self.communities = VKRealmService().getGroupsRealmData() ?? [GroupRealm]()
+            guard self.communities.count != 0 else { return }
+            self.tableView.reloadData()
+        }
     }
     
     func processGroupsResponse() {
         let vkNetworkService = VKNetworkService()
         vkNetworkService.getGroups(url: vkNetworkService.getUrlForVKMethod(vkParameters: .userGroups, userId: Session.shared.userID), completion: {
-            groupModel, error in guard let groupModel = groupModel else {
+            groupModel, error in guard groupModel != nil else {
                 print(error)
                 return
             }
-            print(groupModel.response.items[0].name)
-            self.communities = groupModel.response.items
+
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+                self.reloadGroupsDataFromRealm()
             }
 
         })
@@ -71,7 +80,7 @@ class GroupsController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "CommunitiesCell") as? CommunitiesCell else { fatalError() }
 
-        var community: Group.Item
+        var community: GroupRealm
         if isFiltering {
             community = filteredCommunities[indexPath.row]
         } else {
@@ -99,7 +108,7 @@ extension GroupsController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 
-        filteredCommunities = communities.filter({ (community: Group.Item) -> Bool in
+        filteredCommunities = communities.filter({ (community: GroupRealm) -> Bool in
             return community.name.lowercased().contains(searchText.lowercased())
         })
 
