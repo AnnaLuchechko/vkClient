@@ -15,9 +15,22 @@ class VKRealmService {
         do {
             let realm = try Realm()
             try realm.write{
-                let oldFriendList = realm.objects(UserRealm.self) // список существующих записей
-                realm.delete(oldFriendList) // удалить старые данные
+                let oldUserList = realm.objects(UserRealm.self) // список существующих записей
+                realm.delete(oldUserList) // удалить старые данные
                 realm.add(userList) // записать новые данные
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
+    func savePhotoToRealm(photoList: [PhotoRealm]) {
+        do {
+            let realm = try Realm()
+            try realm.write{
+                let oldPhotoList = realm.objects(PhotoRealm.self) // список существующих записей
+                realm.delete(oldPhotoList) // удалить старые данные
+                realm.add(photoList) // записать новые данные
             }
         } catch {
             print(error)
