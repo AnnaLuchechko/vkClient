@@ -95,12 +95,12 @@ class VKNetworkService {
             do {
                 let photoModel = try JSONDecoder().decode(Photo.self, from: data)
                 
-                var photoList: [PhotoRealm] = []
+                var photosList: [PhotoRealm] = []
                 for photo in photoModel.response.items {
-                    photoList.append(PhotoRealm(id: photo.id, url: photo.sizes.last!.url))
+                    photosList.append(PhotoRealm(id: photo.id, url: photo.sizes.last!.url))
                 }
                 let vkRealmService = VKRealmService()
-                vkRealmService.savePhotoToRealm(photoList: photoList)
+                vkRealmService.savePhotosToRealm(photosList: photosList)
                 
                 completion(photoModel, "")
             } catch {
