@@ -124,6 +124,14 @@ class VKNetworkService {
             }
             do {
                 let groupModel = try JSONDecoder().decode(Group.self, from: data)
+                
+                var groupsList: [GroupRealm] = []
+                for group in groupModel.response.items {
+                    groupsList.append(GroupRealm(id: group.id, name: group.name, photo50: group.photo50))
+                }
+                let vkRealmService = VKRealmService()
+                vkRealmService.saveGroupsToRealm(groupsList: groupsList)
+                
                 completion(groupModel, "")
             } catch {
                 completion(nil, "data decode error")
