@@ -8,10 +8,11 @@
 
 import UIKit
 import Kingfisher
+import RealmSwift
 
 class UserGalleryController: UIViewController {
     
-    var photosArray: [Photo.Item] = []
+    var photosArray: [PhotoRealm] = []
     var userId: Int = 0
     var currentIndex: Int = 0
     
@@ -41,24 +42,30 @@ class UserGalleryController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         getUserImages()
+        
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(self.onPan(_:)))
+        self.imageView.addGestureRecognizer(gesture)
+    }
+    
+    func reloadPhotosFromRealm() {
+        DispatchQueue.main.async {
+            self.photosArray = VKRealmService().getPhotosRealmData(ownerId: String(self.userId)) ?? [PhotoRealm]()
+            guard self.photosArray.count != 0 else { return }
+            
+            self.layout(imgView: self.backgrounImageView)
+            self.layout(imgView: self.imageView)
+            self.setImages()
+        }
     }
     
     func getUserImages() {
         let vkNetworkService = VKNetworkService()
         vkNetworkService.getPhotos(url: vkNetworkService.getUrlForVKMethod(vkParameters: .userPhotos, userId: userId), completion: {
-            photoModel, error in guard let photoModel = photoModel else {
+            photoModel, error in guard photoModel != nil else {
                 print(error)
                 return
             }
-            DispatchQueue.main.async {
-                self.photosArray = photoModel.response.items
-                self.layout(imgView: self.backgrounImageView)
-                self.layout(imgView: self.imageView)
-                self.setImages()
-                
-                let gesture = UIPanGestureRecognizer(target: self, action: #selector(self.onPan(_:)))
-                self.imageView.addGestureRecognizer(gesture)
-            }
+            self.reloadPhotosFromRealm()
         })
     }
     
@@ -73,7 +80,7 @@ class UserGalleryController: UIViewController {
     }
     
     private func setImages() {
-        let firstImage = URL(string: photosArray[currentIndex].sizes.last!.url)
+        let firstImage = URL(string: photosArray[currentIndex].url)
         var nextIndex = currentIndex + 1
         var backgroundImage: URL?
         
@@ -82,7 +89,7 @@ class UserGalleryController: UIViewController {
         }
 
         if nextIndex < photosArray.count, nextIndex >= 0 {
-            backgroundImage = URL(string: photosArray[nextIndex].sizes.last!.url)
+            backgroundImage = URL(string: photosArray[nextIndex].url)
         }
         
         imageView.kf.setImage(with: firstImage)

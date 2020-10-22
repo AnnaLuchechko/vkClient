@@ -11,20 +11,24 @@ import RealmSwift
 
 class UserRealm: Object {
 
-    @objc dynamic var id = 0
+    @objc dynamic var userId = ""
     @objc dynamic var firstName = ""
     @objc dynamic var lastName = ""
     @objc dynamic var photo50 = ""
 
-    init(id:Int, firstName:String, lastName:String, photo50: String) {
-        self.id = id
+    init(userId:String, firstName:String, lastName:String, photo50: String) {
+        self.userId = userId
         self.firstName = firstName
         self.lastName = lastName
         self.photo50 = photo50
     }
     
-    required init() {
+    required override init() {
         super.init()
+    }
+    
+    override static func primaryKey() -> String? {
+        return "userId"
     }
     
 }

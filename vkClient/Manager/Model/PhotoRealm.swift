@@ -11,16 +11,22 @@ import RealmSwift
 
 class PhotoRealm: Object {
 
-    @objc dynamic var id = 0
+    @objc dynamic var photoId = ""
+    @objc dynamic var photoOwnerId = ""
     @objc dynamic var url = ""
 
-    init(id:Int, url: String) {
-        self.id = id
+    init(photoId: String, url: String, photoOwnerId: String) {
+        self.photoId = photoId
+        self.photoOwnerId = photoOwnerId
         self.url = url
     }
     
-    required init() {
+    required override init() {
         super.init()
+    }
+    
+    override static func primaryKey() -> String? {
+        return "photoId"
     }
     
 }

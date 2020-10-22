@@ -12,7 +12,7 @@ import Kingfisher
 
 class UserPhotosController: UICollectionViewController {
     
-    var user: User.Item?
+    var user: UserRealm?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,10 +35,10 @@ class UserPhotosController: UICollectionViewController {
         
         //Send selectedFriend's photos by seque to FriendsGalleryController
         if segue.destination is UserGalleryController {
-            let friendsGalleryController = segue.destination as? UserGalleryController
+            let userGalleryController = segue.destination as? UserGalleryController
             
-            guard let userId = user?.id else { fatalError() }
-            friendsGalleryController?.userId = userId
+            guard let userId = user?.userId else { fatalError() }
+            userGalleryController?.userId = Int.init(userId)!
         }
     }
     

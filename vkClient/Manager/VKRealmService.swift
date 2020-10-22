@@ -15,10 +15,9 @@ class VKRealmService {
         do {
             let realm = try Realm()
             try realm.write{
-                let oldUserList = realm.objects(UserRealm.self) // список существующих записей
-                realm.delete(oldUserList) // удалить старые данные
-                realm.add(userList) // записать новые данные
+                realm.add(userList, update: .all) // записать новые данные
             }
+            print("Database URL: /n", realm.configuration.fileURL!)
         } catch {
             print(error)
         }
@@ -28,9 +27,7 @@ class VKRealmService {
         do {
             let realm = try Realm()
             try realm.write{
-                let oldPhotoList = realm.objects(PhotoRealm.self) // список существующих записей
-                realm.delete(oldPhotoList) // удалить старые данные
-                realm.add(photosList) // записать новые данные
+                realm.add(photosList, update: .all) // записать новые данные
             }
         } catch {
             print(error)
@@ -41,12 +38,43 @@ class VKRealmService {
         do {
             let realm = try Realm()
             try realm.write{
-                let oldGroupList = realm.objects(GroupRealm.self) // список существующих записей
-                realm.delete(oldGroupList) // удалить старые данные
-                realm.add(groupsList) // записать новые данные
+                realm.add(groupsList, update: .all) // записать новые данные
             }
         } catch {
             print(error)
+        }
+    }
+    
+    func getUsersRealmData() -> [UserRealm]? {
+        do {
+            let realm = try Realm()
+            let usersFromRealm = realm.objects(UserRealm.self)
+            return Array(usersFromRealm)
+        } catch {
+            print(error)
+            return nil
+        }
+    }
+    
+    func getPhotosRealmData(ownerId: String) -> [PhotoRealm]? {
+        do {
+            let realm = try Realm()
+            let photosFromRealm = realm.objects(PhotoRealm.self).filter("photoOwnerId == %@", ownerId)
+            return Array(photosFromRealm)
+        } catch {
+            print(error)
+            return nil
+        }
+    }
+    
+    func getGroupsRealmData() -> [GroupRealm]? {
+        do {
+            let realm = try Realm()
+            let groupsFromRealm = realm.objects(GroupRealm.self)
+            return Array(groupsFromRealm)
+        } catch {
+            print(error)
+            return nil
         }
     }
     

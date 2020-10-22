@@ -9,12 +9,13 @@
 import Foundation
 import UIKit
 import Kingfisher
+import RealmSwift
 
 class UsersController: UITableViewController {
 
-    var selectedUser: User.Item? 
+    var selectedUser: UserRealm?
     
-    private var userModel = [User.Item]()
+    private var userModel = [UserRealm]()
 
     private let searchController = UISearchController(searchResultsController: nil)
     private var searchBarIsEmpty: Bool {
@@ -25,10 +26,10 @@ class UsersController: UITableViewController {
         return searchController.isActive && !searchBarIsEmpty
     }
 
-    var sections: [Character: [User.Item]] = [:]
+    var sections: [Character: [UserRealm]] = [:]
     var sectionTitles = [Character]()
 
-    var filteredSections: [Character: [User.Item]] = [:]
+    var filteredSections: [Character: [UserRealm]] = [:]
     var filteredSectionTitles = [Character]()
 
 
@@ -49,35 +50,49 @@ class UsersController: UITableViewController {
 
         tableView.backgroundColor = UIColor(red: 0.29, green: 0.53, blue: 0.80, alpha: 1.00)
         
+        reloadUsersDataFromRealm()
         processUsersResponse()
+    }
+    
+    func reloadUsersDataFromRealm() {
+        DispatchQueue.main.async {
+            self.userModel = VKRealmService().getUsersRealmData() ?? [UserRealm]()
+            self.createSectionTitles()
+            guard self.userModel.count != 0 else { return }
+            self.tableView.reloadData()
+        }
     }
 
     func processUsersResponse() {
         let vkNetworkService = VKNetworkService()
         vkNetworkService.getFriends(url: vkNetworkService.getUrlForVKMethod(vkParameters: .friendsList, userId: Session.shared.userID), completion: {
-            userModel, error in guard let userModel = userModel else {
+            userModel, error in guard userModel != nil else {
                 print(error)
                 return
             }
-            self.userModel = userModel.response.items
-            for user in userModel.response.items {
-                let firstLetter = user.lastName.first ?? "_"
-
-                if self.sections[firstLetter] != nil {
-                    self.sections[firstLetter]?.append(user)
-                }
-                else {
-                    self.sections[firstLetter] = [user]
-                }
-            }
-            self.sectionTitles = Array(self.sections.keys)
-            self.sectionTitles.sort()    //Sort section titles A-Z
-        
+    
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+                self.reloadUsersDataFromRealm()
             }
-
         })
+    }
+    
+    func createSectionTitles() {
+        self.sectionTitles.removeAll()
+        self.sections.removeAll()
+        
+        for user in userModel {
+            let firstLetter = user.lastName.first ?? "_"
+
+            if self.sections[firstLetter] != nil {
+                self.sections[firstLetter]?.append(user)
+            }
+            else {
+                self.sections[firstLetter] = [user]
+            }
+        }
+        self.sectionTitles = Array(self.sections.keys)
+        self.sectionTitles.sort()    //Sort section titles A-Z
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -129,7 +144,7 @@ class UsersController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell") as? FriendsCell else { fatalError() }
 
-        var filteredUser: User.Item
+        var filteredUser: UserRealm
 
         if isFiltering {
             guard let user = filteredSections[filteredSectionTitles[indexPath.section]]?[indexPath.row] else { fatalError() }
@@ -141,7 +156,7 @@ class UsersController: UITableViewController {
 
         cell.titleLabel.text = filteredUser.lastName + " " + filteredUser.firstName
         cell.friendimage.kf.setImage(with: URL(string: filteredUser.photo50))
-
+        
         return cell
     }
 
