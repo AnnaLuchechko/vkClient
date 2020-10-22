@@ -64,6 +64,14 @@ class VKNetworkService {
             }
             do {
                 let userModel = try JSONDecoder().decode(User.self, from: data)
+                
+                var userList: [UserRealm] = []
+                for user in userModel.response.items {
+                    userList.append(UserRealm(id: user.id, firstName: user.firstName, lastName: user.lastName, photo50: user.photo50))
+                }
+                let vkRealmService = VKRealmService()
+                vkRealmService.saveUsersToRealm(userList: userList)
+                
                 completion(userModel, "")
             } catch {
                 completion(nil, "data decode error")
@@ -86,6 +94,14 @@ class VKNetworkService {
             }
             do {
                 let photoModel = try JSONDecoder().decode(Photo.self, from: data)
+                
+                var photosList: [PhotoRealm] = []
+                for photo in photoModel.response.items {
+                    photosList.append(PhotoRealm(id: photo.id, url: photo.sizes.last!.url))
+                }
+                let vkRealmService = VKRealmService()
+                vkRealmService.savePhotosToRealm(photosList: photosList)
+                
                 completion(photoModel, "")
             } catch {
                 completion(nil, "data decode error")
@@ -108,6 +124,14 @@ class VKNetworkService {
             }
             do {
                 let groupModel = try JSONDecoder().decode(Group.self, from: data)
+                
+                var groupsList: [GroupRealm] = []
+                for group in groupModel.response.items {
+                    groupsList.append(GroupRealm(id: group.id, name: group.name, photo50: group.photo50))
+                }
+                let vkRealmService = VKRealmService()
+                vkRealmService.saveGroupsToRealm(groupsList: groupsList)
+                
                 completion(groupModel, "")
             } catch {
                 completion(nil, "data decode error")
