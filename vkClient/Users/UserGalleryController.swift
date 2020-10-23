@@ -12,7 +12,8 @@ import RealmSwift
 
 class UserGalleryController: UIViewController {
     
-    var photosArray: [PhotoRealm] = []
+    private var token: NotificationToken?
+    var photosArray: Results<PhotoRealm>?
     var userId: Int = 0
     var currentIndex: Int = 0
     
@@ -41,20 +42,35 @@ class UserGalleryController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
+        reloadPhotosFromRealm()
         getUserImages()
+        addObserver()
         
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(self.onPan(_:)))
         self.imageView.addGestureRecognizer(gesture)
     }
     
     func reloadPhotosFromRealm() {
-        DispatchQueue.main.async {
-            self.photosArray = VKRealmService().getPhotosRealmData(ownerId: String(self.userId)) ?? [PhotoRealm]()
-            guard self.photosArray.count != 0 else { return }
-            
-            self.layout(imgView: self.backgrounImageView)
-            self.layout(imgView: self.imageView)
-            self.setImages()
+        self.photosArray = VKRealmService().getPhotosRealmData(ownerId: String(self.userId))
+        guard self.photosArray?.count != 0 else { return }
+        
+        self.layout(imgView: self.backgrounImageView)
+        self.layout(imgView: self.imageView)
+        self.setImages()
+    }
+    
+    func addObserver() {
+        self.token = photosArray?.observe {(changes: RealmCollectionChange) in
+            switch(changes) {
+                case .initial:
+                    self.reloadPhotosFromRealm()
+                case .update(_, let deletions, let insertions, let modifications):
+                    print(deletions, insertions, modifications)
+                    self.reloadPhotosFromRealm()
+                case .error(_):
+                    fatalError()
+            }
         }
     }
     
@@ -65,7 +81,7 @@ class UserGalleryController: UIViewController {
                 print(error)
                 return
             }
-            self.reloadPhotosFromRealm()
+            //self.reloadPhotosFromRealm()
         })
     }
     
@@ -80,16 +96,17 @@ class UserGalleryController: UIViewController {
     }
     
     private func setImages() {
-        let firstImage = URL(string: photosArray[currentIndex].url)
+        let firstImage = URL(string: photosArray?[currentIndex].url ?? "https://miro.medium.com/max/720/1*W35QUSvGpcLuxPo3SRTH4w.png")
         var nextIndex = currentIndex + 1
         var backgroundImage: URL?
         
         if currentSign > 0 {
             nextIndex = currentIndex - 1
         }
-
-        if nextIndex < photosArray.count, nextIndex >= 0 {
-            backgroundImage = URL(string: photosArray[nextIndex].url)
+        
+        guard self.photosArray?.count != 0 else { return }
+        if nextIndex < photosArray?.count ?? 0, nextIndex >= 0 {
+            backgroundImage = URL(string: photosArray?[nextIndex].url ?? "https://miro.medium.com/max/720/1*W35QUSvGpcLuxPo3SRTH4w.png")
         }
         
         imageView.kf.setImage(with: firstImage)
@@ -140,7 +157,8 @@ class UserGalleryController: UIViewController {
                 resetImageView()
                 interactiveAnimator = nil
                 
-                if ( sign > 0 && currentIndex > 0 || ( sign < 0 && currentIndex < photosArray.count - 1 ) ) {
+                guard self.photosArray?.count != 0 else { return }
+                if ( sign > 0 && currentIndex > 0 || ( sign < 0 && currentIndex < photosArray?.count ?? 0 - 1 ) ) {
                     currentSign = sign
                     setImages()
                     initAnimator()

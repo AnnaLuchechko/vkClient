@@ -14,11 +14,13 @@ class GroupRealm: Object {
     @objc dynamic var groupId = ""
     @objc dynamic var name = ""
     @objc dynamic var photo50 = ""
+    @objc dynamic var isMember = 0
 
-    init(groupId: String, name: String, photo50: String) {
+    init(groupId: String, name: String, photo50: String, isMember: Int) {
         self.groupId = groupId
         self.name = name
         self.photo50 = photo50
+        self.isMember = isMember
     }
     
     override required init() {

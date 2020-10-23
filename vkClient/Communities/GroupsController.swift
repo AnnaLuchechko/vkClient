@@ -11,10 +11,12 @@ import RealmSwift
 
 class GroupsController: UITableViewController {
     
-    private var communities = [GroupRealm]()
     var group: GroupRealm?
-
-    private var filteredCommunities = [GroupRealm]()
+    
+    private var token: NotificationToken?
+    private var communities: Results<GroupRealm>?
+    private var filteredCommunities: Results<GroupRealm>?
+    
     private let searchController = UISearchController(searchResultsController: nil)
     private var searchBarIsEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
@@ -37,13 +39,29 @@ class GroupsController: UITableViewController {
         
         reloadGroupsDataFromRealm()
         processGroupsResponse()
+        addObserver()
     }
     
     func reloadGroupsDataFromRealm() {
-        DispatchQueue.main.async {
-            self.communities = VKRealmService().getGroupsRealmData() ?? [GroupRealm]()
-            guard self.communities.count != 0 else { return }
-            self.tableView.reloadData()
+        self.communities = VKRealmService().getGroupsRealmData(isMember: true)
+        guard self.communities?.count != 0 else { return }
+        self.tableView.reloadData()
+    }
+    
+    func addObserver() {
+        self.token = communities?.observe {(changes: RealmCollectionChange) in
+            switch(changes) {
+                case .initial:
+                    self.reloadGroupsDataFromRealm()
+                case .update(_, let deletions, let insertions, let modifications):
+                    self.tableView.beginUpdates()
+                    self.tableView.deleteRows(at: deletions.map{ IndexPath(row: $0, section: 0) }, with: .left)
+                    self.tableView.insertRows(at: insertions.map{ IndexPath(row: $0, section: 0) }, with: .right)
+                    self.tableView.reloadRows(at: modifications.map{ IndexPath(row: $0, section: 0) }, with: .fade)
+                    self.tableView.endUpdates()
+                case .error(_):
+                    fatalError()
+            }
         }
     }
     
@@ -54,11 +72,6 @@ class GroupsController: UITableViewController {
                 print(error)
                 return
             }
-
-            DispatchQueue.main.async {
-                self.reloadGroupsDataFromRealm()
-            }
-
         })
     }
 
@@ -72,9 +85,9 @@ class GroupsController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering {
-            return filteredCommunities.count
+            return filteredCommunities?.count ?? 0
         }
-        return communities.count
+        return communities?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -82,9 +95,9 @@ class GroupsController: UITableViewController {
 
         var community: GroupRealm
         if isFiltering {
-            community = filteredCommunities[indexPath.row]
+            community = filteredCommunities![indexPath.row]
         } else {
-            community = communities[indexPath.row]
+            community = communities![indexPath.row]
         }
 
         cell.titleLabel.text = community.name
@@ -96,7 +109,7 @@ class GroupsController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 
         if editingStyle == .delete {
-            communities.remove(at: indexPath.row)
+            //communities.remove(at: indexPath.row)
 
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
@@ -107,11 +120,8 @@ class GroupsController: UITableViewController {
 extension GroupsController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-
-        filteredCommunities = communities.filter({ (community: GroupRealm) -> Bool in
-            return community.name.lowercased().contains(searchText.lowercased())
-        })
-
+        
+        filteredCommunities = communities?.filter("name contains[c]%@", searchText)
         tableView.reloadData()
     }
 

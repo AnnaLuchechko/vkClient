@@ -8,17 +8,17 @@
 
 import UIKit
 import Kingfisher
+import RealmSwift
 
 class GlobalGroupsController: UITableViewController {
 
-    var userCommunities = [GroupRealm]()
-    var globalCommunities = [GroupRealm]()
+    private var token: NotificationToken?
+    var userCommunities: Results<GroupRealm>?
+    private var globalCommunities: Results<GroupRealm>?
+    private var filteredCommunities: Results<GroupRealm>?
 
+    @IBAction func addCommunity(_ sender: Any) {}
 
-    @IBAction func addCommunity(_ sender: Any) {
-    }
-
-    private var filteredCommunities = [GroupRealm]()
     private let searchController = UISearchController(searchResultsController: nil)
     private var searchBarIsEmpty: Bool {
         guard let text = searchController.searchBar.text else { return false }
@@ -41,13 +41,29 @@ class GlobalGroupsController: UITableViewController {
 
         reloadGlobalGroupsDataFromRealm()
         processGroupsResponse()
+        addObserver()
     }
     
     func reloadGlobalGroupsDataFromRealm() {
-        DispatchQueue.main.async {
-            self.globalCommunities = VKRealmService().getGroupsRealmData() ?? [GroupRealm]()
-            guard self.globalCommunities.count != 0 else { return }
-            self.tableView.reloadData()
+        self.globalCommunities = VKRealmService().getGroupsRealmData(isMember: false)
+        guard self.globalCommunities?.count != 0 else { return }
+        self.tableView.reloadData()
+    }
+    
+    func addObserver() {
+        self.token = globalCommunities?.observe {(changes: RealmCollectionChange) in
+            switch(changes) {
+                case .initial:
+                    self.reloadGlobalGroupsDataFromRealm()
+                case .update(_, let deletions, let insertions, let modifications):
+                    self.tableView.beginUpdates()
+                    self.tableView.deleteRows(at: deletions.map{ IndexPath(row: $0, section: 0) }, with: .automatic)
+                    self.tableView.insertRows(at: insertions.map{ IndexPath(row: $0, section: 0) }, with: .automatic)
+                    self.tableView.reloadRows(at: modifications.map{ IndexPath(row: $0, section: 0) }, with: .automatic)
+                    self.tableView.endUpdates()
+                case .error(_):
+                    fatalError()
+            }
         }
     }
     
@@ -58,25 +74,14 @@ class GlobalGroupsController: UITableViewController {
                 print(error)
                 return
             }
-            DispatchQueue.main.async {
-                self.reloadGlobalGroupsDataFromRealm()
-            }
-
         })
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        //  Filter globalCommunities by communities array to remove userCommunities
-        globalCommunities = globalCommunities.filter({ item in userCommunities.contains(where: { $0.name == item.name }) })
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering {
-            return filteredCommunities.count
+            return filteredCommunities?.count ?? 0
         }
-        return globalCommunities.count
+        return globalCommunities?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -84,9 +89,9 @@ class GlobalGroupsController: UITableViewController {
 
         var globalCommunity: GroupRealm
         if isFiltering {
-            globalCommunity = filteredCommunities[indexPath.row]
+            globalCommunity = filteredCommunities![indexPath.row]
         } else {
-            globalCommunity = globalCommunities[indexPath.row]
+            globalCommunity = globalCommunities![indexPath.row]
         }
 
         cell.titleLabel.text = globalCommunity.name
@@ -98,8 +103,8 @@ class GlobalGroupsController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
 
         if editingStyle == .delete {
-            globalCommunities.remove(at: indexPath.row)
-
+            //удаление row: нужно переделать логику(?)
+            //globalCommunities?.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
@@ -110,10 +115,13 @@ extension GlobalGroupsController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 
-        filteredCommunities = globalCommunities.filter({ (community: GroupRealm) -> Bool in
-            return community.name.lowercased().contains(searchText.lowercased())
-        })
-
+        filteredCommunities = globalCommunities?.filter("name contains[c]%@", searchText)
+        
+        // тот же код для GroupRealm
+        // filteredCommunities = globalCommunities.filter({ (community: GroupRealm) -> Bool in
+        // return community.name.lowercased().contains(searchText.lowercased())
+        // })
+        
         tableView.reloadData()
     }
 
