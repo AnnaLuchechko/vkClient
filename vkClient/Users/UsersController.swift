@@ -15,7 +15,9 @@ class UsersController: UITableViewController {
 
     var selectedUser: UserRealm?
     
-    private var userModel = [UserRealm]()
+    //private var userModel = [UserRealm]()
+    private var userElements: Results<UserRealm>?
+    private var token: NotificationToken?
 
     private let searchController = UISearchController(searchResultsController: nil)
     private var searchBarIsEmpty: Bool {
@@ -52,14 +54,27 @@ class UsersController: UITableViewController {
         
         reloadUsersDataFromRealm()
         processUsersResponse()
+        addObserver()
     }
     
     func reloadUsersDataFromRealm() {
-        DispatchQueue.main.async {
-            self.userModel = VKRealmService().getUsersRealmData() ?? [UserRealm]()
-            self.createSectionTitles()
-            guard self.userModel.count != 0 else { return }
-            self.tableView.reloadData()
+        self.userElements = VKRealmService().getUsersRealmData()
+
+        self.createSectionTitles()
+        guard self.userElements?.count != 0 else { return }
+        self.tableView.reloadData()
+    }
+    
+    func addObserver() {
+        self.token = userElements?.observe {(changes: RealmCollectionChange) in
+            switch(changes) {
+                case .initial:
+                    self.reloadUsersDataFromRealm()
+                case .update(_, let deletions, let insertions, let modifications):
+                    self.reloadUsersDataFromRealm()
+                case .error(_):
+                    fatalError()
+            }
         }
     }
 
@@ -70,10 +85,6 @@ class UsersController: UITableViewController {
                 print(error)
                 return
             }
-    
-            DispatchQueue.main.async {
-                self.reloadUsersDataFromRealm()
-            }
         })
     }
     
@@ -81,7 +92,8 @@ class UsersController: UITableViewController {
         self.sectionTitles.removeAll()
         self.sections.removeAll()
         
-        for user in userModel {
+        guard let userElements = userElements else { fatalError() }
+        for user in userElements {
             let firstLetter = user.lastName.first ?? "_"
 
             if self.sections[firstLetter] != nil {
@@ -188,7 +200,8 @@ extension UsersController: UISearchBarDelegate {
         filteredSections = [:]
         filteredSectionTitles = [Character]()
 
-        for user in userModel {
+        guard let userElements = userElements else { fatalError() }
+        for user in userElements {
             let userFullName = user.firstName + " " + user.lastName
             if(userFullName.lowercased().contains(searchText.lowercased())) {
                 let firstLetter = user.lastName.first!

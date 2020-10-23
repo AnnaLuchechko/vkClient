@@ -45,33 +45,33 @@ class VKRealmService {
         }
     }
     
-    func getUsersRealmData() -> [UserRealm]? {
+    func getUsersRealmData() -> Results<UserRealm>? {
         do {
             let realm = try Realm()
             let usersFromRealm = realm.objects(UserRealm.self)
-            return Array(usersFromRealm)
+            return usersFromRealm
         } catch {
             print(error)
             return nil
         }
     }
     
-    func getPhotosRealmData(ownerId: String) -> [PhotoRealm]? {
+    func getPhotosRealmData(ownerId: String) -> Results<PhotoRealm>? {
         do {
             let realm = try Realm()
             let photosFromRealm = realm.objects(PhotoRealm.self).filter("photoOwnerId == %@", ownerId)
-            return Array(photosFromRealm)
+            return photosFromRealm
         } catch {
             print(error)
             return nil
         }
     }
     
-    func getGroupsRealmData() -> [GroupRealm]? {
+    func getGroupsRealmData(isMember: Bool) -> Results<GroupRealm>? {
         do {
             let realm = try Realm()
-            let groupsFromRealm = realm.objects(GroupRealm.self)
-            return Array(groupsFromRealm)
+            let groupsFromRealm = realm.objects(GroupRealm.self).filter("isMember == %@", isMember ? 1 : 0)
+            return groupsFromRealm
         } catch {
             print(error)
             return nil

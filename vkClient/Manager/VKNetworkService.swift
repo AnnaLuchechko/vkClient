@@ -43,7 +43,7 @@ class VKNetworkService {
             urlConstructor.queryItems?.append(URLQueryItem(name: "extended", value: "1"))
         case .searchGroups:
             urlConstructor.path = "/method/groups.search"
-            urlConstructor.queryItems?.append(URLQueryItem(name: "q", value: "video"))
+            urlConstructor.queryItems?.append(URLQueryItem(name: "q", value: "Google"))
             urlConstructor.queryItems?.append(URLQueryItem(name: "type", value: "h"))
         }
         guard let url = urlConstructor.url else { return URL(fileURLWithPath: "https://api.vk.com/blank.html") }
@@ -132,7 +132,7 @@ class VKNetworkService {
                 
                 var groupsList: [GroupRealm] = []
                 for group in groupModel.response.items {
-                    groupsList.append(GroupRealm(groupId: String(group.id), name: group.name, photo50: group.photo50))
+                    groupsList.append(GroupRealm(groupId: String(group.id), name: group.name, photo50: group.photo50, isMember: group.isMember ?? 0))
                 }
                 let vkRealmService = VKRealmService()
                 
