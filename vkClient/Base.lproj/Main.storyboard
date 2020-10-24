@@ -473,14 +473,14 @@
                                                     <rect key="frame" x="15" y="15" width="50" height="53"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2Bs-xJ-Uhe">
-                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="47"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="53"/>
                                                         </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstItem="2Bs-xJ-Uhe" firstAttribute="leading" secondItem="A7c-7J-BrD" secondAttribute="leading" id="b65-cx-QoH"/>
                                                         <constraint firstItem="2Bs-xJ-Uhe" firstAttribute="centerX" secondItem="A7c-7J-BrD" secondAttribute="centerX" id="eZy-bz-r0z"/>
-                                                        <constraint firstItem="2Bs-xJ-Uhe" firstAttribute="centerY" secondItem="A7c-7J-BrD" secondAttribute="centerY" constant="-3" id="n4O-o1-Qlg"/>
+                                                        <constraint firstItem="2Bs-xJ-Uhe" firstAttribute="centerY" secondItem="A7c-7J-BrD" secondAttribute="centerY" id="n4O-o1-Qlg"/>
                                                         <constraint firstItem="2Bs-xJ-Uhe" firstAttribute="top" secondItem="A7c-7J-BrD" secondAttribute="top" id="pfZ-Jt-NLd"/>
                                                     </constraints>
                                                 </view>
@@ -518,12 +518,15 @@
                                             <constraints>
                                                 <constraint firstItem="kXi-IH-SJK" firstAttribute="leading" secondItem="A7c-7J-BrD" secondAttribute="leading" constant="57" id="1ar-Ne-V44"/>
                                                 <constraint firstItem="vWA-SO-PSM" firstAttribute="top" secondItem="A7c-7J-BrD" secondAttribute="bottom" constant="5" id="22W-4C-qSI"/>
-                                                <constraint firstItem="Y06-2d-J6e" firstAttribute="leading" secondItem="vWA-SO-PSM" secondAttribute="leading" id="BDp-KU-aZC"/>
+                                                <constraint firstItem="A7c-7J-BrD" firstAttribute="leading" secondItem="vWA-SO-PSM" secondAttribute="leading" constant="15" id="BDp-KU-aZC"/>
                                                 <constraint firstItem="kXi-IH-SJK" firstAttribute="top" secondItem="LEP-uC-3mH" secondAttribute="bottom" constant="5" id="CEh-b4-Jjz"/>
                                                 <constraint firstAttribute="bottom" secondItem="Y06-2d-J6e" secondAttribute="bottom" constant="5" id="EO1-2G-TuG"/>
                                                 <constraint firstItem="A7c-7J-BrD" firstAttribute="leading" secondItem="6HW-0h-PXJ" secondAttribute="leading" constant="15" id="EgA-cQ-FUj"/>
                                                 <constraint firstItem="LEP-uC-3mH" firstAttribute="top" secondItem="6HW-0h-PXJ" secondAttribute="top" constant="18" id="FGB-Rg-Uev"/>
+                                                <constraint firstItem="vWA-SO-PSM" firstAttribute="top" secondItem="6HW-0h-PXJ" secondAttribute="top" constant="73" id="J0l-wJ-MT5"/>
                                                 <constraint firstItem="kXi-IH-SJK" firstAttribute="trailing" secondItem="LEP-uC-3mH" secondAttribute="trailing" id="Om5-K6-Lrp"/>
+                                                <constraint firstItem="Y06-2d-J6e" firstAttribute="top" secondItem="6HW-0h-PXJ" secondAttribute="top" constant="456" id="P7P-aJ-hde"/>
+                                                <constraint firstItem="Y06-2d-J6e" firstAttribute="leading" secondItem="vWA-SO-PSM" secondAttribute="leading" id="Rbc-XK-sKf"/>
                                                 <constraint firstItem="LEP-uC-3mH" firstAttribute="leading" secondItem="6HW-0h-PXJ" secondAttribute="leading" constant="72" id="YWS-Vb-kzs"/>
                                                 <constraint firstItem="LEP-uC-3mH" firstAttribute="leading" secondItem="A7c-7J-BrD" secondAttribute="trailing" constant="7" id="YZ8-rM-AIW"/>
                                                 <constraint firstAttribute="trailing" secondItem="LEP-uC-3mH" secondAttribute="trailing" constant="15" id="Yrk-Xa-RkC"/>
@@ -532,6 +535,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="vWA-SO-PSM" secondAttribute="trailing" id="ghL-bx-cCG"/>
                                                 <constraint firstItem="vWA-SO-PSM" firstAttribute="leading" secondItem="6HW-0h-PXJ" secondAttribute="leading" id="oAb-gU-gWF"/>
                                                 <constraint firstAttribute="trailing" secondItem="Y06-2d-J6e" secondAttribute="trailing" id="w9t-h0-8mt"/>
+                                                <constraint firstItem="vWA-SO-PSM" firstAttribute="top" secondItem="kXi-IH-SJK" secondAttribute="bottom" constant="15" id="ynz-z0-g3O"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

@@ -22,7 +22,6 @@ class NewsViewController: UIViewController {
         newsTable.delegate = self
         newsTable.dataSource = self
         
-        //if newsArray[0].newsType == .Post {}
     }
     
 }
