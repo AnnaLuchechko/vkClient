@@ -70,7 +70,7 @@ class UsersController: UITableViewController {
             switch(changes) {
                 case .initial:
                     self.reloadUsersDataFromRealm()
-                case .update(_, let deletions, let insertions, let modifications):
+                case .update(_, _, _, _):
                     self.reloadUsersDataFromRealm()
                 case .error(_):
                     fatalError()
