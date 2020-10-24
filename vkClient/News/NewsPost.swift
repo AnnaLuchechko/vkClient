@@ -12,7 +12,7 @@ class NewsPost: UITableViewCell {
     @IBOutlet weak var newsTime: UILabel!
     @IBOutlet weak var accountImage: UIImageView!
     @IBOutlet weak var containerAccountImage: UIView!
-    @IBOutlet weak var newsText: UILabel!
+    @IBOutlet weak var newsText: UITextView!
     @IBOutlet weak var newsImage: UIImageView!
     @IBOutlet weak var controlView: UIView!
     
@@ -34,6 +34,8 @@ class NewsPost: UITableViewCell {
         accountImage.layer.cornerRadius = containerAccountImage.bounds.width / 2
         accountImage.clipsToBounds = true
         
+        newsText.isScrollEnabled = true
+        newsText.isUserInteractionEnabled = true
         
         let likeControl = LikeControl(frame: CGRect(x: 10, y: 5, width: 44, height: 44))
         controlView.addSubview(likeControl)
