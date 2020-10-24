@@ -12,7 +12,8 @@ class NewsViewController: UIViewController {
     @IBOutlet weak var newsTable: UITableView!
     
     private var newsArray = [
-        News("Apple", "10 Oct 2020", UIImage(named: "apple"), "Кидайте в коментарии последнюю фотографию из вашей галереи Кидайте в коментарии последнюю фотографию из вашей галереи Кидайте в коментарии", UIImage(named: "newsImage"), "823", "67", "12", "1023")
+        News(.Post, "Apple", "10 Oct 2020", UIImage(named: "apple"), "Кидайте в коментарии последнюю фотографию из вашей галереи Кидайте в коментарии последнюю фотографию из вашей галереи Кидайте в коментарии", UIImage(named: "newsImage"), "823", "67", "12", "1023"),
+        News(.Photo, "Apple", "10 Oct 2020", UIImage(named: "apple"), "", UIImage(named: "newsImage"), "823", "67", "12", "1023")
     ]
     
     override func viewDidLoad() {
@@ -20,6 +21,8 @@ class NewsViewController: UIViewController {
         
         newsTable.delegate = self
         newsTable.dataSource = self
+        
+        //if newsArray[0].newsType == .Post {}
     }
     
 }
@@ -30,15 +33,28 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = newsTable.dequeueReusableCell(withIdentifier: "NewsCell") as? NewsCell else { fatalError() }
+        if (newsArray[indexPath.row].newsType == News.NewsType.Post) {
+            guard let cell = newsTable.dequeueReusableCell(withIdentifier: "NewsPost") as? NewsPost else { fatalError() }
+
+            cell.accountLabel.text = newsArray[indexPath.row].accountLabel
+            cell.newsTime.text = newsArray[indexPath.row].newsTime
+            cell.accountImage.image = newsArray[indexPath.row].accountImage
+            cell.newsText.text = newsArray[indexPath.row].newsText
+            cell.newsImage.image = newsArray[indexPath.row].newsImage
         
-        cell.accountLabel.text = newsArray[indexPath.row].accountLabel
-        cell.newsTime.text = newsArray[indexPath.row].newsTime
-        cell.accountImage.image = newsArray[indexPath.row].accountImage
-        cell.newsText.text = newsArray[indexPath.row].newsText
-        cell.newsImage.image = newsArray[indexPath.row].newsImage
-        
-        return cell
+            return cell
+            
+        } else {
+            guard let cell = newsTable.dequeueReusableCell(withIdentifier: "NewsPhoto") as? NewsPhoto else { fatalError() }
+
+            cell.accountLabel.text = newsArray[indexPath.row].accountLabel
+            cell.newsTime.text = newsArray[indexPath.row].newsTime
+            cell.accountImage.image = newsArray[indexPath.row].accountImage
+            cell.newsImage.image = newsArray[indexPath.row].newsImage
+            
+            return cell
+            
+        }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
