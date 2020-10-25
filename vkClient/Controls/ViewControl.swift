@@ -10,8 +10,6 @@ import UIKit
 
 class ViewControl: UIControl {
     
-    private var viewCount: Int = 0
-
     let viewCountLabel = UILabel()
     let viewImageView = UIImageView()
     
@@ -30,13 +28,12 @@ class ViewControl: UIControl {
     }
 
     private func updateView() {
+        var viewCount = Int(viewCountLabel.text!) ?? 0
         if isSelected {
-            viewImageView.image = UIImage(named: "view")
-            viewCount = 1
+            viewCount += 1
         }
         else {
-            viewImageView.image = UIImage(named: "view")
-            viewCount = 0
+            viewCount -= 1
         }
         viewCountLabel.text = "\(viewCount)"
     }
@@ -49,16 +46,15 @@ class ViewControl: UIControl {
     
     private func config() {
         viewImageView.frame.size = CGSize(width: 30, height: 30)
+        viewImageView.image = UIImage(named: "view")
         addSubview(viewImageView)
         
         viewCountLabel.frame.size = CGSize(width: 60, height: 30)
-        viewCountLabel.text = String(viewCount)
         viewCountLabel.font = UIFont(name: "Roboto", size: 20)
-        viewCountLabel.frame.origin.x = viewImageView.frame.size.width + 7
+        viewCountLabel.frame.origin.x = viewImageView.frame.size.width + 3
         addSubview(viewCountLabel)
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(onLikeTapped(_:)))
         self.addGestureRecognizer(gesture)
-        updateView()
     }
 }

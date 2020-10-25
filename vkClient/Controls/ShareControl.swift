@@ -10,10 +10,8 @@ import UIKit
 
 class ShareControl: UIControl {
     
-    private var shareCount: Int = 0
-
-    private  let shareCountLabel = UILabel()
-    private  let shareImageView = UIImageView()
+    let shareCountLabel = UILabel()
+    private let shareImageView = UIImageView()
     
     //called when initialized programmatically
     override init(frame: CGRect) {
@@ -30,13 +28,12 @@ class ShareControl: UIControl {
     }
 
     private func updateShare() {
+        var shareCount = Int(shareCountLabel.text ?? "0") ?? 0
         if isSelected {
-            shareImageView.image = UIImage(named: "share")
-            shareCount = 1
+            shareCount += 1
         }
         else {
-            shareImageView.image = UIImage(named: "share")
-            shareCount = 0
+            shareCount -= 1
         }
         shareCountLabel.text = "\(shareCount)"
     }
@@ -49,10 +46,10 @@ class ShareControl: UIControl {
     
     private func config() {
         shareImageView.frame.size = CGSize(width: 30, height: 30)
+        shareImageView.image = UIImage(named: "share")
         addSubview(shareImageView)
         
         shareCountLabel.frame.size = CGSize(width: 60, height: 30)
-        shareCountLabel.text = String(shareCount)
         shareCountLabel.font = UIFont(name: "Roboto", size: 20)
         shareCountLabel.frame.origin.x = shareImageView.frame.size.width + 7
         addSubview(shareCountLabel)
