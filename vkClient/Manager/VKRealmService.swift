@@ -45,6 +45,18 @@ class VKRealmService {
         }
     }
     
+    func saveNewsFeedRealm(newsList: [NewsFeedRealm]) {
+        do {
+            let realm = try Realm()
+            try realm.write{
+                realm.add(newsList, update: .all)
+            }
+            print("Database URL: /n", realm.configuration.fileURL!)
+        } catch {
+            print(error)
+        }
+    }
+    
     func getUsersRealmData() -> Results<UserRealm>? {
         do {
             let realm = try Realm()
@@ -71,6 +83,17 @@ class VKRealmService {
         do {
             let realm = try Realm()
             let groupsFromRealm = realm.objects(GroupRealm.self).filter("isMember == %@", isMember ? 1 : 0)
+            return groupsFromRealm
+        } catch {
+            print(error)
+            return nil
+        }
+    }
+    
+    func getNewsFeedData() -> Results<NewsFeedRealm>? {
+        do {
+            let realm = try Realm()
+            let groupsFromRealm = realm.objects(NewsFeedRealm.self)
             return groupsFromRealm
         } catch {
             print(error)
