@@ -53,7 +53,7 @@ class UsersController: UITableViewController {
         tableView.backgroundColor = UIColor(red: 0.29, green: 0.53, blue: 0.80, alpha: 1.00)
         
         reloadUsersDataFromRealm()
-        processUsersResponse()
+        VKNetworkService().getFriends()
         addObserver()
     }
     
@@ -76,16 +76,6 @@ class UsersController: UITableViewController {
                     fatalError()
             }
         }
-    }
-
-    func processUsersResponse() {
-        let vkNetworkService = VKNetworkService()
-        vkNetworkService.getFriends(url: vkNetworkService.getUrlForVKMethod(vkParameters: .friendsList, userId: Session.shared.userID), completion: {
-            userModel, error in guard userModel != nil else {
-                print(error)
-                return
-            }
-        })
     }
     
     func createSectionTitles() {
