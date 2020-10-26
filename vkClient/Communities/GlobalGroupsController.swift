@@ -16,6 +16,7 @@ class GlobalGroupsController: UITableViewController {
     var userCommunities: Results<GroupRealm>?
     private var globalCommunities: Results<GroupRealm>?
     private var filteredCommunities: Results<GroupRealm>?
+    private var photoService: PhotoService?
 
     @IBAction func addCommunity(_ sender: Any) {}
 
@@ -31,6 +32,8 @@ class GlobalGroupsController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        photoService = PhotoService(container: self.tableView)
+        
         //Setup the Search Controller
         searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -85,7 +88,8 @@ class GlobalGroupsController: UITableViewController {
         }
 
         cell.titleLabel.text = globalCommunity.name
-        cell.communityimage.kf.setImage(with: URL(string: globalCommunity.photo50 ))
+        cell.communityimage.image = photoService?.photo(atIndexpath: indexPath, byUrl: globalCommunity.photo50)
+        //cell.communityimage.kf.setImage(with: URL(string: globalCommunity.photo50 ))
 
         return cell
     }

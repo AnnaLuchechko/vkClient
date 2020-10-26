@@ -18,6 +18,7 @@ class UsersController: UITableViewController {
     //private var userModel = [UserRealm]()
     private var userElements: Results<UserRealm>?
     private var token: NotificationToken?
+    private var photoService: PhotoService?
 
     private let searchController = UISearchController(searchResultsController: nil)
     private var searchBarIsEmpty: Bool {
@@ -37,6 +38,8 @@ class UsersController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        photoService = PhotoService(container: self.tableView)
 
         //Setup the Search Controller
         searchController.searchBar.delegate = self
@@ -157,7 +160,8 @@ class UsersController: UITableViewController {
         }
 
         cell.titleLabel.text = filteredUser.lastName + " " + filteredUser.firstName
-        cell.friendimage.kf.setImage(with: URL(string: filteredUser.photo50))
+        cell.friendimage.image = photoService?.photo(atIndexpath: indexPath, byUrl: filteredUser.photo50)
+        //cell.friendimage.kf.setImage(with: URL(string: filteredUser.photo50))
         
         return cell
     }

@@ -16,6 +16,7 @@ class GroupsController: UITableViewController {
     private var token: NotificationToken?
     private var communities: Results<GroupRealm>?
     private var filteredCommunities: Results<GroupRealm>?
+    private var photoService: PhotoService?
     
     private let searchController = UISearchController(searchResultsController: nil)
     private var searchBarIsEmpty: Bool {
@@ -28,6 +29,8 @@ class GroupsController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        photoService = PhotoService(container: self.tableView)
 
         //Setup the Search Controller
         searchController.searchBar.delegate = self
@@ -91,7 +94,8 @@ class GroupsController: UITableViewController {
         }
 
         cell.titleLabel.text = community.name
-        cell.communityimage.kf.setImage(with: URL(string: community.photo50 ))
+        cell.communityimage.image = photoService?.photo(atIndexpath: indexPath, byUrl: community.photo50)
+        //cell.communityimage.kf.setImage(with: URL(string: community.photo50 ))
 
         return cell
     }
