@@ -25,7 +25,7 @@ struct NewsFeed: Codable {
         let name, screenName: String
         let isClosed: Int
         let type: GroupType
-        let isAdmin, isMember, isAdvertiser: Int
+        let isAdmin, isMember, isAdvertiser: Int?
         let photo50, photo100, photo200: String
 
         enum CodingKeys: String, CodingKey {
@@ -103,7 +103,8 @@ struct NewsFeed: Codable {
         let isExplicit, isFocusTrack: Bool
         let trackCode: String
         let url: String
-        let date, albumID: Int
+        let date: Int
+        let albumID: Int?
         let contentRestricted: Int?
         let mainArtists: [MainArtist]?
         let shortVideosAllowed, storiesAllowed, storiesCoverAllowed: Bool
@@ -193,6 +194,7 @@ struct NewsFeed: Codable {
         case x = "x"
         case y = "y"
         case z = "z"
+        case temp = "temp"
     }
 
     struct Link: Codable {
@@ -215,7 +217,7 @@ struct NewsFeed: Codable {
     }
 
     struct LinkPhoto: Codable {
-        let albumID, date, id, ownerID: Int
+        let albumID, date, id, ownerID: Int?
         let hasTags: Bool
         let sizes: [VideoElement]
         let text: String
@@ -301,7 +303,7 @@ struct NewsFeed: Codable {
         let id, ownerID, fromID, date: Int
         let postType: PostTypeEnum
         let text: String
-        let postSource: PostSource
+        let postSource: PostSource?
         let attachments: [CopyHistoryAttachment]?
 
         enum CodingKeys: String, CodingKey {
@@ -322,7 +324,7 @@ struct NewsFeed: Codable {
     }
 
     struct PostSource: Codable {
-        let type: PostSourceType
+        let type: PostSourceType?
         let platform: Platform?
     }
 
@@ -334,11 +336,13 @@ struct NewsFeed: Codable {
     enum PostSourceType: String, Codable {
         case api = "api"
         case vk = "vk"
+        case rss = "rss"
     }
 
     enum PostTypeEnum: String, Codable {
         case photo = "photo"
         case post = "post"
+        case rss = "rss"
     }
 
 //    struct Copyright: Codable {
@@ -364,7 +368,7 @@ struct NewsFeed: Codable {
     }
 
     struct PhotosItem: Codable {
-        let albumID, date, id, ownerID: Int
+        let albumID, date, id, ownerID: Int?
         let hasTags: Bool
         let accessKey: String
         let sizes: [VideoElement]

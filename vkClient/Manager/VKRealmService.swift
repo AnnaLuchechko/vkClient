@@ -49,7 +49,7 @@ class VKRealmService {
         do {
             let realm = try Realm()
             try realm.write{
-                realm.add(newsList, update: .all)
+                realm.add(newsList, update: .modified)
             }
             print("Database URL: /n", realm.configuration.fileURL!)
         } catch {
@@ -89,15 +89,14 @@ class VKRealmService {
             return nil
         }
     }
-    
-    func getNewsFeedData() -> Results<NewsFeedRealm>? {
+    func getNewsFeedData(completion: @escaping (Results<NewsFeedRealm>?, String) -> Void) {
         do {
             let realm = try Realm()
-            let groupsFromRealm = realm.objects(NewsFeedRealm.self)
-            return groupsFromRealm
+            let newsFromRealm = realm.objects(NewsFeedRealm.self).sorted(byKeyPath: "postTime", ascending: false)
+            completion(newsFromRealm, "")
         } catch {
             print(error)
-            return nil
+            completion(nil, "error getting data")
         }
     }
     

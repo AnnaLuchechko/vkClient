@@ -24,15 +24,17 @@ class NewsViewController: UIViewController {
         loadNewsFeedFromRealm()
         
         let newsService = VKNewsService()
-        newsService.getVKNewsFeed(completion: { newsFeedResponse, error in
+        newsService.getVKNewsFeed(completion: { newsFeedList, error in
             self.loadNewsFeedFromRealm()
         })
     }
     
     func loadNewsFeedFromRealm() {
-        self.newsFeed = VKRealmService().getNewsFeedData()
-        guard self.newsFeed?.count != 0 else { return }
-        self.newsTable.reloadData()
+        VKRealmService().getNewsFeedData(completion: { newsList, error in
+            self.newsFeed = newsList
+            guard self.newsFeed?.count != 0 else { return }
+            self.newsTable.reloadData()
+        })
     }
     
     func viewsToK(viewsCount: Int) -> String {
