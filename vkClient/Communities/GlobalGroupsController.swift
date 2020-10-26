@@ -40,7 +40,7 @@ class GlobalGroupsController: UITableViewController {
         tableView.setContentOffset(CGPoint.init(x: 0, y: searchController.searchBar.frame.size.height), animated: false)
 
         reloadGlobalGroupsDataFromRealm()
-        processGroupsResponse()
+        VKOperationsService().getApiData(dataType: .searchGroups)
         addObserver()
     }
     
@@ -65,16 +65,6 @@ class GlobalGroupsController: UITableViewController {
                     fatalError()
             }
         }
-    }
-    
-    func processGroupsResponse() {
-        let vkNetworkService = VKNetworkService()
-        vkNetworkService.getGroups(url: vkNetworkService.getUrlForVKMethod(vkParameters: .searchGroups, userId: Session.shared.userID), completion: {
-            groupModel, error in guard groupModel != nil else {
-                print(error)
-                return
-            }
-        })
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

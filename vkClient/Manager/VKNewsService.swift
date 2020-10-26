@@ -62,7 +62,6 @@ class VKNewsService {
         var newsList: [NewsFeedRealm] = []
         // for each element in array
         for news in newsFeed.items {
-            print("parse")
             // only for photo or post types
             if (news.type == NewsFeed.PostTypeEnum.photo || news.type == NewsFeed.PostTypeEnum.post) {
                 var srcName: String, srcPhotoUrl: String, pstPhotoUrl: String, pstTxt: String

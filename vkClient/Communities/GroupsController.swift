@@ -38,7 +38,7 @@ class GroupsController: UITableViewController {
         tableView.setContentOffset(CGPoint.init(x: 0, y: searchController.searchBar.frame.size.height), animated: false)
         
         reloadGroupsDataFromRealm()
-        processGroupsResponse()
+        VKOperationsService().getApiData(dataType: .userGroups)
         addObserver()
     }
     
@@ -63,16 +63,6 @@ class GroupsController: UITableViewController {
                     fatalError()
             }
         }
-    }
-    
-    func processGroupsResponse() {
-        let vkNetworkService = VKNetworkService()
-        vkNetworkService.getGroups(url: vkNetworkService.getUrlForVKMethod(vkParameters: .userGroups, userId: Session.shared.userID), completion: {
-            groupModel, error in guard groupModel != nil else {
-                print(error)
-                return
-            }
-        })
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
