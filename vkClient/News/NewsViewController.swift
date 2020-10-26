@@ -21,6 +21,7 @@ class NewsViewController: UIViewController {
         newsTable.delegate = self
         newsTable.dataSource = self
         
+        loadNewsFeedFromRealm()
         
         let newsService = VKNewsService()
         newsService.getVKNewsFeed(completion: { newsFeedResponse, error in
