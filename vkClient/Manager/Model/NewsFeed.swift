@@ -139,7 +139,7 @@ struct NewsFeed: Codable {
         let ext: String
         let date, type: Int
         let url: String
-        let preview: Preview
+        let preview: Preview?
         let accessKey: String
 
         enum CodingKeys: String, CodingKey {
@@ -245,6 +245,7 @@ struct NewsFeed: Codable {
         case photo = "photo"
         case video = "video"
         case poll = "poll"
+        case preview = "preview"
     }
 
     struct AttachmentVideo: Codable {
