@@ -244,6 +244,7 @@ struct NewsFeed: Codable {
         case link = "link"
         case photo = "photo"
         case video = "video"
+        case poll = "poll"
     }
 
     struct AttachmentVideo: Codable {

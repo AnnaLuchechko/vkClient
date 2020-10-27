@@ -95,7 +95,6 @@ class GroupsController: UITableViewController {
 
         cell.titleLabel.text = community.name
         cell.communityimage.image = photoService?.photo(atIndexpath: indexPath, byUrl: community.photo50)
-        //cell.communityimage.kf.setImage(with: URL(string: community.photo50 ))
 
         return cell
     }
