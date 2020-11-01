@@ -15,7 +15,7 @@ class VKRealmService {
         do {
             let realm = try Realm()
             try realm.write{
-                realm.add(userList, update: .all) // записать новые данные
+                realm.add(userList, update: .modified) // записать новые данные
             }
             print("Database URL: /n", realm.configuration.fileURL!)
         } catch {
