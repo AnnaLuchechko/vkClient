@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PromiseKit
 
 class VKNetworkService {
     
@@ -50,18 +51,36 @@ class VKNetworkService {
         return url
     }
     
-    func getFriends(url:URL, completion: @escaping (User?, String) -> Void) {
-        let configuration = URLSessionConfiguration.default
-        let session = URLSession(configuration: configuration)
-        
-        //Using shared(default) URLSession with no configuration
-        //let task = URLSession.shared.dataTask(with: url) { data, response, error in
-
-        let task = session.dataTask(with: url) { data, response, error in
-            guard let data = data, error == nil else {
-                completion(nil, "data is nil")
-                return
-            }
+    func getFriends() {
+        firstly {
+            self.getFriendsApiData()
+        }.then { data in
+            self.parseFriendsData(data)
+        }.done { friendList in
+            VKRealmService().saveUsersToRealm(userList: friendList)
+        }.catch { error in
+            print(error.localizedDescription)
+        }
+    }
+    
+    func getFriendsApiData() -> Promise<Data> {
+        return Promise<Data> { (resolver) in
+            let configuration = URLSessionConfiguration.default
+            let session = URLSession(configuration: configuration)
+            
+            let url = getUrlForVKMethod(vkParameters: .friendsList, userId: Session.shared.userID)
+            session.dataTask(with: url) { (data, _, error) in
+                if let error = error {
+                    return resolver.reject(error)
+                } else {
+                    return resolver.fulfill(data ?? Data())
+                }
+            }.resume()
+        }
+    }
+    
+    func parseFriendsData(_ data: Data) -> Promise<[UserRealm]> {
+        return Promise<[UserRealm]> { (resolver) in
             do {
                 let userModel = try JSONDecoder().decode(User.self, from: data)
                 
@@ -70,17 +89,11 @@ class VKNetworkService {
                     userList.append(UserRealm(userId: String(user.id), firstName: user.firstName, lastName: user.lastName, photo50: user.photo50))
                 }
                 
-                DispatchQueue.main.async {
-                    let vkRealmService = VKRealmService()
-                    vkRealmService.saveUsersToRealm(userList: userList)
-                    completion(userModel, "")
-                }
-                
-            } catch {
-                completion(nil, "data decode error")
+                resolver.fulfill(userList)
+            } catch let error {
+                resolver.reject(error)
             }
         }
-        task.resume()
     }
     
     func getPhotos(url:URL, completion: @escaping (Photo?, String) -> Void) {

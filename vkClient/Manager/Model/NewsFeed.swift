@@ -139,7 +139,7 @@ struct NewsFeed: Codable {
         let ext: String
         let date, type: Int
         let url: String
-        let preview: Preview
+        let preview: Preview?
         let accessKey: String
 
         enum CodingKeys: String, CodingKey {
@@ -199,7 +199,8 @@ struct NewsFeed: Codable {
 
     struct Link: Codable {
         let url: String
-        let title, linkDescription: String
+        let title: String
+        //let linkDescription: String
         let buttonText, buttonAction, target: String?
         let photo: LinkPhoto?
         //let isFavorite: Bool
@@ -207,7 +208,7 @@ struct NewsFeed: Codable {
 
         enum CodingKeys: String, CodingKey {
             case url, title
-            case linkDescription = "description"
+            //case linkDescription = "description"
             case buttonText = "button_text"
             case buttonAction = "button_action"
             case target, photo
@@ -243,13 +244,15 @@ struct NewsFeed: Codable {
         case link = "link"
         case photo = "photo"
         case video = "video"
+        case poll = "poll"
+        case preview = "preview"
     }
 
     struct AttachmentVideo: Codable {
         let accessKey: String
         let canComment, canLike, canRepost, canSubscribe: Int
         let canAddToFaves, canAdd, date: Int
-        let videoDescription: String
+        //let videoDescription: String
         let duration: Int
         let image: [VideoElement]
         let firstFrame: [VideoElement]?
@@ -273,7 +276,7 @@ struct NewsFeed: Codable {
             case canAddToFaves = "can_add_to_faves"
             case canAdd = "can_add"
             case date
-            case videoDescription = "description"
+            //case videoDescription = "description"
             case duration, image
             case firstFrame = "first_frame"
             case width, height, id

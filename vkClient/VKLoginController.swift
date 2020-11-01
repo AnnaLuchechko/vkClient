@@ -20,6 +20,8 @@ class VKLoginController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //removeCookie()
+        
         var components = URLComponents()
         components.scheme = "https"
         components.host = "oauth.vk.com"
@@ -34,9 +36,21 @@ class VKLoginController: UIViewController {
         ]
         
         let request = URLRequest(url: components.url!)
+        print("load web view")
         webView.load(request)
         
     }
+    
+    func removeCookie() {
+            let cookieStore = webView.configuration.websiteDataStore.httpCookieStore
+            
+            cookieStore.getAllCookies {
+                cookies in
+                for cookie in cookies {
+                    cookieStore.delete(cookie)
+                }
+            }
+        }
     
 }
 

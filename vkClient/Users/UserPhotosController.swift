@@ -13,9 +13,12 @@ import Kingfisher
 class UserPhotosController: UICollectionViewController {
     
     var user: UserRealm?
+    private var photoService: PhotoService?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        photoService = PhotoService(container: self.collectionView)
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -26,8 +29,8 @@ class UserPhotosController: UICollectionViewController {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "friendsPhotoCell", for: indexPath) as? FriendsPhotoCell else { fatalError() }
                     
         cell.friendsName.text = (user?.firstName ?? "") + " " + (user?.lastName ?? "")
-        cell.friendsImage.kf.setImage(with: URL(string: user?.photo50 ?? "https://miro.medium.com/max/720/1*W35QUSvGpcLuxPo3SRTH4w.png"))
-
+        cell.friendsImage.image = photoService?.photo(atIndexpath: indexPath, byUrl: user?.photo50 ?? "https://miro.medium.com/max/720/1*W35QUSvGpcLuxPo3SRTH4w.png")
+        
         return cell
     }
     
