@@ -10,10 +10,8 @@ import UIKit
 
 class CommentControl: UIControl {
     
-    private var commentCount: Int = 0
-
-    private  let commentCountLabel = UILabel()
-    private  let commentImageView = UIImageView()
+    let commentCountLabel = UILabel()
+    private let commentImageView = UIImageView()
     
     //called when initialized programmatically
     override init(frame: CGRect) {
@@ -30,13 +28,12 @@ class CommentControl: UIControl {
     }
 
     private func updateComment() {
+        var commentCount = Int(commentCountLabel.text!) ?? 0
         if isSelected {
-            commentImageView.image = UIImage(named: "comment")
-            commentCount = 1
+            commentCount += 1
         }
         else {
-            commentImageView.image = UIImage(named: "comment")
-            commentCount = 0
+            commentCount -= 1
         }
         commentCountLabel.text = "\(commentCount)"
     }
@@ -49,16 +46,15 @@ class CommentControl: UIControl {
     
     private func config() {
         commentImageView.frame.size = CGSize(width: 30, height: 30)
+        commentImageView.image = UIImage(named: "comment")
         addSubview(commentImageView)
         
         commentCountLabel.frame.size = CGSize(width: 60, height: 30)
-        commentCountLabel.text = String(commentCount)
         commentCountLabel.font = UIFont(name: "Roboto", size: 20)
         commentCountLabel.frame.origin.x = commentImageView.frame.size.width + 7
         addSubview(commentCountLabel)
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(onLikeTapped(_:)))
         self.addGestureRecognizer(gesture)
-        updateComment()
     }
 }

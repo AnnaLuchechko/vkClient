@@ -20,13 +20,15 @@ class VKLoginController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //removeCookie()
+        
         var components = URLComponents()
         components.scheme = "https"
         components.host = "oauth.vk.com"
         components.path = "/authorize"
         components.queryItems = [
             URLQueryItem(name: "client_id", value: "7627434"),
-            URLQueryItem(name: "scope", value: "262150"),
+            URLQueryItem(name: "scope", value: "friends,photos,groups,wall"),
             URLQueryItem(name: "display", value: "mobile"),
             URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
             URLQueryItem(name: "response_type", value: "token"),
@@ -34,9 +36,21 @@ class VKLoginController: UIViewController {
         ]
         
         let request = URLRequest(url: components.url!)
+        print("load web view")
         webView.load(request)
         
     }
+    
+    func removeCookie() {
+            let cookieStore = webView.configuration.websiteDataStore.httpCookieStore
+            
+            cookieStore.getAllCookies {
+                cookies in
+                for cookie in cookies {
+                    cookieStore.delete(cookie)
+                }
+            }
+        }
     
 }
 
@@ -68,31 +82,6 @@ extension VKLoginController: WKNavigationDelegate {
         
         Session.shared.token = token
         Session.shared.userID = userID
-        
-//        let vkNetworkService = VKNetworkService()
-//        vkNetworkService.getFriends(url: vkNetworkService.getUrlForVKMethod(vkParameters: .friendsList), completion: {
-//            userModel, error in guard let userModel = userModel else {
-//                print(error)
-//                return
-//            }
-//            print(userModel.response.items[0].lastName)
-//        })
-        
-//        vkNetworkService.getPhotos(url: vkNetworkService.getUrlForVKMethod(vkParameters: .userPhotos), completion: {
-//            photoModel, error in guard let photoModel = photoModel else {
-//                print(error)
-//                return
-//            }
-//            print(photoModel.response.items[0].ownerID)
-//        })
-//
-//        vkNetworkService.getGroups(url: vkNetworkService.getUrlForVKMethod(vkParameters: .userGroups), completion: {
-//            groupModel, error in guard let groupModel = groupModel else {
-//                print(error)
-//                return
-//            }
-//            print(groupModel.response.items[0].name)
-//        })
         
         decisionHandler(.cancel)
         

@@ -16,6 +16,11 @@ class NewsPost: UITableViewCell {
     @IBOutlet weak var newsImage: UIImageView!
     @IBOutlet weak var controlView: UIView!
     
+    let likeControl = LikeControl()
+    let commentControl = CommentControl()
+    let shareControl = ShareControl()
+    let viewControl = ViewControl()
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         
@@ -37,19 +42,16 @@ class NewsPost: UITableViewCell {
         newsText.isScrollEnabled = true
         newsText.isUserInteractionEnabled = true
         
-        let likeControl = LikeControl(frame: CGRect(x: 10, y: 5, width: 44, height: 44))
+        likeControl.frame = CGRect(x: 10, y: 5, width: 44, height: 44)
         controlView.addSubview(likeControl)
         
-        let commentControl = CommentControl(frame: CGRect(x: 94, y: 5, width: 44, height: 44))
+        commentControl.frame = CGRect(x: 94, y: 5, width: 44, height: 44)
         controlView.addSubview(commentControl)
         
-        let shareControl = ShareControl(frame: CGRect(x: 178, y: 5, width: 44, height: 44))
+        shareControl.frame = CGRect(x: 178, y: 5, width: 44, height: 44)
         controlView.addSubview(shareControl)
         
-        let viewControl = ViewControl(frame: CGRect(x: frame.size.width - 35, y: 5, width: 44, height: 44))
-        viewControl.viewImageView.frame.origin.y = viewControl.frame.origin.y
-        viewControl.viewImageView.frame.size.width = 20
-        viewControl.viewImageView.frame.size.height = 20
+        viewControl.frame = CGRect(x: frame.size.width - 40, y: 5, width: 44, height: 44)
         controlView.addSubview(viewControl)
     }
 }

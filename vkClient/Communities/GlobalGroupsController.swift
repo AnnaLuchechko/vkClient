@@ -16,6 +16,7 @@ class GlobalGroupsController: UITableViewController {
     var userCommunities: Results<GroupRealm>?
     private var globalCommunities: Results<GroupRealm>?
     private var filteredCommunities: Results<GroupRealm>?
+    private var photoService: PhotoService?
 
     @IBAction func addCommunity(_ sender: Any) {}
 
@@ -31,6 +32,8 @@ class GlobalGroupsController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        photoService = PhotoService(container: self.tableView)
+        
         //Setup the Search Controller
         searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -40,7 +43,7 @@ class GlobalGroupsController: UITableViewController {
         tableView.setContentOffset(CGPoint.init(x: 0, y: searchController.searchBar.frame.size.height), animated: false)
 
         reloadGlobalGroupsDataFromRealm()
-        processGroupsResponse()
+        VKOperationsService().getApiData(dataType: .searchGroups)
         addObserver()
     }
     
@@ -66,16 +69,6 @@ class GlobalGroupsController: UITableViewController {
             }
         }
     }
-    
-    func processGroupsResponse() {
-        let vkNetworkService = VKNetworkService()
-        vkNetworkService.getGroups(url: vkNetworkService.getUrlForVKMethod(vkParameters: .searchGroups, userId: Session.shared.userID), completion: {
-            groupModel, error in guard groupModel != nil else {
-                print(error)
-                return
-            }
-        })
-    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFiltering {
@@ -95,7 +88,7 @@ class GlobalGroupsController: UITableViewController {
         }
 
         cell.titleLabel.text = globalCommunity.name
-        cell.communityimage.kf.setImage(with: URL(string: globalCommunity.photo50 ))
+        cell.communityimage.image = photoService?.photo(atIndexpath: indexPath, byUrl: globalCommunity.photo50)
 
         return cell
     }
