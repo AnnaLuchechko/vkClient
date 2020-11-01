@@ -24,6 +24,7 @@
 		087E894D2544B560004F6E66 /* NewsPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 087E894C2544B560004F6E66 /* NewsPhoto.swift */; };
 		08866D58253E4EC8003655B8 /* GroupsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08866D57253E4EC8003655B8 /* GroupsController.swift */; };
 		08866D5C253E591F003655B8 /* GlobalGroupsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08866D5B253E591F003655B8 /* GlobalGroupsController.swift */; };
+		0887692D254762B8005577D7 /* PhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0887692C254762B8005577D7 /* PhotoService.swift */; };
 		0892F6EC25248EB300D8C807 /* LikeControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0892F6EB25248EB300D8C807 /* LikeControl.swift */; };
 		089733F02544F278004C0A58 /* VKNewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089733EF2544F278004C0A58 /* VKNewsService.swift */; };
 		089C9F86253A3A3D00F4FA89 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 089C9F85253A3A3D00F4FA89 /* User.swift */; };
@@ -73,6 +74,7 @@
 		087E894C2544B560004F6E66 /* NewsPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsPhoto.swift; sourceTree = "<group>"; };
 		08866D57253E4EC8003655B8 /* GroupsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsController.swift; sourceTree = "<group>"; };
 		08866D5B253E591F003655B8 /* GlobalGroupsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalGroupsController.swift; sourceTree = "<group>"; };
+		0887692C254762B8005577D7 /* PhotoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoService.swift; sourceTree = "<group>"; };
 		0892F6EB25248EB300D8C807 /* LikeControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeControl.swift; sourceTree = "<group>"; };
 		089733EF2544F278004C0A58 /* VKNewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VKNewsService.swift; sourceTree = "<group>"; };
 		089C9F85253A3A3D00F4FA89 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				08B9CCF12534EF7000A93C1A /* Session.swift */,
+				0887692C254762B8005577D7 /* PhotoService.swift */,
 				08FFCE7D254736F8005C3E10 /* VKOperationsService.swift */,
 				083AB1A025385A3F00181D0C /* VKNetworkService.swift */,
 				08C2B9832541052700EA01A8 /* VKRealmService.swift */,
@@ -378,6 +381,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0887692D254762B8005577D7 /* PhotoService.swift in Sources */,
 				08BD29032545D8A60028780F /* NewsFeedRealm.swift in Sources */,
 				089C9F8E253A3CD500F4FA89 /* Group.swift in Sources */,
 				08C2B987254109A000EA01A8 /* PhotoRealm.swift in Sources */,

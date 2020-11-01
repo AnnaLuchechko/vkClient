@@ -15,6 +15,12 @@ class NewsViewController: UIViewController {
     
     private var newsFeed: Results<NewsFeedRealm>?
     
+    private let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMM hh:mm"
+        return formatter
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -62,15 +68,10 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
 
             cell.accountLabel.text = newsFeed?[indexPath.row].sourceName
             
-            // Format time to XX Jan XX:XX
-            let dateFormatter = DateFormatter()
-            // Parse date from Unix TimeStamp
             let date = Date(timeIntervalSince1970: TimeInterval(newsFeed?[indexPath.row].postTime ?? 1602054090))
-            dateFormatter.dateFormat = "dd MMM hh:mm"
             cell.newsTime.text = dateFormatter.string(from: date)
             
             cell.accountImage.kf.setImage(with: URL(string: newsFeed?[indexPath.row].sourcePhotoUrl ?? "https://www.meme-arsenal.com/memes/d9f5610c69e8da2698454b336a70536b.jpg"))
-            cell.newsText.text = newsFeed?[indexPath.row].postText
             cell.newsImage.kf.setImage(with: URL(string: newsFeed?[indexPath.row].postPhotoUrl ?? "https://www.meme-arsenal.com/memes/d9f5610c69e8da2698454b336a70536b.jpg"))
             
             cell.likeControl.likeCountLabel.text = String(newsFeed?[indexPath.row].postLikes ?? 0)
@@ -84,9 +85,7 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
             guard let cell = newsTable.dequeueReusableCell(withIdentifier: "NewsPhoto") as? NewsPhoto else { fatalError() }
             
             cell.accountLabel.text = newsFeed?[indexPath.row].sourceName
-            let dateFormatter = DateFormatter()
             let date = Date(timeIntervalSince1970: TimeInterval(newsFeed?[indexPath.row].postTime ?? 1602054090))
-            dateFormatter.dateFormat = "dd MMM hh:mm"
             cell.newsTime.text = dateFormatter.string(from: date)
             cell.accountImage.kf.setImage(with: URL(string: newsFeed?[indexPath.row].sourcePhotoUrl ?? "https://www.meme-arsenal.com/memes/d9f5610c69e8da2698454b336a70536b.jpg"))
             cell.newsImage.kf.setImage(with: URL(string: newsFeed?[indexPath.row].postPhotoUrl ?? "https://www.meme-arsenal.com/memes/d9f5610c69e8da2698454b336a70536b.jpg"))
