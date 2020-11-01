@@ -161,7 +161,6 @@ class UsersController: UITableViewController {
 
         cell.titleLabel.text = filteredUser.lastName + " " + filteredUser.firstName
         cell.friendimage.image = photoService?.photo(atIndexpath: indexPath, byUrl: filteredUser.photo50)
-        //cell.friendimage.kf.setImage(with: URL(string: filteredUser.photo50))
         
         return cell
     }

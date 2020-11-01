@@ -89,7 +89,6 @@ class GlobalGroupsController: UITableViewController {
 
         cell.titleLabel.text = globalCommunity.name
         cell.communityimage.image = photoService?.photo(atIndexpath: indexPath, byUrl: globalCommunity.photo50)
-        //cell.communityimage.kf.setImage(with: URL(string: globalCommunity.photo50 ))
 
         return cell
     }
