@@ -16,6 +16,7 @@ class GroupsController: UITableViewController {
     private var token: NotificationToken?
     private var communities: Results<GroupRealm>?
     private var filteredCommunities: Results<GroupRealm>?
+    private var photoService: PhotoService?
     
     private let searchController = UISearchController(searchResultsController: nil)
     private var searchBarIsEmpty: Bool {
@@ -28,6 +29,8 @@ class GroupsController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        photoService = PhotoService(container: self.tableView)
 
         //Setup the Search Controller
         searchController.searchBar.delegate = self
@@ -38,7 +41,7 @@ class GroupsController: UITableViewController {
         tableView.setContentOffset(CGPoint.init(x: 0, y: searchController.searchBar.frame.size.height), animated: false)
         
         reloadGroupsDataFromRealm()
-        processGroupsResponse()
+        VKOperationsService().getApiData(dataType: .userGroups)
         addObserver()
     }
     
@@ -63,16 +66,6 @@ class GroupsController: UITableViewController {
                     fatalError()
             }
         }
-    }
-    
-    func processGroupsResponse() {
-        let vkNetworkService = VKNetworkService()
-        vkNetworkService.getGroups(url: vkNetworkService.getUrlForVKMethod(vkParameters: .userGroups, userId: Session.shared.userID), completion: {
-            groupModel, error in guard groupModel != nil else {
-                print(error)
-                return
-            }
-        })
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -101,7 +94,7 @@ class GroupsController: UITableViewController {
         }
 
         cell.titleLabel.text = community.name
-        cell.communityimage.kf.setImage(with: URL(string: community.photo50 ))
+        cell.communityimage.image = photoService?.photo(atIndexpath: indexPath, byUrl: community.photo50)
 
         return cell
     }

@@ -15,7 +15,7 @@ class VKRealmService {
         do {
             let realm = try Realm()
             try realm.write{
-                realm.add(userList, update: .all) // записать новые данные
+                realm.add(userList, update: .modified) // записать новые данные
             }
             print("Database URL: /n", realm.configuration.fileURL!)
         } catch {
@@ -40,6 +40,18 @@ class VKRealmService {
             try realm.write{
                 realm.add(groupsList, update: .all) // записать новые данные
             }
+        } catch {
+            print(error)
+        }
+    }
+    
+    func saveNewsFeedRealm(newsList: [NewsFeedRealm]) {
+        do {
+            let realm = try Realm()
+            try realm.write{
+                realm.add(newsList, update: .modified)
+            }
+            print("Database URL: /n", realm.configuration.fileURL!)
         } catch {
             print(error)
         }
@@ -75,6 +87,16 @@ class VKRealmService {
         } catch {
             print(error)
             return nil
+        }
+    }
+    func getNewsFeedData(completion: @escaping (Results<NewsFeedRealm>?, String) -> Void) {
+        do {
+            let realm = try Realm()
+            let newsFromRealm = realm.objects(NewsFeedRealm.self).sorted(byKeyPath: "postTime", ascending: false)
+            completion(newsFromRealm, "")
+        } catch {
+            print(error)
+            completion(nil, "error getting data")
         }
     }
     

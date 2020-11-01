@@ -1,20 +1,25 @@
 //
-//  NewsCell.swift
+//  NewsPost.swift
 //  vkClient
 //
-//  Created by Anna Luchechko on 03.10.2020.
+//  Created by Anna Luchechko on 24.10.2020.
 //  Copyright © 2020 Anna Luchechko. All rights reserved.
 //
 import UIKit
 
-class NewsCell: UITableViewCell {
+class NewsPost: UITableViewCell {
     @IBOutlet weak var accountLabel: UILabel!
     @IBOutlet weak var newsTime: UILabel!
     @IBOutlet weak var accountImage: UIImageView!
     @IBOutlet weak var containerAccountImage: UIView!
-    @IBOutlet weak var newsText: UILabel!
+    @IBOutlet weak var newsText: UITextView!
     @IBOutlet weak var newsImage: UIImageView!
     @IBOutlet weak var controlView: UIView!
+    
+    let likeControl = LikeControl()
+    let commentControl = CommentControl()
+    let shareControl = ShareControl()
+    let viewControl = ViewControl()
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -34,20 +39,20 @@ class NewsCell: UITableViewCell {
         accountImage.layer.cornerRadius = containerAccountImage.bounds.width / 2
         accountImage.clipsToBounds = true
         
+        newsText.isScrollEnabled = true
+        newsText.isUserInteractionEnabled = true
         
-        let likeControl = LikeControl(frame: CGRect(x: 10, y: 5, width: 44, height: 44))
+        likeControl.frame = CGRect(x: 10, y: 5, width: 44, height: 44)
         controlView.addSubview(likeControl)
         
-        let commentControl = CommentControl(frame: CGRect(x: 94, y: 5, width: 44, height: 44))
+        commentControl.frame = CGRect(x: 94, y: 5, width: 44, height: 44)
         controlView.addSubview(commentControl)
         
-        let shareControl = ShareControl(frame: CGRect(x: 178, y: 5, width: 44, height: 44))
+        shareControl.frame = CGRect(x: 178, y: 5, width: 44, height: 44)
         controlView.addSubview(shareControl)
         
-        let viewControl = ViewControl(frame: CGRect(x: frame.size.width - 35, y: 5, width: 44, height: 44))
-        viewControl.viewImageView.frame.origin.y = viewControl.frame.origin.y
-        viewControl.viewImageView.frame.size.width = 20
-        viewControl.viewImageView.frame.size.height = 20
+        viewControl.frame = CGRect(x: frame.size.width - 40, y: 5, width: 44, height: 44)
         controlView.addSubview(viewControl)
     }
 }
+

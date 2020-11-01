@@ -9,11 +9,9 @@
 import UIKit
 
 class LikeControl: UIControl {
-    
-    private var likeCount: Int = 0
 
-    private  let likeCountLabel = UILabel()
-    private  let likeImageView = UIImageView()
+    let likeCountLabel = UILabel()
+    let likeImageView = UIImageView()
     
     //called when initialized programmatically
     override init(frame: CGRect) {
@@ -30,15 +28,16 @@ class LikeControl: UIControl {
     }
 
     private func updatelike() {
+        var likesCount = Int(likeCountLabel.text!) ?? 0
         if isSelected {
             animateLikeTap()
-            likeCount = 1
+            likesCount += 1
         }
         else {
             animateLikeTap()
-            likeCount = 0
+            likesCount -= 1
         }
-        likeCountLabel.text = "\(likeCount)"
+        likeCountLabel.text = "\(likesCount)"
     }
 
     @objc func onLikeTapped(_ gesture: UITapGestureRecognizer) {
@@ -63,16 +62,15 @@ class LikeControl: UIControl {
     
     private func config() {
         likeImageView.frame.size = CGSize(width: 30, height: 30)
+        likeImageView.image = UIImage(named: "likeUnfilled")
         addSubview(likeImageView)
         
         likeCountLabel.frame.size = CGSize(width: 60, height: 30)
-        likeCountLabel.text = String(likeCount)
         likeCountLabel.font = UIFont(name: "Roboto", size: 20)
         likeCountLabel.frame.origin.x = likeImageView.frame.size.width + 7
         addSubview(likeCountLabel)
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(onLikeTapped(_:)))
         self.addGestureRecognizer(gesture)
-        updatelike()
     }
 }

@@ -8,6 +8,8 @@
 import UIKit
 
 struct News {
+    var newsType: NewsType
+    
     var accountLabel: String
     var newsTime: String
     var accountImage: UIImage?
@@ -19,8 +21,15 @@ struct News {
     var newsRepostCount: String
     var newsViewCount: String
     
+    enum NewsType {
+        case Post, Photo
+    }
     
-    init(_ accountLabel: String, _ newsTime: String, _ accountImage: UIImage?, _ newsText: String, _ newsImage: UIImage?, _ newsLikeCount: String, _ newsCommentCount: String, _ newsRepostCount: String, _ newsViewCount: String) {
+    
+    init(_ newsType: NewsType, _ accountLabel: String, _ newsTime: String, _ accountImage: UIImage?, _ newsText: String, _ newsImage: UIImage?, _ newsLikeCount: String, _ newsCommentCount: String, _ newsRepostCount: String, _ newsViewCount: String) {
+        
+        self.newsType = newsType
+        
         self.accountLabel = accountLabel
         self.newsTime = newsTime
         self.accountImage = accountImage
