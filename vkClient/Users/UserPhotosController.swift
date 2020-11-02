@@ -18,7 +18,7 @@ class UserPhotosController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        photoService = PhotoService(container: self.collectionView)
+        photoService = PhotoService(container: collectionView)
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

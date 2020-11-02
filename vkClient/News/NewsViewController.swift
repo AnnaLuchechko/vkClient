@@ -30,8 +30,8 @@ class NewsViewController: UIViewController {
         loadNewsFeedFromRealm()
         
         let newsService = VKNewsService()
-        newsService.getVKNewsFeed(completion: { newsFeedList, error in
-            self.loadNewsFeedFromRealm()
+        newsService.getVKNewsFeed(completion: { [weak self] (newsFeedList, error) in
+            self?.loadNewsFeedFromRealm()
         })
     }
     
@@ -43,7 +43,7 @@ class NewsViewController: UIViewController {
         })
     }
     
-    func viewsToK(viewsCount: Int) -> String {
+    func formatViewsCount(viewsCount: Int) -> String {
         var views: String = ""
         if viewsCount > 999 {
             let viewsCountFloat = Float(viewsCount)/1000.0
@@ -77,7 +77,7 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.likeControl.likeCountLabel.text = String(newsFeed?[indexPath.row].postLikes ?? 0)
             cell.commentControl.commentCountLabel.text = String(newsFeed?[indexPath.row].postComments ?? 0)
             cell.shareControl.shareCountLabel.text = String(newsFeed?[indexPath.row].postReposts ?? 0)
-            cell.viewControl.viewCountLabel.text = self.viewsToK(viewsCount: newsFeed?[indexPath.row].postViews ?? 0)
+            cell.viewControl.viewCountLabel.text = self.formatViewsCount(viewsCount: newsFeed?[indexPath.row].postViews ?? 0)
 
             return cell
 
@@ -93,7 +93,7 @@ extension NewsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.likeControl.likeCountLabel.text = String(newsFeed?[indexPath.row].postLikes ?? 0)
             cell.commentControl.commentCountLabel.text = String(newsFeed?[indexPath.row].postComments ?? 0)
             cell.shareControl.shareCountLabel.text = String(newsFeed?[indexPath.row].postReposts ?? 0)
-            cell.viewControl.viewCountLabel.text = self.viewsToK(viewsCount: newsFeed?[indexPath.row].postViews ?? 0)
+            cell.viewControl.viewCountLabel.text = self.formatViewsCount(viewsCount: newsFeed?[indexPath.row].postViews ?? 0)
             
             return cell
         }
