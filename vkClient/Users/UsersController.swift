@@ -53,7 +53,7 @@ class UsersController: UITableViewController {
         tableView.register(UINib(nibName: "FriendsSectionHeaderView", bundle: nil), forHeaderFooterViewReuseIdentifier: "friendSectionHeader")
         tableView.estimatedSectionHeaderHeight = 40
 
-        tableView.backgroundColor = UIColor(red: 0.29, green: 0.53, blue: 0.80, alpha: 1.00)
+        tableView.backgroundColor = .lightBlue
         
         reloadUsersDataFromRealm()
         VKNetworkService().getFriends()

@@ -126,7 +126,6 @@
 		084A7BFC24AF63990049FAF7 = {
 			isa = PBXGroup;
 			children = (
-				08D6E033255AFDDA0031F29E /* Flyweight.swift */,
 				084A7C0724AF63990049FAF7 /* vkClient */,
 				084A7C0624AF63990049FAF7 /* Products */,
 				5006CF9C44D24F786CC9FF41 /* Pods */,
@@ -150,6 +149,7 @@
 				08E0FDE12527C96900738150 /* News */,
 				084AB3C02528F620004CBF56 /* Controls */,
 				08EB0E4A252A80B000132AB3 /* FriendsSectionHeader */,
+				08B9CCEF2534EF2F00A93C1A /* Manager */,
 				084A7C0824AF63990049FAF7 /* AppDelegate.swift */,
 				084A7C0A24AF63990049FAF7 /* SceneDelegate.swift */,
 				083197912537C41B00588893 /* VKLoginController.swift */,
@@ -159,7 +159,7 @@
 				08E1010625337BCC00D5BF94 /* CustomPushAnimator.swift */,
 				08E1010A25337DCA00D5BF94 /* CustomPopAnimator.swift */,
 				08E1010D25337FBD00D5BF94 /* CustomNavigationController.swift */,
-				08B9CCEF2534EF2F00A93C1A /* Manager */,
+				08D6E033255AFDDA0031F29E /* Flyweight.swift */,
 				084A7C1124AF639A0049FAF7 /* Assets.xcassets */,
 				084A7C0E24AF63990049FAF7 /* Main.storyboard */,
 				084A7C1324AF639A0049FAF7 /* LaunchScreen.storyboard */,
