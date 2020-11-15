@@ -13,11 +13,12 @@ import RealmSwift
 
 class UsersController: UITableViewController {
 
-    var selectedUser: UserRealm?
+    var selectedUser: User?
     
     //private var userModel = [UserRealm]()
-    private var userElements: Results<UserRealm>?
-    private var token: NotificationToken?
+    private var friendsAdapter = FriendsAdapter()
+    private var userElements: [User]?
+    //private var token: NotificationToken?
     private var photoService: PhotoService?
 
     private let searchController = UISearchController(searchResultsController: nil)
@@ -29,10 +30,10 @@ class UsersController: UITableViewController {
         return searchController.isActive && !searchBarIsEmpty
     }
 
-    var sections: [Character: [UserRealm]] = [:]
+    var sections: [Character: [User]] = [:]
     var sectionTitles = [Character]()
 
-    var filteredSections: [Character: [UserRealm]] = [:]
+    var filteredSections: [Character: [User]] = [:]
     var filteredSectionTitles = [Character]()
 
 
@@ -55,31 +56,38 @@ class UsersController: UITableViewController {
 
         tableView.backgroundColor = .lightBlue
         
-        reloadUsersDataFromRealm()
-        VKNetworkService().getFriends()
-        addObserver()
+        //reloadUsersDataFromRealm()
+        friendsAdapter.getFriends(completion: { users in
+            print(users.last?.firstName)
+            self.userElements = users
+            self.createSectionTitles()
+            guard self.userElements?.count != 0 else { return }
+            self.tableView.reloadData()
+        })
+        //VKNetworkService().getFriends()
+        //addObserver()
     }
     
-    func reloadUsersDataFromRealm() {
-        self.userElements = VKRealmService().getUsersRealmData()
-
-        self.createSectionTitles()
-        guard self.userElements?.count != 0 else { return }
-        self.tableView.reloadData()
-    }
+//    func reloadUsersDataFromRealm() {
+//        self.userElements = VKRealmService().getUsersRealmData()
+//
+//        self.createSectionTitles()
+//        guard self.userElements?.count != 0 else { return }
+//        self.tableView.reloadData()
+//    }
     
-    func addObserver() {
-        self.token = userElements?.observe {(changes: RealmCollectionChange) in
-            switch(changes) {
-                case .initial:
-                    self.reloadUsersDataFromRealm()
-                case .update(_, _, _, _):
-                    self.reloadUsersDataFromRealm()
-                case .error(_):
-                    fatalError()
-            }
-        }
-    }
+//    func addObserver() {
+//        self.token = userElements?.observe {(changes: RealmCollectionChange) in
+//            switch(changes) {
+//                case .initial:
+//                    self.reloadUsersDataFromRealm()
+//                case .update(_, _, _, _):
+//                    self.reloadUsersDataFromRealm()
+//                case .error(_):
+//                    fatalError()
+//            }
+//        }
+//    }
     
     func createSectionTitles() {
         self.sectionTitles.removeAll()
@@ -149,7 +157,7 @@ class UsersController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FriendsCell") as? FriendsCell else { fatalError() }
 
-        var filteredUser: UserRealm
+        var filteredUser: User
 
         if isFiltering {
             guard let user = filteredSections[filteredSectionTitles[indexPath.section]]?[indexPath.row] else { fatalError() }

@@ -12,7 +12,7 @@ import Kingfisher
 
 class UserPhotosController: UICollectionViewController {
     
-    var user: UserRealm?
+    var user: User?
     private var photoService: PhotoService?
     
     override func viewDidLoad() {
