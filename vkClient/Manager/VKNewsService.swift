@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class VKNewsService {
     
-    func getVKNewsFeed(completion: @escaping (NewsFeed.Response?, String) -> Void) {
+    func getVKNewsFeed(completion: @escaping (VkNewsFeed.Response?, String) -> Void) {
         
         let apiUrl = "https://api.vk.com/method/newsfeed.get"
 
@@ -30,24 +30,24 @@ class VKNewsService {
                     
                     let dispatchGroup = DispatchGroup()
                     
-                    var items = [NewsFeed.ResponseItem]()
-                    var groups = [NewsFeed.Group]()
-                    var profiles = [NewsFeed.Profile]()
+                    var items = [VkNewsFeed.ResponseItem]()
+                    var groups = [VkNewsFeed.Group]()
+                    var profiles = [VkNewsFeed.Profile]()
                     
                     DispatchQueue.global().async(group: dispatchGroup) {
-                        items = try! JSONDecoder().decode([NewsFeed.ResponseItem].self, from: json["response"]["items"].rawData())
+                        items = try! JSONDecoder().decode([VkNewsFeed.ResponseItem].self, from: json["response"]["items"].rawData())
                     }
                     
                     DispatchQueue.global().async(group: dispatchGroup) {
-                        groups = try! JSONDecoder().decode([NewsFeed.Group].self, from: json["response"]["groups"].rawData())
+                        groups = try! JSONDecoder().decode([VkNewsFeed.Group].self, from: json["response"]["groups"].rawData())
                     }
                     
                     DispatchQueue.global().async(group: dispatchGroup) {
-                        profiles = try! JSONDecoder().decode([NewsFeed.Profile].self, from: json["response"]["profiles"].rawData())
+                        profiles = try! JSONDecoder().decode([VkNewsFeed.Profile].self, from: json["response"]["profiles"].rawData())
                     }
                     
                     dispatchGroup.notify(queue: DispatchQueue.main) {
-                        let newsFeed = NewsFeed.Response(items: items, profiles: profiles, groups: groups, nextFrom: "")
+                        let newsFeed = VkNewsFeed.Response(items: items, profiles: profiles, groups: groups, nextFrom: "")
                         self.newsFeedToRealm(newsFeed: newsFeed, completion: { completion(newsFeed, "") })
                     }
                     
@@ -58,12 +58,12 @@ class VKNewsService {
 
     }
     
-    func newsFeedToRealm(newsFeed: NewsFeed.Response, completion: @escaping () -> Void) {
+    func newsFeedToRealm(newsFeed: VkNewsFeed.Response, completion: @escaping () -> Void) {
         var newsList: [NewsFeedRealm] = []
         // for each element in array
         for news in newsFeed.items {
             // only for photo or post types
-            if (news.type == NewsFeed.PostTypeEnum.photo || news.type == NewsFeed.PostTypeEnum.post) {
+            if (news.type == VkNewsFeed.PostTypeEnum.photo || news.type == VkNewsFeed.PostTypeEnum.post) {
                 var srcName: String, srcPhotoUrl: String, pstPhotoUrl: String, pstTxt: String
                 
                 if (news.sourceID < 0) {
@@ -78,14 +78,14 @@ class VKNewsService {
                     srcPhotoUrl = profile?.photo100 ?? "https://www.meme-arsenal.com/memes/d9f5610c69e8da2698454b336a70536b.jpg"
                 }
                 
-                if (news.type == NewsFeed.PostTypeEnum.photo) {
+                if (news.type == VkNewsFeed.PostTypeEnum.photo) {
                     pstPhotoUrl = news.photos?.items.last?.sizes.last?.url ?? "https://www.meme-arsenal.com/memes/d9f5610c69e8da2698454b336a70536b.jpg"
                 } else {
-                    if (news.attachments?.last?.type == NewsFeed.AttachmentType.photo) {
+                    if (news.attachments?.last?.type == VkNewsFeed.AttachmentType.photo) {
                         pstPhotoUrl = news.attachments?.last?.photo?.sizes.last?.url ?? "https://www.meme-arsenal.com/memes/d9f5610c69e8da2698454b336a70536b.jpg"
-                    } else if (news.attachments?.last?.type == NewsFeed.AttachmentType.link) {
+                    } else if (news.attachments?.last?.type == VkNewsFeed.AttachmentType.link) {
                         pstPhotoUrl = news.attachments?.last?.link?.photo?.sizes.last?.url ?? "https://www.meme-arsenal.com/memes/d9f5610c69e8da2698454b336a70536b.jpg"
-                    } else if (news.attachments?.last?.type == NewsFeed.AttachmentType.video) {
+                    } else if (news.attachments?.last?.type == VkNewsFeed.AttachmentType.video) {
                         pstPhotoUrl = news.attachments?.last?.video?.image.last?.url ?? "https://www.meme-arsenal.com/memes/d9f5610c69e8da2698454b336a70536b.jpg"
                     } else {
                         // if repost

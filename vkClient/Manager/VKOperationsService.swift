@@ -137,7 +137,7 @@ final class VKOperationsService {
             
             guard let operation = dependencies.first as? GetData, let data = operation.apiData else { return }
             do {
-                let groupModel = try JSONDecoder().decode(Group.self, from: data)
+                let groupModel = try JSONDecoder().decode(VkGroup.self, from: data)
                 var groupsList: [GroupRealm] = []
                 for group in groupModel.response.items {
                     groupsList.append(GroupRealm(groupId: String(group.id), name: group.name, photo50: group.photo50, isMember: group.isMember ?? 0))

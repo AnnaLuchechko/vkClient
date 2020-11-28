@@ -128,7 +128,7 @@ class UserGalleryController: UIViewController {
             self.backgrounImageView.transform = bgTransform
         })
 
-        
+
         interactiveAnimator?.startAnimation()
         interactiveAnimator?.pauseAnimation()
     }

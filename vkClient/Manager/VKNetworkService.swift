@@ -82,7 +82,7 @@ class VKNetworkService {
     func parseFriendsData(_ data: Data) -> Promise<[UserRealm]> {
         return Promise<[UserRealm]> { (resolver) in
             do {
-                let userModel = try JSONDecoder().decode(User.self, from: data)
+                let userModel = try JSONDecoder().decode(VkUser.self, from: data)
                 
                 var userList: [UserRealm] = []
                 for user in userModel.response.items {
@@ -96,7 +96,7 @@ class VKNetworkService {
         }
     }
     
-    func getPhotos(url:URL, completion: @escaping (Photo?, String) -> Void) {
+    func getPhotos(url:URL, completion: @escaping (VkPhoto?, String) -> Void) {
         let configuration = URLSessionConfiguration.default
         let session = URLSession(configuration: configuration)
         
@@ -109,7 +109,7 @@ class VKNetworkService {
                 return
             }
             do {
-                let photoModel = try JSONDecoder().decode(Photo.self, from: data)
+                let photoModel = try JSONDecoder().decode(VkPhoto.self, from: data)
                 
                 var photosList: [PhotoRealm] = []
                 for photo in photoModel.response.items {
@@ -128,7 +128,7 @@ class VKNetworkService {
         task.resume()
     }
     
-    func getGroups(url:URL, completion: @escaping (Group?, String) -> Void) {
+    func getGroups(url:URL, completion: @escaping (VkGroup?, String) -> Void) {
         let configuration = URLSessionConfiguration.default
         let session = URLSession(configuration: configuration)
         
@@ -141,7 +141,7 @@ class VKNetworkService {
                 return
             }
             do {
-                let groupModel = try JSONDecoder().decode(Group.self, from: data)
+                let groupModel = try JSONDecoder().decode(VkGroup.self, from: data)
                 
                 var groupsList: [GroupRealm] = []
                 for group in groupModel.response.items {
